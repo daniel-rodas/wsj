@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 151.6 140.6" xml:space="preserve">
+<g id="narrow_col">
+</g>
+<g id="normal_col">
+	<rect x="53.1" y="40.3" fill="none" stroke="#222889" stroke-width="3" stroke-miterlimit="10" width="45.5" height="60"/>
+	<line fill="none" stroke="#222889" stroke-width="3" stroke-miterlimit="10" x1="62.2" y1="77.5" x2="89.4" y2="77.5"/>
+	<line fill="none" stroke="#222889" stroke-width="3" stroke-miterlimit="10" x1="62.2" y1="92.1" x2="89.4" y2="92.1"/>
+	<line fill="none" stroke="#222889" stroke-width="3" stroke-miterlimit="10" x1="62.2" y1="70.3" x2="89.4" y2="70.3"/>
+	<line fill="none" stroke="#222889" stroke-width="3" stroke-miterlimit="10" x1="62.2" y1="84.8" x2="89.4" y2="84.8"/>
+	<path fill="#222889" d="M86.4,50.8v9.8H65.2v-9.8H86.4 M89.4,47.8H62.2v15.8h27.3V47.8L89.4,47.8z"/>
+</g>
+<g id="wide_col">
+</g>
+<g id="text_size">
+</g>
+</svg>
