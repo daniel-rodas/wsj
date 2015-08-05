@@ -6,9 +6,10 @@
  * @version    1.7
  * @author     Fuel Development Team
  * @license    MIT License
- * @copyright  2010 - 2015 Fuel Development Team
+ * @copyright  2010 - 2014 Fuel Development Team
  * @link       http://fuelphp.com
  */
+
 
 return array(
 
@@ -43,7 +44,7 @@ return array(
 	 */
 	// 'index_file' => false,
 
-	// 'profiling'  => false,
+//	 'profiling'  => true,
 
 	/**
 	 * Default location for the file cache
@@ -92,8 +93,8 @@ return array(
 	 * server_gmt_offset	in seconds the server offset from gmt timestamp when time() is used
 	 * default_timezone		optional, if you want to change the server's default timezone
 	 */
-	// 'server_gmt_offset'  => 0,
-	// 'default_timezone'   => null,
+    'server_gmt_offset'  => 0,
+    'default_timezone'   => 'America/Los_Angeles',
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -113,9 +114,9 @@ return array(
 	 * Security settings
 	 */
 	'security' => array(
-		// 'csrf_autoload'    => false,
-		// 'csrf_token_key'   => 'fuel_csrf_token',
-		// 'csrf_expiration'  => 0,
+		'csrf_autoload'    => false,
+		'csrf_token_key'   => 'wsj_csrf_token',
+		'csrf_expiration'  => 0,
 
 		/**
 		 * A salt to make sure the generated security tokens are not predictable
@@ -237,9 +238,9 @@ return array(
 	 *
 	 * Paths MUST end with a directory separator (the DS constant)!
 	 */
-	// 'module_paths' => array(
-	// 	//APPPATH.'modules'.DS
-	// ),
+	 'module_paths' => array(
+	 	APPPATH.'modules'.DS
+	 ),
 
 	/**
 	 * To enable you to split up your additions to the framework, packages are
@@ -250,13 +251,14 @@ return array(
 	 * Paths MUST end with a directory separator (the DS constant)!
 	 */
 	'package_paths' => array(
-		PKGPATH,
+		PKGPATH
 	),
+
 
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
-	// 'always_load'  => array(
+	 'always_load'  => array(
 
 		/**
 		 * These packages are loaded on Fuel's startup.
@@ -269,9 +271,9 @@ return array(
 		 *     array('auth'	=> PKGPATH.'auth/')
 		 * );
 		 */
-		// 'packages'  => array(
-		// 	//'orm',
-		// ),
+    'packages'  => array(
+        'orm', 'auth', 'messages','casset',
+    ),
 
 		/**
 		 * These modules are always loaded on Fuel's startup. You can specify them
@@ -286,7 +288,7 @@ return array(
 		/**
 		 * Classes to autoload & initialize even when not used
 		 */
-		// 'classes'  => array(),
+		 'classes'  => array('session'),
 
 		/**
 		 * Configs to autoload
@@ -307,6 +309,6 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-	// ),
+	 ),
 
 );

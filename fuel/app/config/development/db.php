@@ -6,9 +6,12 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_dev',
-			'username'   => 'root',
-			'password'   => 'root',
+			'dsn'        => 'mysql:host=localhost;dbname=wsj_db',
+
+                        'username'   => 'wsj_db',
+
+                        'password'   => 'wsj_db',
 		),
+//        'profiling' => 'true',
 	),
 );
