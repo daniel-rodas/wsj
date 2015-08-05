@@ -10,7 +10,7 @@ return array(
 
                         'username'   => 'wsj_db',
 
-                        'password'   => 'wsj_db',
+                        'password'   => 'wsj_db+++###',
 		),
 //        'profiling' => 'true',
 	),
