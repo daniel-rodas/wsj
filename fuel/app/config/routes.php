@@ -1,13 +1,13 @@
 <?php
 return array(
 	'_root_'  => 'frontend/index',  // The default route
-	'_404_'   => 'welcome/404',    // The main 404 route
+	'_404_'   => 'base/template/404',    // The main 404 route
 
 //    User Login
 
-    'user/login' => array('user/auth/login', 'name' => 'login'),
-    'user/logout' => array('user/auth/logout', 'name' => 'logout'),
-    'user/create' => array('user/auth/create', 'name' => 'register'),
+    'user/login' => array('user/service/index/login', 'name' => 'login'),
+    'user/logout' => array('user/service/index/logout', 'name' => 'logout'),
+    'user/create' => array('user/service/index/register', 'name' => 'register'),
     'user/link' => array('user/auth/link', 'name' => 'link'),
     'user/password/update' => array('user/password/update', 'name' => 'password_update'),
     'user/password/recover' => array('user/password/recover', 'name' => 'password_recover'),

@@ -2,9 +2,6 @@
 
 class Controller_Base_Backend extends \Controller_Base_Template
 {
-    protected $_user;
-
-
     public function before()
     {
         parent::before();
@@ -27,8 +24,5 @@ class Controller_Base_Backend extends \Controller_Base_Template
         // Set Navigation
 
         $this->template->title = "RN | Wall Street Journal";
-
-        // Set global
-        $this->dataGlobal['title'] = \Config::get('application.seo.backend.title');
     }
 }

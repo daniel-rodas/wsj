@@ -1,6 +1,8 @@
 <?php
 
-class Controller_User_Password extends Controller_User_Service
+namespace Authentication;
+
+class Controller_Password extends Controller_Base
 {
     public function action_update()
     {

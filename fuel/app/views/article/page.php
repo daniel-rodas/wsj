@@ -41,7 +41,8 @@
                             {
                                 echo $form;
                             }
-                        echo '<div class="user-auth-background" ng-include="templateUrl"></div>';
+
+                            echo '<div class="user-auth-background" ng-include="templateUrl"></div>';
                         ?>
 
                     <?php endif; ?>

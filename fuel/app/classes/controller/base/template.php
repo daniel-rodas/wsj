@@ -44,8 +44,9 @@ class Controller_Base_Template extends \Controller_Hybrid
     {
         $messages = array('Uh Oh!', 'Huh ?');
         $data['notfound_title'] = $messages[array_rand($messages)];
-        $this->dataGlobal['pageTitle'] = __('page-not-found');
-        $this->template->content = View::forge('404', $data);
+        $data['title'] = '<h1>404 Times</h1>';
+        $this->template->title = __('page-not-found');
+        $this->template->content = Presenter::forge('frontpage/page')->set('content', View::forge('404', $data) );
     }
 }
 

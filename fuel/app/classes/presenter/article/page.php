@@ -16,6 +16,33 @@ class Presenter_Article_Page extends Presenter
      */
     public function view()
     {
+        // Check Auth Access
+//        if (\Auth::check())
+//        {
+        /*
+         *  $subscription = Subscription::forge($user);
+        switch ($subscription->getStatus())
+        {
+            case 'new':
+                $subscription->setStatus('prompt');
+                break;
+            case 'prompt':
+                $subscription->infoPrompt();
+                break;
+            case 'social':
+                $subscription->decrementPreview();
+                break;
+            case 'expire':
+                echo "i equals 0";
+                break;
+
+        }
+         *
+         *
+         *
+         */
+//        }
+
         $snippet = true;
         if (!\Auth::check())
         {
@@ -32,8 +59,8 @@ class Presenter_Article_Page extends Presenter
             $snippet = false;
         }
 
-//        $this->content = Request::forge('blog/frontend/post/show/'. $this->slug . '/' . $snippet , false)->execute()->response()->body();
-
+        $this->content = Request::forge('blog/frontend/post/show/'. $this->slug . '/' . $snippet , false)->execute()->response()->body();
+//
 //        $postId = Request::forge('blog/frontend/post/id_by_slug/' . $this->slug, false)->execute();
 //        $this->featured_image = Request::forge('media/image/featured/' . $postId, false)->execute()->response()->body();
 //        $this->related_articles = Request::forge('blog/frontend/post/show_related_by_slug/' . $this->slug, false)->execute()->response()->body();
