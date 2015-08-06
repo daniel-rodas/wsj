@@ -1,8 +1,4 @@
 
-
-            <?php if (isset($header)): ?>
-                <?php echo $header; ?>
-            <?php endif; ?>
             <div class="row article-page-splash" xmlns="http://www.w3.org/1999/html">
             <?= View::forge()->render('_includes/breadcrumbs'); ?>
             <div class="img-wrap">
@@ -35,7 +31,7 @@
 
             <div style="border: dashed 1px #000000" class="stripes-please row">
 
-                <div ng-controller="userAuthCtrl"  class=" col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                <div ng-controller="AuthenticationController"  class=" col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
                     <?= View::forge()->render('_includes/angularjs_message'); ?>
 

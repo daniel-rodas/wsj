@@ -2,13 +2,8 @@
 
 class Controller_Base_Template extends \Controller_Hybrid
 {
-    public $template = 'main_template';
-    public $dataGlobal = array();
-    protected $_userId;
-    protected $_userSubscriptionStatus;
-    protected $_userEmail;
-    protected $_navigation;
-    protected $_header;
+    protected $user = null;
+    protected $userSubscriptionStatus;
 
     public function before()
     {
@@ -18,15 +13,15 @@ class Controller_Base_Template extends \Controller_Hybrid
         if (\Auth::check())
         {
             /*
-                     *  Get the current user id and email address
-                     * */
-            list(, $this->_userId) = Auth::get_user_id();
-            $user = Model_User::find($this->_userId, array('select' => array('email')));
-            $this->_userEmail = $user->email;
+             *  Get the current user id and email address
+             * */
+            list(, $userId) = Auth::get_user_id();
+            $this->user = Model_User::find($userId);
         }
-        $this->template->title = "Wall Street Journal";
-        $this->_navigation = View::forge('_templates/top_navbar')->set('user_email', $this->_userEmail);
-        $this->_header = View::forge('_templates/header');
+
+        $this->template->title = "RN | Wall Street Journal";
+
+        $this->template->header = Presenter::forge('header/template')->set('user', $this->user );
 
         // Load translation
         \Lang::load('application');

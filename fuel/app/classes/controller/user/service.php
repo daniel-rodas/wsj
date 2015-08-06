@@ -1,21 +1,11 @@
 <?php
 
-class Controller_User_Service extends Controller_Template
+class Controller_User_Service extends Controller_Base_Template
 {
-    protected $_userId;
-    protected $_userSubscriptionStatus;
-    protected $_userEmail;
-    protected $_navigation;
-    protected $_header;
-    protected $selfReferrerLogin = 'user/service/index/login';
-    protected $selfReferrerRegistration = 'user/service/index/register';
-
     public function before()
     {
         parent::before();
 
-        // Load translation
-        \Lang::load('application');
         if ( Request::is_hmvc() )
         {
             $this->template = View::forge('user/hmvc/template');

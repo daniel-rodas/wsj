@@ -90,7 +90,7 @@ body {
     border: inset 0.15rem gold;
 }
 
-#brand-wsj {
+#brand {
     font-family: "adriane", times, Times New Roman, times-roman, georgia, serif;
     font-style: normal;
     font-weight: 400;
@@ -452,7 +452,7 @@ a[ng-click]{
     .header.front-page, .header.article-page {
 
     }
-    #brand-wsj {
+    #brand {
         font-size: 11rem;
         line-height: 12rem;
     }
@@ -504,7 +504,7 @@ a[ng-click]{
 }
 
 @media (min-width: 1900px ) {
-    #brand-wsj {
+    #brand {
         text-align: center;
     }
 }

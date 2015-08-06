@@ -272,7 +272,7 @@ return array(
 		 * );
 		 */
     'packages'  => array(
-        'orm', 'auth', 'messages','casset',
+        'orm', 'auth', 'messages',
     ),
 
 		/**

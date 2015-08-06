@@ -1,16 +1,6 @@
-
-
-            <div class="header front-page row">
-                <a href="/"><div id="brand-wsj" >Wall Street Journal</div></a>
-                <!-- top_navbar_lbMenu -->
-                <?php if (isset($navigation)): ?>
-                    <?php echo $navigation; ?>
-                <?php endif; ?>
-            </div><!-- End /.row-->
-
 <div class="row">
     <div class="advertisement">
-        <?php echo Request::forge('image/advertisement/banner/', false)->execute(); ?>
+        <?= Request::forge('image/advertisement/banner/', false)->execute(); ?>
     </div>
     <?= View::forge()->render('_includes/message'); ?>
 

@@ -1,4 +1,6 @@
-.controller('controllerHeader', function ($scope, $http, $modal, $log) {
+angular
+    .module('app.core')
+    .controller('HeaderController', function ($scope, $http, $modal, $log) {
 
     // get main section categories, then populate top level navigation links
     $http.get('/blog/rest/navigation/navSectionCategories.json').success(function (categories) {
@@ -36,4 +38,4 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-})
+});
