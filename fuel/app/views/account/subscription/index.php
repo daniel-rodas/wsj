@@ -53,7 +53,7 @@
                 color: black;
             }
         </style>
-        <div ng-controller="DatepickerDemoCtrl">
+        <div ng-controller="DeliveryOptionsController">
             <h4>Choose Date to Stop  Delivery</h4>
             <pre><em>{{dt | date:'fullDate' }}</em></pre>
 

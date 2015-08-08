@@ -1,4 +1,6 @@
-.directive('ngUnique', function ($http) {
+angular
+    .module('validation')
+    .directive('ngUnique', function ($http) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
@@ -21,4 +23,4 @@
             });
         }
     };
-})
+});

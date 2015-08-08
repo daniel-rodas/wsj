@@ -1,7 +1,5 @@
 
 
-<?= (isset($header)) ? $header : null; ?>
-
     <div class="row">
 
         <section class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">

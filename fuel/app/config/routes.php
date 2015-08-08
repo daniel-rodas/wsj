@@ -50,7 +50,7 @@ return array(
     'app/execute' => array('backend/app/execute', 'name' => 'app_execute'),
 
     // Article View
-    '(:segment)' => array('frontend/index/article/$1', 'name' => 'show_post'),
+//    '(:segment)' => array('frontend/index/article/$1', 'name' => 'show_post'),
 
 
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),

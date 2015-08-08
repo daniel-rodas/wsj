@@ -1,8 +1,16 @@
 <?php
+
 namespace Blog;
 
 class Model_Post extends \Orm\Model_Soft
 {
+    public static function _init()
+    {
+        // this is called upon loading the class
+        \Module::load('authentication');
+    }
+
+
     protected static $_properties = array(
         'id',
         'name' => array(
@@ -90,7 +98,7 @@ class Model_Post extends \Orm\Model_Soft
         ),
         'user' => array(
             'key_from' => 'user_id',
-            'model_to' => '\Model_User',
+            'model_to' => '\Authentication\Model_User',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,
@@ -111,13 +119,13 @@ class Model_Post extends \Orm\Model_Soft
             'cascade_save' => false,
             'cascade_delete' => true,  // We delete all comments from the post deleted
         ),
-        'galleries' => array(
-            'key_from' => 'id',
-            'model_to' => '\Model_Gallery',
-            'key_to' => 'post_id',
-            'cascade_save' => false,
-            'cascade_delete' => false,  // We do NOT delete all assests from the gallery deleted
-        ),
+//        'galleries' => array(
+//            'key_from' => 'id',
+//            'model_to' => '\Model_Gallery',
+//            'key_to' => 'post_id',
+//            'cascade_save' => false,
+//            'cascade_delete' => false,  // We do NOT delete all assests from the gallery deleted
+//        ),
     );
 
     public static function set_form_fields($form, $instance = null)
@@ -127,7 +135,7 @@ class Model_Post extends \Orm\Model_Soft
         parent::set_form_fields($form, $instance);
 
         // Set authors
-        foreach(\Model_User::find('all') as $user)
+        foreach(\Authentication\Model_User::find('all') as $user)
             $form->field('user_id')->set_options($user->id, $user->username);
 
         // Set categories

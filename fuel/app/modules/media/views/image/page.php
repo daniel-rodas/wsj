@@ -11,7 +11,7 @@
 
 
         <div class="row">
-            <div ng-controller="whatsNewsCtrl" id="whats-news-column" class=" col-md-2 col-lg-2  " >
+            <div ng-controller="WhatsNewsController" id="whats-news-column" class=" col-md-2 col-lg-2  " >
                 <h3 ng-click="changeClass()" class="h3">What's News </h3>
                 <section ng-class="class">
 

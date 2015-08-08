@@ -39,8 +39,9 @@ class Controller_Password extends Controller_Base
         }
 
         // display the password reset page
-        $this->template->content = View::forge('user/password/update');
+        return \Request::forge(  \View::forge('password/update') );
     }
+
 
     public function action_recover($hash = null)
     {
@@ -73,13 +74,13 @@ class Controller_Password extends Controller_Base
                     \Package::load('email');
                     $email = \Email::forge();
                     $data = array();
-                    $hash = Crypt::encode($hash, 'R@nd0mK~Y');
-                    $data['url'] = \Uri::create('user/password/recover/' . $hash );
+                    $hash = \Crypt::encode($hash, 'R@nd0mK~Y');
+                    $data['url'] = \Uri::create('password/recover/' . $hash );
                     $data['user'] = $user;
 
                 // use a view file to generate the email message
                     $email->html_body(
-                        View::forge('user/password/email', $data)
+                        \View::forge('password/email', $data)
                         );
 
                 // give it a subject
@@ -144,7 +145,7 @@ class Controller_Password extends Controller_Base
     // no form posted, do we have a hash passed in the URL?
         elseif ($hash !== null)
         {
-            $hash = Crypt::decode($hash, 'R@nd0mK~Y');
+            $hash = \Crypt::decode($hash, 'R@nd0mK~Y');
 
         // get the userid from the hash
             $user = substr($hash, 44);
@@ -198,7 +199,7 @@ class Controller_Password extends Controller_Base
         else
         {
            // display the login page
-        $this->template->content = View::forge('user/password/recover');
+        return \Response::forge( \View::forge('password/recover') );
 
         }
     }
@@ -208,9 +209,9 @@ class Controller_Password extends Controller_Base
         $data = array();
         $user = \Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
-        $this->template = View::forge('main_template');
+        $this->template = \View::forge('template');
         $this->template->title = 'Balls';
-        $this->template->content = View::forge('user/password/confirm', $data);
+        $this->template->content = View::forge('password/confirm', $data);
     }
 
     public function action_mock_email($id)
@@ -218,17 +219,18 @@ class Controller_Password extends Controller_Base
         $data = array();
         $user = \Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
-        $this->template = View::forge('template_email');
+        $this->template = \View::forge('template_email');
         $this->template->title = 'Balls';
         if (  isset($user->lostpassword_hash) )
         {
+            // TODO move hash key to configuration file.
             $hash = Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
-            $data['url'] = \Uri::create('user/password/recover/' . $hash );
-            $this->template->content = View::forge('user/password/email', $data);
+            $data['url'] = \Uri::create('password/recover/' . $hash );
+            $this->template->content = \View::forge('password/email', $data);
         }
         else
         {
-            $this->template->content = View::forge('user/password/expired');
+            $this->template->content = \View::forge('password/expired');
         }
     }
 
@@ -237,17 +239,17 @@ class Controller_Password extends Controller_Base
         $data = array();
         $user = \Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
-        $this->template = View::forge('template_phone');
+        $this->template = \View::forge('template_phone');
         $this->template->title = 'Balls';
         if (  isset($user->lostpassword_hash) )
         {
             $hash = Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
-            $data['url'] = \Uri::create('user/password/recover/' . $hash );
-            $this->template->content = View::forge('user/password/phone', $data);
+            $data['url'] = \Uri::create('password/recover/' . $hash );
+            $this->template->content = \View::forge('password/phone', $data);
         }
         else
         {
-            $this->template->content = View::forge('user/password/expired');
+            $this->template->content = \View::forge('password/expired');
         }
     }
 }

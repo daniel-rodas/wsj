@@ -1,7 +1,9 @@
-.controller('userAuthCtrl', function ($scope, $rootScope, messageService, subscriptionService) {
+angular
+    .module('authentication')
+    .controller('AuthenticationController', function ($scope, $rootScope, messageService, subscriptionService) {
 
     $scope.step = 1;
-    $scope.$on('userOptionChanged', function (event, message) {
+    $scope.$on('UserOptionChangeEvent', function (event, message) {
         console.log(event);
 
         $scope.subscription = message;

@@ -1,3 +1,5 @@
+angular
+    .module('ticker')
 .controller("LineChartController", ["$scope", function ($scope) {
     //$scope.salesData = [
     //    {hour: 1,sales: 54},

@@ -1,4 +1,6 @@
-.factory('subscriptionService', function () {
+angular
+    .module('subscription')
+.factory('SubscriptionService', function () {
     var option;
     var beginning = 1;
     var ending;

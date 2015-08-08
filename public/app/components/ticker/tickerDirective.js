@@ -1,3 +1,5 @@
+angular
+    .module('ticker')
 .directive("linearChart", function ($window) {
     return {
         restrict: "EA",

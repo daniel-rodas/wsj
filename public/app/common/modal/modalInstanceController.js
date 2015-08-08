@@ -1,4 +1,6 @@
-.controller('ModalInstanceCtrl', function ($scope, $modalInstance, categories, subCategories, $http) {
+angular
+    .module('app.core')
+    .controller('ModalInstanceController', function ($scope, $modalInstance, categories, subCategories, $http) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
     $scope.letterLimitHeadline = 50;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Blog;
 
 class Controller_Frontend_Post extends Controller_Blog

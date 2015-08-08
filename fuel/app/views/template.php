@@ -60,9 +60,10 @@
     'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
     Asset::get_file('app.module.js', 'ngApp'),
     Asset::get_file('common/header/headerController.js', 'ngApp'),
-    Asset::get_file('common/sidebar/sidebarController.js', 'ngApp'),
-    Asset::get_file('components/blog/blogController.js', 'ngApp'),
+    Asset::get_file('components/modal/modalInstanceController.js', 'ngApp'),
     Asset::get_file('components/authentication/authenticationController.js', 'ngApp'),
+    Asset::get_file('components/deliveryOptions/deliveryOptionsController.js', 'ngApp'),
+    Asset::get_file('components/whatsNews/whatsNewsController.js', 'ngApp'),
 ]); ?>
 </body>
 </html>
