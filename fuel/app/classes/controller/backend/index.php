@@ -1,5 +1,6 @@
 <?php
 
+
 class Controller_Backend_Index extends \Controller_Base_Backend
 {
     /*
@@ -7,13 +8,12 @@ class Controller_Backend_Index extends \Controller_Base_Backend
      * It call data for New, Options, and Account tabs.
      * The requests for the application is handled by the Controller_Backend_App REST controller.
      */
-    public $template = "backend_template";
 
     public function action_index()
     {
-        $this->template->title = 'Welcome ';
-        $data['coins'] = Model_Coin::find('all');
-        $this->template->content = View::forge('backend/index/new/index', $data);
+        $this->template->title = 'Backend ';
+
+        $this->template->content = View::forge('backend/index/new/index');
     }
 
     public function action_option()
@@ -21,41 +21,41 @@ class Controller_Backend_Index extends \Controller_Base_Backend
         $this->template->title = 'WSJ | RN Options Market';
 
         /*  Find options the user has bought and now can sell or execute  */
-        $options_sell = Model_Option::find('all', array(
-            'where' => array(
-                array('user_id', '=', $this->_userId),
-                array('expiration_date', '>', DB::expr(time()) ),
-                array('status', '=', 'Sold' ),
-                'or' => array(
-                    array('user_id', '=', $this->_userId),
-                    array('expiration_date', '>', DB::expr(time()) ),
-                    array('status', '=', 'New' ),
-                ),
-            ),
-        ));
-
-        /*  Find options that do not belong to user and is allowed to buy  */
-        $options_buy = Model_Option::find('all', array(
-            'where' => array(
-                array('user_id', '!=', $this->_userId),
-                array('expiration_date', '>', DB::expr(time()) ),
-                array('status', '=', 'Sell' ),
-            ),
-        ));
-
-        $data['optionsSell'] = $options_sell;
-        $data['optionsBuy'] = $options_buy;
+//        $options_sell = Model_Option::find('all', array(
+//            'where' => array(
+//                array('user_id', '=', $this->_userId),
+//                array('expiration_date', '>', DB::expr(time()) ),
+//                array('status', '=', 'Sold' ),
+//                'or' => array(
+//                    array('user_id', '=', $this->_userId),
+//                    array('expiration_date', '>', DB::expr(time()) ),
+//                    array('status', '=', 'New' ),
+//                ),
+//            ),
+//        ));
+//
+//        /*  Find options that do not belong to user and is allowed to buy  */
+//        $options_buy = Model_Option::find('all', array(
+//            'where' => array(
+//                array('user_id', '!=', $this->_userId),
+//                array('expiration_date', '>', DB::expr(time()) ),
+//                array('status', '=', 'Sell' ),
+//            ),
+//        ));
+//
+//        $data['optionsSell'] = $options_sell;
+//        $data['optionsBuy'] = $options_buy;
         /* set data info views and set views in template */
-        $this->template->sell_option = View::forge('backend/index/option/sell', $data);
-        $this->template->buy_option = View::forge('backend/index/option/buy', $data);
+        $this->template->sell_option = View::forge('backend/index/option/sell');
+        $this->template->buy_option = View::forge('backend/index/option/buy');
         $this->template->modal = View::forge('backend/index/option/modal');
     }
 
     public function action_account()
     {
         $this->template->title = 'RN | WSJ Account';
-        $data['transactions'] = Model_Transaction::find('all');
-        $this->template->content = View::forge('user/changepassword', $data);
+//        $data['transactions'] = Model_Transaction::find('all');
+        $this->template->content = View::forge('user/changepassword');
     }
 
     public function action_deposit()

@@ -1,8 +1,8 @@
 <?php
 
-namespace Exchange;
+namespace Exchange\Cron;
 
-class Cron_Market
+class Market
 {
     public static function populateHistory()
     {
@@ -11,13 +11,13 @@ class Cron_Market
         foreach($coins as $coin)
         {
             // Put inside history table
-            $curl = \Request::forge($coin->api, 'curl');
+            $curl = \Fuel\Core\Request::forge($coin->api, 'curl');
             $curl->set_params(array('market' => $coin->market));
             $curl->execute();
             $curl = $curl->response();
             $info = json_decode($curl->body());
 
-            Model_Market_History::forge(array(
+            \Exchange\Model\Market\History::forge(array(
                 'market' => $coin->market,
                 'coin_id' => $coin->id,
                 'last_price' => $info->result->Last,
@@ -25,6 +25,4 @@ class Cron_Market
             ))->save();
         }
     }
-
-
 }

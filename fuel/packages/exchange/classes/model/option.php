@@ -1,8 +1,8 @@
 <?php
 
-namespace Exchange;
+namespace Exchange\Model;
 
-class Model_Option extends \Orm\Model_Soft
+class Option extends \Orm\Model_Soft
 {
     public static function _init()
     {
@@ -10,7 +10,7 @@ class Model_Option extends \Orm\Model_Soft
         \Module::load('authentication');
         \Module::load('wallet');
     }
-//	public $coin_name;
+
     protected static $_properties = array(
 		'id',
 		'serial',

@@ -10,14 +10,15 @@ class Controller_Backend_Account extends \Controller_Base_Backend
 
     public function action_index($view = 'basic')
     {
-        // Put navigation view into header
-        $this->_header->set('navigation',$this->_navigation);
+        /**
+         * Account page, featured story
+         */
 
         // Grab presenter to be used for layout
-        $presenter = Presenter::forge('account/page')->set('header',$this->_header);
+        $presenter = Presenter::forge('account/page');
 
         // Get view and place in presenter
-        $data['user'] = $this->_user;
+        $data['user'] = $this->user;
         $view = View::forge('account/' . $view . '/index', $data);
         $presenter->set('content', $view);
 
@@ -69,11 +70,11 @@ class Controller_Backend_Account extends \Controller_Base_Backend
             }
 
 
-            $data['user'] = $this->_user;
+            $data['user'] = $this->user;
             $this->template->content = View::forge('account/basic/edit', $data);
         }
         $this->template->title = "Basic Information";
-        $data['user'] = $this->_user;
+        $data['user'] = $this->user;
         $this->template->content = View::forge('account/basic/edit', $data);
 
     }
@@ -124,11 +125,11 @@ class Controller_Backend_Account extends \Controller_Base_Backend
             }
 
 
-            $data['user'] = $this->_user;
+            $data['user'] = $this->user;
             $this->template->content = View::forge('account/subscription/edit', $data);
         }
         $this->template->title = "Delivery Settings";
-        $data['user'] = $this->_user;
+        $data['user'] = $this->user;
         $this->template->content = View::forge('account/subscription/edit', $data);
 
     }
@@ -138,9 +139,9 @@ class Controller_Backend_Account extends \Controller_Base_Backend
         // we have a UID and logged in? Just attach this authentication to a user
         if (\Auth::check())
         {
-            list(, $user_id) = \Auth::instance()->get_user_id();
+
             $entry = Model_Users_Providers::query()
-                ->where('parent_id', $user_id)
+                ->where('parent_id', $this->user->user_id)
                 ->and_where_open()
                     ->where('provider', $provider)
                 ->and_where_close()

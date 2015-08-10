@@ -2,7 +2,6 @@
 
 class Controller_Backend_App extends \Controller_Base_Backend
 {
-    public $template = "template";
     protected $response; /* Use variable to hold response back to client */
     protected $_priceHistory;
     protected $_strike;

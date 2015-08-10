@@ -16,7 +16,7 @@
 <?= View::forge()->render('backend/index/new/_buyoption'); ?>
 <div  class="col-md-4 btn-group" id="coin-choice">
 
-    <?php if ($coins): ?>
+    <?php if (isset($coins)): ?>
         <?php foreach ($coins as $item): ?>
             <a type="button" class="btn btn-default"><?=
                 Asset::img('coin/' . $item->file,
@@ -26,7 +26,7 @@
         <?php endforeach; ?>
     <?php else: ?>
 
-        <p>No notes.</p>
+        <p>No Coins.</p>
     <?php endif; ?>
 </div><!-- End. Button Group-->
 

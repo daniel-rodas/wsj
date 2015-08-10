@@ -7,7 +7,8 @@ class Model_User extends \Orm\Model_Soft
     public static function _init()
     {
         // this is called upon loading the class
-        \Module::load('exchange');
+        \Package::load('exchange');
+        \Module::load('wallet');
     }
 
     protected static $_properties = array(
@@ -24,13 +25,19 @@ class Model_User extends \Orm\Model_Soft
     );
     protected static $_table_name = 'users';
     // set up the statistics relation the usual way
-//    protected static $_has_one = array('wallet');
-    protected static $_has_many = array(
-        'transactions' => [
-
-            'model_to' => '\Exchange\Model_Transaction',      // related model
+    protected static $_has_one = [
+        'wallet' => [
+            'model_to' => '\Wallet\Model_Wallet',      // related model
         ],
-//        'options',
+    ];
+
+    protected static $_has_many = array(
+//        'transactions' => [
+//            'model_to' => '\Exchange\Model\Transaction',      // related model
+//        ],
+//        'options' => [
+//            'model_to' => '\Exchange\Model\Option',      // related model
+//        ],
         'users_metadata' => array(
             'key_from' => 'id',			// key in this model
             'model_to' => 'Authentication\Model_Users_Metadata',      // related model
@@ -71,7 +78,7 @@ class Model_User extends \Orm\Model_Soft
 
     public static function validate($factory)
     {
-        $val = Validation::forge($factory);
+        $val = \Validation::forge($factory);
         $val->add_field('email', 'Email Address', 'required');
         $val->add('password', 'Choose Password:', array('type'=>'password'))->add_rule('required');
         $val->add('password2', 'Re-type Password:', array('type' => 'password'))->add_rule('required');
@@ -84,7 +91,7 @@ class Model_User extends \Orm\Model_Soft
 
     public static function validate_basic($factory)
     {
-        $val = Validation::forge($factory);
+        $val = \Validation::forge($factory);
         $val->add_field('email', 'Email Address', 'required');
         $val->add_field('firstname', 'First', 'required');
         $val->add_field('lastname', 'Last', 'required');
@@ -96,7 +103,7 @@ class Model_User extends \Orm\Model_Soft
     }
     public static function validate_subscription($factory)
     {
-        $val = Validation::forge($factory);
+        $val = \Validation::forge($factory);
         $val->add_field('delivery_address', 'Delivery Address', 'required');
         $val->add_field('delivery_address_2', 'Line 2', 'required');
         $val->add_field('delivery_city', 'City', 'required');

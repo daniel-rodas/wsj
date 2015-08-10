@@ -1,8 +1,8 @@
 <?php
 
-namespace Exchange;
+namespace Exchange\Model\Market;
 
-class Model_Market_History extends \Orm\Model_Soft
+class History extends \Orm\Model_Soft
 {
 	protected static $_properties = array(
 		'id',
@@ -27,7 +27,7 @@ class Model_Market_History extends \Orm\Model_Soft
 
 	public static function validate($factory)
 	{
-		$val = \Validation::forge($factory);
+		$val = \Fuel\Core\Validation::forge($factory);
 		$val->add_field('market', 'Market', 'required|max_length[255]');
 		$val->add_field('coin_id', 'Coin Id', 'required|valid_string[numeric]');
 		$val->add_field('last_price', 'Last Price', 'required|valid_string[numeric]');

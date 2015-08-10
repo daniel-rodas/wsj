@@ -1,8 +1,8 @@
 <?php
 
-namespace Exchange;
+namespace Exchange\Model;
 
-class Model_Transaction extends \Orm\Model_Soft
+class Transaction extends \Orm\Model_Soft
 {
     public static function _init()
     {
