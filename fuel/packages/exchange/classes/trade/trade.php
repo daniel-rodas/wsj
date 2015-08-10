@@ -24,6 +24,12 @@ abstract class Trade extends Base
     protected $_option;
 
     /*
+     * @var $trade will hold instance of Trade object.
+     */
+    protected $trade;
+
+   
+    /*
      * @var $_option will hold a model of an option
      */
     protected $_price;

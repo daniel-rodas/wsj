@@ -8,11 +8,13 @@
 
 namespace Exchange\Market;
 
+use Exchange\Model\Market\History;
+
 class Price extends Base
 {
     public static function last(){}
 
-    public static function strike( $coinId ,  $expirationDate  )
+    public static function strike( History $history, $coinId ,  $expirationDate  )
     {
         /*
          * Future value prediction of coin based of market price history.
@@ -20,14 +22,9 @@ class Price extends Base
          *
          *
          */
-        $timeframeInSecondsX3 = time() - ( 3 * $expirationDate );
-        $priceHistory = \Exchange\Model\Market\History::find('all', array(
-            'where' => array(
-                array('coin_id','=',$coinId),
-                array('created_at','>',$timeframeInSecondsX3),
-            ),
-            'order_by' => array('created_at' => 'desc'),
-        ));
+        $timeFrameInSecondsX3 = time() - ( 3 * $expirationDate );
+
+        $priceHistory = $history->getPriceHistory( $coinId, $timeFrameInSecondsX3);
         /*
          * Reset array index to find most current last_price
          */
@@ -43,7 +40,7 @@ class Price extends Base
 
     public static function purchase($category, $strike, $quantity, $coin_id, $action)
     {
-        $inst = self::instance();
+
         $inst->_option = \Exchange\Model\Option::forge(array(
             'coin_id' => $coin_id,
             'strike' => $strike,
