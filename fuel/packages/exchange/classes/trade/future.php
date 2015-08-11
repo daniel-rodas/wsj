@@ -1,10 +1,10 @@
 <?php
 
-namespace Exchange\Market\Trade;
+namespace Exchange\Trade;
 
 class Future extends Trade
 {
-    protected function trade($action)
+    protected function algorithmTrade($action)
     {
         $this->_n = 17;
         $this->_m = 75;

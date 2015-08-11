@@ -1,10 +1,10 @@
 <?php
 
-namespace Exchange\Market\Trade;
+namespace Exchange\Trade;
 
 class Call extends Trade
 {
-    protected function trade($action)
+    protected function algorithmTrade($action)
     {
         /*
          * User has to pay for the rest of the call option when they execute

@@ -1,6 +1,6 @@
 <?php
 
-namespace Exchange\Market\Trade;
+namespace Exchange\Trade;
 
 class Put extends Trade
 {

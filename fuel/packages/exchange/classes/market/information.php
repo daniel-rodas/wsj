@@ -8,7 +8,7 @@
 
 namespace Exchange\Market;
 
-use \Exchange\Model\Coin;
+use Exchange\Model\Coin;
 
 class Information extends Base
 {
@@ -19,5 +19,17 @@ class Information extends Base
         $curl->execute();
         $curl = $curl->response();
         return $info = json_decode($curl->body());
+    }
+
+    public function getLastPrice ( $coinId )
+    {
+        $history =  History::find( 'last', array(
+            'where' => array(
+                array( 'coin_id','=', $coinId ),
+            ),
+            'order_by' => array( 'created_at' => 'desc' ),
+        ));
+
+        return $history->last_price;
     }
 }

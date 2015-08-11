@@ -2,7 +2,9 @@
 
 namespace Exchange;
 
-use Market;
+use Exchange\Market\Price;
+use Exchange\Trade\Trade;
+
 /**
  * @ Package Exchange 
  */
@@ -24,19 +26,24 @@ class Exchange
 
     public static function forge(){}
 
-    public function newOption( $optionType, $coinId, $userId, $timeFrame )
+    protected $price;
+    protected $history;
+
+    protected function __construct()
+    {
+        $this->price = new Price();
+        $this->history = new History();
+    }
+
+    public function newOption( $optionType, $coinId, $userId, $timeFrame , $quantity , $action )
     {
     	$expirationDate = $this->getExpirationDate( $timeFrame );
     	
-    	$this->strikePrice = $price->strike( new History() , $coinId ,  $expirationDate );
-    	$this->purchasePrice = $price->purchase( $category, $this->strikePrice, $quantity, $coinId, $action );	    
-	    /*
-          * Generate serial number for option
-          */
-        $serial = 'OP' . time() .''.  rand ( 55 , time() );
-        
+    	$strikePrice = $this->price->strike( $this->history , $coinId ,  $expirationDate );
+    	$purchasePrice = $this->getPurchasePrice( $optionType, $strikePrice, $quantity, $coinId, $action );
+
         $this->option->create(
-	        $coinId, $serial, $this->strikePrice, $this->expirationDate, $optionType, $userId );
+	        $coinId, $this->strikePrice, $expirationDate, $optionType, $userId, $purchasePrice, $quantity );
             
     }
 
@@ -46,10 +53,16 @@ class Exchange
 
     public function executeOption( $optionId ){}
     
-    public function getStrikePrice( $coinId, $timeFrame ){}
+    public function getStrikePrice( $coinId, $timeFrame,  $expirationDate )
+    {
+        $this->price->strike( $this->history , $coinId ,  $expirationDate );
+    }
 
     public function getExpirationDate( $timeFrame ){}
 
-    public function getPurchasePrice( $optionType, $strikePrice, $quantity,  $optionTrade ){}
+    public function getPurchasePrice( $optionType, $strikePrice, $quantity,  $optionTrade )
+    {
+        $this->price->purchase( $optionType, $strikePrice, $quantity, $coinId, $action );
+    }
 
 }

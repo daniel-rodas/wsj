@@ -6,81 +6,99 @@
  * Time: 12:54 AM
  */
 
-namespace Exchange\Market\Trade;
+namespace Exchange\Trade;
+//
+//use Exchange\Market\Information;
+//use Exchange\Market\Option;
 
-use Exchange\Market\Base;
-use Exchange\Model\Market\History;
-use Exchange\Model\Option;
-
-abstract class Trade extends Base
+class Trade
 {
     /*
- * When you sell your option you get debited a %0.01 fee of the purchase price
- */
+    * When you sell your option you get debited a %0.01 fee of the purchase price
+    */
 
     /*
-     * @var $_option will hold a model of an option
+     * @var $option will hold a market option
      */
-    protected $_option;
+    protected $option;
+
+    /*
+     * @var $optionType will hold a value of an optionType
+     */
+    protected $optionType;
+
+    /*
+     * @var $information will hold a History object to get last price value
+     */
+    protected $information;
 
     /*
      * @var $trade will hold instance of Trade object.
      */
-    protected $trade;
-
+    protected $tradeStrategy;
    
     /*
-     * @var $_option will hold a model of an option
+     * @var $price will hold a Price object
      */
-    protected $_price;
+    protected $price;
 
     /*
-     * @var $_theta will hold the value of Strike X Quantity
+     * @var $theta will hold the value of Strike X Quantity
      */
-    protected $_theta;
+    protected $theta;
 
     /*
-    * @var $_beta will hold the value of  Quantity X LastPrice
+    * @var $beta will hold the value of  Quantity X LastPrice
     */
-    protected $_beta;
+    protected $beta;
 
     /*
-     * @var $_n is used to calculate a fee
+     * @var $n is used to calculate a fee
      */
-    protected $_n = 20;
+    protected $n = 20;
 
     /*
-     * @var $_m is used to calculate a fee
+     * @var $m is used to calculate a fee
      */
-    protected $_m = 40;
+    protected $m = 40;
 
     /*
-     * @var $instance to add support for static methods
+     *
+     * @usage
+     *      $trade = new Trade( new <Trade>(), New Information(), new Option(),  Option->category );
+     *      $trade->trade();
      */
 
-    public function __construct(Option $option ,  History $history)
+    public function __construct(Trade $tradeObject, Information $information = null , Option $option = null  ,   $optionType = null )
     {
-        // TODO Call new Trade() Object, Call, Put, Future, or Short.
-        $this->_option = $option;
-        $this->_price = $history;
-
-        $category = '_'.strtolower($option->category);
-
-        $this->_theta = $option->strike * $option->quantity;
-        /*
-         * To get Theta first
-         *  Get Last Price
-         */
-        $history = History::find('last', array(
-            'where' => array(
-                array('coin_id','=',$option->coin_id),
-            ),
-            'order_by' => array('created_at' => 'desc'),
-        ));
-        $lastPrice = $history->last_price;
-        $this->_beta = $option->quantity * $lastPrice;
-        return $this->$category($option->status);
+        $this->tradeStradegy = $tradeObject;
+        $this->information = $information;
+        $this->option = $option || null;
+        $this->optionType = $option->getType() || $optionType;
     }
 
-    protected abstract function trade($action);
+    public function trade()
+    {
+        /*
+         * 1. Get Theta from
+         *      Option's StrikePrice multiplied by the Quantity.
+         * 2. Get LastPrice from
+         *      Market Information object
+         * 3. Get Beta from
+         *      Option's Quantity and StrikePrice
+         * 4. Hand over request to TradeStrategy for running algorithm
+         *
+         */
+
+        $this->theta = $this->option->getStrike() * $this->option->getQuantity();
+
+        // TODO get me a coinId
+        $lastPrice = $this->information->getLastPrice( coinId );
+
+        $this->beta = $this->option->getQuantity() * $lastPrice;
+
+        return $this->tradeStradegy->algorithmTrade( $this->option->getStatus() );
+    }
+
+    protected function algorithmTrade( $action ){}
 }

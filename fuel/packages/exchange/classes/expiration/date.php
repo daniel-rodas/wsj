@@ -6,8 +6,7 @@
  * Time: 1:46 AM
  */
 
-namespace Exchange\market\expiration;
-
+namespace Exchange\Expiration;
 
 class Date
 {
