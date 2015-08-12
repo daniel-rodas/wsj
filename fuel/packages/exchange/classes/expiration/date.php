@@ -25,9 +25,10 @@ class Date
 
             case '1d':
                 return  time() + (24 * 60 * 60);
+            // TODO turn seven day options after Sept 11, 2016
 
-            case '7d':
-                return  time() + (7 * 24 * 60 * 60);
+//            case '7d':
+//                return  time() + (7 * 24 * 60 * 60);
 
             default:
                 /*

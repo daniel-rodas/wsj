@@ -6,13 +6,13 @@ class Short extends Trade
 {
     protected function algorithmTrade($action)
     {
-        $this->_n = 13;
-        $this->_m = 75;
+        $this->n = 13;
+        $this->m = 75;
 
         switch($action) :
             case 'New':
                 /* 1. option of cost - NEW */
-                return - ( $this->_theta / $this->_n );
+                return - ( $this->theta / $this->n );
 
             case 'Sell':
                 return true;
@@ -22,11 +22,11 @@ class Short extends Trade
 
             case 'Execute':
 
-                return $this->_theta;
+                return $this->theta;
 
             case 'Expire' :
                 /*  3. cost of execute - After Execute*/
-                return - ( $this->_beta );
+                return - ( $this->beta );
         endswitch;
 
     }

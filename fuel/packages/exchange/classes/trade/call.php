@@ -11,14 +11,14 @@ class Call extends Trade
          * But there is not obligation to execute for a call option
          * The option is like a very light down payment and they're only obligated to pay in full if they execute
          */
-        $this->_n = 17;
-        $this->_m = 75;
+        $this->n = 17;
+        $this->m = 75;
 
         switch($action) :
 
             case 'New':
                 /* 1. option of cost - NEW */
-                return - ( $this->_theta / $this->_n );
+                return - ( $this->theta / $this->n );
 
             case 'Sell':
                 return true;
@@ -28,11 +28,11 @@ class Call extends Trade
 
             case 'Execute':
                 /* 2. cost if they execute - Execute */
-                return $this->_theta + ( $this->_theta / $this->_m );
+                return $this->theta + ( $this->theta / $this->m );
 
             case 'Expire':
                 /*  3. cost of execute - After Execute*/
-                return ( $this->_theta / $this->_n ) +  $this->_beta ;
+                return ( $this->theta / $this->n ) +  $this->beta ;
         endswitch;
     }
 }

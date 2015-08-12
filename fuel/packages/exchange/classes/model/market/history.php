@@ -2,7 +2,7 @@
 
 namespace Exchange\Model\Market;
 
-class History extends \Orm\Model_Soft
+class History extends \Orm\Model
 {
     protected static $_properties = array(
         'id',
@@ -13,6 +13,8 @@ class History extends \Orm\Model_Soft
         'created_at',
         'updated_at',
     );
+
+    protected static $_table_name = 'market_histories';
 
     protected static $_observers = array(
         'Orm\Observer_CreatedAt' => array(
@@ -35,21 +37,4 @@ class History extends \Orm\Model_Soft
 
         return $val;
     }
-
-    public function getPriceHistory($coinId, $timeFrameInSecondsX3)
-    {
-        try {
-            return $this->find('all', array(
-                'where' => array(
-                    array('coin_id', '=', $coinId),
-                    array('created_at', '>', $timeFrameInSecondsX3),
-                ),
-                'order_by' => array('created_at' => 'desc'),
-            ));
-        } catch (Database_Exception $e) {
-            echo $e->getMessage();
-        }
-
-    }
-
 }

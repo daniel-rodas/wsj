@@ -7,9 +7,8 @@
  */
 
 namespace Exchange\Trade;
-//
-//use Exchange\Market\Information;
-//use Exchange\Market\Option;
+
+use Exchange\Market;
 
 class Trade
 {
@@ -23,9 +22,9 @@ class Trade
     protected $option;
 
     /*
-     * @var $optionType will hold a value of an optionType
+     * @var $action to be performed on option
      */
-    protected $optionType;
+    protected $action;
 
     /*
      * @var $information will hold a History object to get last price value
@@ -36,11 +35,6 @@ class Trade
      * @var $trade will hold instance of Trade object.
      */
     protected $tradeStrategy;
-   
-    /*
-     * @var $price will hold a Price object
-     */
-    protected $price;
 
     /*
      * @var $theta will hold the value of Strike X Quantity
@@ -69,12 +63,11 @@ class Trade
      *      $trade->trade();
      */
 
-    public function __construct(Trade $tradeObject, Information $information = null , Option $option = null  ,   $optionType = null )
+    public function __construct(Trade $tradeObject,  Option $option  )
     {
         $this->tradeStradegy = $tradeObject;
-        $this->information = $information;
-        $this->option = $option || null;
-        $this->optionType = $option->getType() || $optionType;
+        $this->information = new Information();
+        $this->option = $option;
     }
 
     public function trade()
@@ -92,8 +85,7 @@ class Trade
 
         $this->theta = $this->option->getStrike() * $this->option->getQuantity();
 
-        // TODO get me a coinId
-        $lastPrice = $this->information->getLastPrice( coinId );
+        $lastPrice = $this->information->getLastPrice( $this->option->getCoinId() );
 
         $this->beta = $this->option->getQuantity() * $lastPrice;
 

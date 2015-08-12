@@ -8,27 +8,27 @@
 
 namespace Exchange\Market;
 
-use Exchange\Market\Information;
+use Exchange\Trade\Trade;
+use Exchange\Trade\Put;
+use Exchange\Trade\Call;
+use Exchange\Trade\Future;
+use Exchange\Trade\Short;
 
 class Price extends Base
 {
-
-
-
-
-    public static function last(){}
-
-    public static function strike( Information $information, $coinId ,  $expirationDate  )
+    public function strike( $coinId ,  $expirationDate  )
     {
-        /*
-         * Future value prediction of coin based of market price history.
-         * Now do some linear algebra to get the average change in rate for the market.
-         *
-         *
-         */
-        $timeFrameInSecondsX3 = time() - ( 3 * $expirationDate );
 
-        $priceHistory = $history->getPriceHistory( $coinId, $timeFrameInSecondsX3);
+        /*
+         * Estimate future value prediction of coin based on market price (last price) history.
+         * Now do some linear algebra to get the average change in rate for the market.
+         */
+        $timeElapsed =  $expirationDate - time();
+
+        $timeFrameBack = time() - ( 3 * $timeElapsed );
+
+        $information = new Information();
+        $priceHistory = $information->getPriceHistory( $coinId, $timeFrameBack );
         /*
          * Reset array index to find most current last_price
          */
@@ -39,52 +39,23 @@ class Price extends Base
         {
             $sumOfLastPrice = $sumOfLastPrice + $record->last_price;
         }
-        return $lastPrice[0]->last_price + ( $sumOfLastPrice / $denominatorOfAverages );
+
+        $strikePrice = $lastPrice[0]->last_price + ( $sumOfLastPrice / $denominatorOfAverages );
+
+        // Convert scientific notation to decimal notation
+        return rtrim( sprintf('%.20F', $strikePrice ), '0');
     }
 
-    public function get_purchase_price()
+    public function purchase( $optionType, $option )
     {
-        $this->_strike = $this->get_strike_price();
-        return  \Market\Market::purchasePrice(
-            $category = Input::param('option'),
-            $strike = $this->_strike ,
-            $quantity = Input::param('quantity'),
-            $coin_id = Input::param('coin_id'),
-            $action = Input::param('status') );
-    }
 
-
-    public static function purchase($optionType, $strikePrice, $quantity, $coinId, $action)
-    {
+//                echo '<br /> $optionType ' .  $optionType . '<br />';
+//                echo '<br /> <pre>$option.: ' .  print_r($option);
 //
-//        \Market\Market::purchasePrice( $category = Input::param('option'),
-//            $strike = $this->_strike , $quantity = Input::param('quantity'),
-//            $coin_id = Input::param('coin_id'), $action = Input::param('status') );
-//
-        $option = \Exchange\Model\Option::forge(array(
-            'coin_id' => $coinId,
-            'strike' => $strikePrice,
-            'quantity' => $quantity,
-            'category' => $optionType,
-            'status' => $action,
-        ));
+//                die();
+        $fqcn = new $fqcn() = $fqcn =  "Exchange\\\Trade\\\" . $optionType;
 
-        $theta = $strikePrice * $quantity;
-
-        /*
-         * Get Last Price
-         */
-
-        $history = \Exchange\Model\Market\History::find('last', array(
-            'where' => array(
-                array('coin_id','=',$coinId),
-            ),
-            'order_by' => array('created_at' => 'desc'),
-        ));
-        $lastPrice = $history->last_price;
-        $beta = $quantity * $lastPrice;
-
-        return $inst->$category($action);
+        $tradeObject = new Trade(  $fqcn ,  $option );
+        return $tradeObject->trade();
     }
-
 }

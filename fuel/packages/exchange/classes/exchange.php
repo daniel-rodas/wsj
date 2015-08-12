@@ -2,14 +2,15 @@
 
 namespace Exchange;
 
-use Exchange\Market\Price;
-use Exchange\Trade\Trade;
-
+use Exchange\Market;
+use Exchange\Expiration\Date;
 /**
  * @ Package Exchange 
  */
 class Exchange 
 {
+    protected $price;
+    protected $option;
     private static $_instance = null;
 
     private static function instance()
@@ -22,29 +23,40 @@ class Exchange
             self::$_instance = new self();
             return self::$_instance;
         }
+        return self::$_instance;
     }
 
-    public static function forge(){}
+    public static function forge()
+    {
+     return self::instance();
+    }
 
-    protected $price;
-    protected $history;
 
     protected function __construct()
     {
-        $this->price = new Price();
-        $this->history = new History();
+        $this->price = new Market\Price();
+        $this->option = new Market\Option();
     }
 
-    public function newOption( $optionType, $coinId, $userId, $timeFrame , $quantity , $action )
+    public function newOption( $optionType ,  $quantity , $timeFrame , $coinId , $userId )
     {
-    	$expirationDate = $this->getExpirationDate( $timeFrame );
-    	
-    	$strikePrice = $this->price->strike( $this->history , $coinId ,  $expirationDate );
-    	$purchasePrice = $this->getPurchasePrice( $optionType, $strikePrice, $quantity, $coinId, $action );
+        $expirationDate = $this->getExpirationDate( $timeFrame );
 
-        $this->option->create(
-	        $coinId, $this->strikePrice, $expirationDate, $optionType, $userId, $purchasePrice, $quantity );
-            
+        // Calculate Strike Price based on future predictions using market history
+    	$strikePrice = $this->getStrikePrice(  $coinId ,  $expirationDate );
+
+        // Set Option parameters
+        $this->option->set( 'strikePrice', $strikePrice );
+        $this->option->set( 'quantity', $quantity );
+        $this->option->set( 'type', $optionType );
+        $this->option->set( 'expirationDate', $expirationDate );
+        $this->option->set( 'userId', $userId );
+        $this->option->set( 'coinId', $coinId );
+
+        // Calculate Purchase Price based on Option parameters
+        $purchasePrice = $this->getPurchasePrice( $this->option );
+
+        return $this->option->create( $purchasePrice );
     }
 
     public function sellOption( $optionId, $optionPrice ){}
@@ -53,16 +65,19 @@ class Exchange
 
     public function executeOption( $optionId ){}
     
-    public function getStrikePrice( $coinId, $timeFrame,  $expirationDate )
+    public function getStrikePrice( $coinId,  $expirationDate )
     {
-        $this->price->strike( $this->history , $coinId ,  $expirationDate );
+        return $this->price->strike(  $coinId ,  $expirationDate );
     }
 
-    public function getExpirationDate( $timeFrame ){}
-
-    public function getPurchasePrice( $optionType, $strikePrice, $quantity,  $optionTrade )
+    public function getExpirationDate( $timeFrame )
     {
-        $this->price->purchase( $optionType, $strikePrice, $quantity, $coinId, $action );
+        $date = new Date();
+        return $date->get( $timeFrame );
     }
 
+    public function getPurchasePrice( $option )
+    {
+        return $this->price->purchase( $option->getType() , $option );
+    }
 }

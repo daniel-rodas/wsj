@@ -8,7 +8,7 @@
 
 namespace Exchange\Market;
 
-use Exchange\Model\Coin;
+use Exchange\Model\Market\History;
 
 class Information extends Base
 {
@@ -31,5 +31,16 @@ class Information extends Base
         ));
 
         return $history->last_price;
+    }
+
+    public function getPriceHistory( $coinId, $timeFrame )
+    {
+        return History::find( 'all', array(
+            'where' => array(
+                array( 'coin_id', '=', $coinId ),
+                array( 'created_at', '>', $timeFrame ),
+            ),
+            'order_by' => array( 'created_at' => 'desc' ),
+        ));
     }
 }

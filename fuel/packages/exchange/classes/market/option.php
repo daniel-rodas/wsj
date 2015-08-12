@@ -8,22 +8,27 @@
 
 namespace Exchange\Market;
 
-use Exchange\Model\Coin;
 use Exchange\Model\Option as Model_Option;
 
 class Option extends Base
 {
-    protected function create(
-        $coinId,
-        $strikePrice,
-        $expirationDate,
-        $optionType,
-        $userId,
-        $purchasePrice,
-        $quantity,
-        $serial = null)
-    {
+    // TODO https://en.wikipedia.org/wiki/Fluent_interface#PHP
+    protected $strikePrice;
+    protected $type;
+    protected $expirationDate;
+    protected $quantity;
+    protected $coinId;
+    protected $userId;
+    protected $status;
 
+    public function set( $key, $value )
+    {
+        $this->$key = $value;
+    }
+
+    public function create( $purchasePrice, $serial = null )
+    {
+        $this->status = 'Initialized';
     /*
           * Generate serial number for option
           */
@@ -32,26 +37,31 @@ class Option extends Base
         $val = Model_Option::validate_new('create_option');
         if ($val->run(array(
             'serial' => $serial,
-            'strike' => $strikePrice,
-            'expiration_date' => $expirationDate,
-            'category' => $optionType ), true))
+            'strike' => $this->strikePrice,
+            'expiration_date' => $this->expirationDate,
+            'category' => $this->type ), true))
         {
             /*
              * Validation was successful
              * Now create a new ORM object then
              * Populate Model_Option with user input then save in DB
              */
-            $option = Model_Option::forge(array(
-                'coin_id' => $coinId,
+             $option = Model_Option::forge(array(
+                'coin_id' => $this->coinId,
                 'serial' => $serial,
-                'quantity' => $quantity,
+                'quantity' => $this->quantity,
                 'price' => $purchasePrice,
-                'strike' => $strikePrice, /* once this value is set it should not change */
-                'category' => $optionType,
+                'strike' => $this->strikePrice, /* once this value is set it should not change */
+                'category' => $this->type,
                 'status' => 'New', /*  enum("New","Sell","Sold","Execute"); */
-                'user_id' => $userId, /* user_id is the current owner of an option */
-                'expiration_date' => $expirationDate,
+                'user_id' => $this->userId, /* user_id is the current owner of an option */
+                'expiration_date' => $this->expirationDate,
             ))->save();
+
+            $this->status = 'New';
+
+            die('Congratulations on creating an Option');
+
         }
         else
         {
@@ -63,13 +73,9 @@ class Option extends Base
     protected function buy(){}
     protected function execute(){}
 
-    /*
-    	 * Gets Quantity of Option.
-    	 *
-    	 * @return  int  Number of coins included in this option
-    	 */
-    public function getQuantity(){}
-    public function getStrike(){}
-    public function getStatus(){}
-    public function getType(){}
+    public function getType(){ return (string) $this->type; }
+    public function getQuantity(){ return (integer) $this->quantity; }
+    public function getStrike(){ return (float) $this->strikePrice; }
+    public function getCoinId(){ return (integer) $this->coinId; }
+    public function getStatus(){ return (string) $this->status; }
 }
