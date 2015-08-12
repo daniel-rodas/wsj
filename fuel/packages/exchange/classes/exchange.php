@@ -2,7 +2,8 @@
 
 namespace Exchange;
 
-use Exchange\Market;
+use Exchange\Market\Price;
+use Exchange\Market\Option;
 use Exchange\Expiration\Date;
 /**
  * @ Package Exchange 
@@ -34,8 +35,8 @@ class Exchange
 
     protected function __construct()
     {
-        $this->price = new Market\Price();
-        $this->option = new Market\Option();
+        $this->price = new Price();
+        $this->option = new Option();
     }
 
     public function newOption( $optionType ,  $quantity , $timeFrame , $coinId , $userId )
@@ -55,6 +56,9 @@ class Exchange
 
         // Calculate Purchase Price based on Option parameters
         $purchasePrice = $this->getPurchasePrice( $this->option );
+
+//        echo $purchasePrice;
+//        die('Purchase Price');
 
         return $this->option->create( $purchasePrice );
     }

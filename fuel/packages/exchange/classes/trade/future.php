@@ -2,9 +2,9 @@
 
 namespace Exchange\Trade;
 
-class Future extends Trade
+class Future implements IStrategy
 {
-    protected function algorithmTrade($action)
+    public function algorithmTrade($action)
     {
         $this->n = 17;
         $this->m = 75;

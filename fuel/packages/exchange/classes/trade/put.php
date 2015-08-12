@@ -2,9 +2,9 @@
 
 namespace Exchange\Trade;
 
-class Put extends Trade
+class Put implements IStrategy
 {
-    protected function algorithmTrade($action)
+    public function algorithmTrade($action)
     {
         $this->n = 17;
         $this->m = 75;

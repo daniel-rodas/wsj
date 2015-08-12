@@ -9,6 +9,7 @@
 namespace Exchange\Market;
 
 use Exchange\Trade\Trade;
+use Exchange\Trade\IStrategy;
 use Exchange\Trade\Put;
 use Exchange\Trade\Call;
 use Exchange\Trade\Future;
@@ -48,14 +49,7 @@ class Price extends Base
 
     public function purchase( $optionType, $option )
     {
-
-//                echo '<br /> $optionType ' .  $optionType . '<br />';
-//                echo '<br /> <pre>$option.: ' .  print_r($option);
-//
-//                die();
-        $fqcn = new $fqcn() = $fqcn =  "Exchange\\\Trade\\\" . $optionType;
-
-        $tradeObject = new Trade(  $fqcn ,  $option );
-        return $tradeObject->trade();
+        $tradeObject = $this->$optionType();
+        return $tradeObject->trade( $option );
     }
 }

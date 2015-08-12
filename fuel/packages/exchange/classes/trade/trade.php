@@ -8,10 +8,15 @@
 
 namespace Exchange\Trade;
 
-use Exchange\Market;
+use Exchange\Market\Information;
+use Exchange\Market\Option as Market_Option;
 
-class Trade
+Class Trade
 {
+    /*
+     * Acts as <Context> for strategy pattern
+     */
+
     /*
     * When you sell your option you get debited a %0.01 fee of the purchase price
     */
@@ -63,15 +68,18 @@ class Trade
      *      $trade->trade();
      */
 
-    public function __construct(Trade $tradeObject,  Option $option  )
+    public function __construct(IStrategy $tradeObject )
     {
+        // TODO Constructors should not return anything, fix trade data return handling.
+
         $this->tradeStradegy = $tradeObject;
         $this->information = new Information();
-        $this->option = $option;
+
     }
 
-    public function trade()
+    public function trade( Market_Option $option  )
     {
+        $this->option = $option;
         /*
          * 1. Get Theta from
          *      Option's StrikePrice multiplied by the Quantity.
@@ -84,6 +92,9 @@ class Trade
          */
 
         $this->theta = $this->option->getStrike() * $this->option->getQuantity();
+//        echo '<pre>';
+//        print_r($this->theta);
+//        die();
 
         $lastPrice = $this->information->getLastPrice( $this->option->getCoinId() );
 
@@ -91,6 +102,4 @@ class Trade
 
         return $this->tradeStradegy->algorithmTrade( $this->option->getStatus() );
     }
-
-    protected function algorithmTrade( $action ){}
 }

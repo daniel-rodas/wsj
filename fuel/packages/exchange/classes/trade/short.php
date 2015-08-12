@@ -2,9 +2,9 @@
 
 namespace Exchange\Trade;
 
-class Short extends Trade
+class Short implements IStrategy
 {
-    protected function algorithmTrade($action)
+    public function algorithmTrade($action)
     {
         $this->n = 13;
         $this->m = 75;

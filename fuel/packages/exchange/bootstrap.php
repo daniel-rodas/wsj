@@ -16,6 +16,7 @@ Autoloader::add_classes(array(
     'Exchange\\Model\Transaction'                => __DIR__.'/classes/model/transaction.php',
     'Exchange\\Observer\Transaction'                => __DIR__.'/classes/observer/transaction.php',
     'Exchange\\Trade\Trade'                => __DIR__.'/classes/trade/trade.php',
+    'Exchange\\Trade\IStrategy'                => __DIR__.'/classes/trade/istrategy.php',
     'Exchange\\Trade\Call'                => __DIR__.'/classes/trade/call.php',
     'Exchange\\Trade\Future'                => __DIR__.'/classes/trade/future.php',
     'Exchange\\Trade\Put'                => __DIR__.'/classes/trade/put.php',

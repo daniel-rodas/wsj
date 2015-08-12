@@ -2,9 +2,9 @@
 
 namespace Exchange\Trade;
 
-class Call extends Trade
+class Call implements IStrategy
 {
-    protected function algorithmTrade($action)
+    public function algorithmTrade($action)
     {
         /*
          * User has to pay for the rest of the call option when they execute
