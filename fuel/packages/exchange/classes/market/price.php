@@ -19,7 +19,6 @@ class Price extends Base
 {
     public function strike( $coinId ,  $expirationDate  )
     {
-
         /*
          * Estimate future value prediction of coin based on market price (last price) history.
          * Now do some linear algebra to get the average change in rate for the market.
@@ -29,16 +28,26 @@ class Price extends Base
         $timeFrameBack = time() - ( 3 * $timeElapsed );
 
         $information = new Information();
-        $priceHistory = $information->getPriceHistory( $coinId, $timeFrameBack );
+
+        if( ! $priceHistory = $information->getPriceHistory( $coinId, $timeFrameBack ) )
+        {
+            throw new \PhpErrorException('Cannot gather price history market information. Please try different market sign or market api.');
+        }
         /*
          * Reset array index to find most current last_price
          */
         $lastPrice = array_values($priceHistory);
         $denominatorOfAverages = count($priceHistory);
         $sumOfLastPrice = 0;
-        foreach($priceHistory as $record)
-        {
-            $sumOfLastPrice = $sumOfLastPrice + $record->last_price;
+        try {
+            // Run query and hope for the best.
+            foreach($priceHistory as $record)
+            {
+                $sumOfLastPrice = $sumOfLastPrice + $record->last_price;
+            }
+        } catch (\PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMassage();
         }
 
         $strikePrice = $lastPrice[0]->last_price + ( $sumOfLastPrice / $denominatorOfAverages );

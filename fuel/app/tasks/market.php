@@ -12,6 +12,7 @@ class Market
     }
     public function ticker()
     {
-        TMarket::populateHistory();
+        $marketHistory = new TMarket();
+        $marketHistory->populateHistory();
     }
 }

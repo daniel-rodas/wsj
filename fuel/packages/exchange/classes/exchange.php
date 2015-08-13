@@ -53,14 +53,19 @@ class Exchange
         $this->option->set( 'expirationDate', $expirationDate );
         $this->option->set( 'userId', $userId );
         $this->option->set( 'coinId', $coinId );
+        $this->option->set( 'status', 'Initialized' );
 
         // Calculate Purchase Price based on Option parameters
         $purchasePrice = $this->getPurchasePrice( $this->option );
+        $this->option->set( 'price', $purchasePrice );
 
-//        echo $purchasePrice;
-//        die('Purchase Price');
-
-        return $this->option->create( $purchasePrice );
+        try {
+            // Run query and hope for the best.
+            return $this->option->create();
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
     }
 
     public function sellOption( $optionId, $optionPrice ){}

@@ -39,7 +39,9 @@ class Transaction extends \Orm\Model_Soft
     );
 
     protected static $_belongs_to = [
-        'option',
+        'option'  => [
+            'model_to' => '\Exchange\Model\Option',
+        ],
         'user' => [
             'model_to' => '\Authentication\Model_User',
         ]

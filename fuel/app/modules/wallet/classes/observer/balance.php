@@ -7,7 +7,7 @@ class Observer_Balance extends \Orm\Observer
     public static function _init()
     {
         // this is called upon loading the class
-        \Module::load('exchange');
+        \Package::load('exchange');
     }
 
     public function after_insert(\Orm\Model $model)
@@ -27,7 +27,7 @@ class Observer_Balance extends \Orm\Observer
         $sql = 'SELECT user_id, (SUM(debit)*-1) + SUM(credit)
                 AS balance FROM balances WHERE user_id = '. $model->user_id . ' GROUP BY user_id ';
 
-        $balance = DB::query($sql)->execute();
+        $balance = \DB::query($sql)->execute();
 
          if( 0 === count( $balance ))
          {// zero customer balance means that use has no records or a zero balance, update new balance
@@ -78,7 +78,7 @@ class Observer_Balance extends \Orm\Observer
             /*
              * Need to credit seller
              */
-            $sell_transaction = \Exchange\Model_Transaction::find('last', array(
+            $sell_transaction = \Exchange\Model\Transaction::find('last', array(
                 'where' => array(
                     array('action', '=', 'Sell' ),
                     array('option_id', '=', $model->id ),

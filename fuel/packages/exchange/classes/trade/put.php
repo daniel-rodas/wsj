@@ -4,16 +4,16 @@ namespace Exchange\Trade;
 
 class Put implements IStrategy
 {
-    public function algorithmTrade($action)
+    public function algorithmTrade($option)
     {
-        $this->n = 17;
-        $this->m = 75;
+        $option->n = 17;
+        $option->m = 75;
 
-        switch($action) :
+        switch($option->getStatus()) :
 
-            case 'New':
+            case 'Initialized':
                 /* 1. option of cost - NEW */
-                return - ( $this->theta / $this->n );
+                return - ( $option->theta / $option->n );
 
             case 'Sell':
                 return true;
@@ -23,11 +23,11 @@ class Put implements IStrategy
 
             case 'Execute':
                 /* 2. cost if they execute - Execute (Put is no obligation)*/
-                return $this->beta + ( $this->beta / $this->m  ); /*  cost of execute */ /* cost if they execute */;
+                return $option->beta + ( $option->beta / $option->m  ); /*  cost of execute */ /* cost if they execute */;
 
             case 'Expire' :
                 /*  3. cost of execute - After Execute*/
-                return $this->theta ;
+                return $option->theta ;
         endswitch;
     }
 }

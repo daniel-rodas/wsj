@@ -8,39 +8,54 @@
 
 namespace Exchange\Market;
 
+use Exchange\Model\Coin;
 use Exchange\Model\Market\History;
 
 class Information extends Base
 {
-    public static function get( Coin $coin )
+    public function get( Coin $coin )
     {
+        // Setup cURL request to url specified in coin (bittrex.com)
         $curl = \Request::forge($coin->api, 'curl');
         $curl->set_params(array('market' => $coin->market));
         $curl->execute();
-        $curl = $curl->response();
-        return $info = json_decode($curl->body());
+        $curlResponse = $curl->response();
+        // Return results as array
+        return json_decode( $curlResponse->body(), true );
     }
 
     public function getLastPrice ( $coinId )
     {
-        $history =  History::find( 'last', array(
-            'where' => array(
-                array( 'coin_id','=', $coinId ),
-            ),
-            'order_by' => array( 'created_at' => 'desc' ),
-        ));
+        try {
+            // Run query and hope for the best.
+            $history =  History::find( 'last', array(
+                'where' => array(
+                    array( 'coin_id','=', $coinId ),
+                ),
+                'order_by' => array( 'created_at' => 'desc' ),
+            ));
+        } catch (Orm\ValidationFailed $e) {
+            // returns the individual ValidationError objects
+            $errors = $e->get_fieldset()->validation()->error();
+        }
 
         return $history->last_price;
     }
 
     public function getPriceHistory( $coinId, $timeFrame )
     {
-        return History::find( 'all', array(
-            'where' => array(
-                array( 'coin_id', '=', $coinId ),
-                array( 'created_at', '>', $timeFrame ),
-            ),
-            'order_by' => array( 'created_at' => 'desc' ),
-        ));
+        try {
+            // Run query and hope for the best.
+            return History::find( 'all', array(
+                'where' => array(
+                    array( 'coin_id', '=', $coinId ),
+                    array( 'created_at', '>', $timeFrame ),
+                ),
+                'order_by' => array( 'created_at' => 'desc' ),
+            ));
+        } catch (\PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
     }
 }

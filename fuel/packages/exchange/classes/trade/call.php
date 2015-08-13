@@ -4,21 +4,21 @@ namespace Exchange\Trade;
 
 class Call implements IStrategy
 {
-    public function algorithmTrade($action)
+    public function algorithmTrade($option)
     {
         /*
          * User has to pay for the rest of the call option when they execute
          * But there is not obligation to execute for a call option
          * The option is like a very light down payment and they're only obligated to pay in full if they execute
          */
-        $this->n = 17;
-        $this->m = 75;
+        $option->n = 17;
+        $option->m = 75;
 
-        switch($action) :
+        switch($option->getStatus()) :
 
-            case 'New':
+            case 'Initialized':
                 /* 1. option of cost - NEW */
-                return - ( $this->theta / $this->n );
+                return - ( $option->theta / $option->n );
 
             case 'Sell':
                 return true;
@@ -28,11 +28,11 @@ class Call implements IStrategy
 
             case 'Execute':
                 /* 2. cost if they execute - Execute */
-                return $this->theta + ( $this->theta / $this->m );
+                return $option->theta + ( $option->theta / $option->m );
 
             case 'Expire':
                 /*  3. cost of execute - After Execute*/
-                return ( $this->theta / $this->n ) +  $this->beta ;
+                return ( $option->theta / $option->n ) +  $option->beta ;
         endswitch;
     }
 }

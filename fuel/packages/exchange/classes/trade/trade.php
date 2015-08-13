@@ -27,12 +27,7 @@ Class Trade
     protected $option;
 
     /*
-     * @var $action to be performed on option
-     */
-    protected $action;
-
-    /*
-     * @var $information will hold a History object to get last price value
+     * @var $information will hold a Information object to get last price value
      */
     protected $information;
 
@@ -42,39 +37,16 @@ Class Trade
     protected $tradeStrategy;
 
     /*
-     * @var $theta will hold the value of Strike X Quantity
-     */
-    protected $theta;
-
-    /*
-    * @var $beta will hold the value of  Quantity X LastPrice
-    */
-    protected $beta;
-
-    /*
-     * @var $n is used to calculate a fee
-     */
-    protected $n = 20;
-
-    /*
-     * @var $m is used to calculate a fee
-     */
-    protected $m = 40;
-
-    /*
      *
      * @usage
-     *      $trade = new Trade( new <Trade>(), New Information(), new Option(),  Option->category );
-     *      $trade->trade();
+     *      $trade = new Trade( new <IStrategy>() );
+     *      $trade->trade( Market_Option $option  );
      */
 
     public function __construct(IStrategy $tradeObject )
     {
-        // TODO Constructors should not return anything, fix trade data return handling.
-
         $this->tradeStradegy = $tradeObject;
         $this->information = new Information();
-
     }
 
     public function trade( Market_Option $option  )
@@ -83,23 +55,20 @@ Class Trade
         /*
          * 1. Get Theta from
          *      Option's StrikePrice multiplied by the Quantity.
-         * 2. Get LastPrice from
+         * 2. Get LastPrice from to help calculate Beta
          *      Market Information object
          * 3. Get Beta from
-         *      Option's Quantity and StrikePrice
+         *      Option's Quantity multiplied by LastPrice
          * 4. Hand over request to TradeStrategy for running algorithm
          *
          */
 
-        $this->theta = $this->option->getStrike() * $this->option->getQuantity();
-//        echo '<pre>';
-//        print_r($this->theta);
-//        die();
+        $this->option->theta = $this->option->getStrike() * $this->option->getQuantity(); // 1.
 
-        $lastPrice = $this->information->getLastPrice( $this->option->getCoinId() );
+        $lastPrice = $this->information->getLastPrice( $this->option->getCoinId() ); // 2.
 
-        $this->beta = $this->option->getQuantity() * $lastPrice;
+        $this->option->beta = $this->option->getQuantity() * $lastPrice; // 3.
 
-        return $this->tradeStradegy->algorithmTrade( $this->option->getStatus() );
+        return $this->tradeStradegy->algorithmTrade( $this->option ); // 4.
     }
 }

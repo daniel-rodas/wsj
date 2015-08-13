@@ -4,15 +4,15 @@ namespace Exchange\Trade;
 
 class Future implements IStrategy
 {
-    public function algorithmTrade($action)
+    public function algorithmTrade($option)
     {
-        $this->n = 17;
-        $this->m = 75;
+        $option->n = 17;
+        $option->m = 75;
 
-        switch($action) :
-            case 'New':
+        switch($option->getStatus()) :
+            case 'Initialized':
                 /* 1. option of cost - NEW */
-                return - (  $this->theta + ( $this->theta / $this->n ) );
+                return - (  $option->theta + ( $option->theta / $option->n ) );
 
             case 'Sell':
                 return true;
@@ -22,11 +22,11 @@ class Future implements IStrategy
 
             case 'Execute':
 
-                return $this->beta;
+                return $option->beta;
 
             case 'Expire' :
                 /*  3. cost of execute - After Execute*/
-                return $this->beta;
+                return $option->beta;
         endswitch;
     }
 }

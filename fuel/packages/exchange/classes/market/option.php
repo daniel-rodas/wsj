@@ -21,14 +21,35 @@ class Option extends Base
     protected $userId;
     protected $status;
 
+    /*
+ * @var $theta will hold the value of Strike X Quantity
+ */
+    public $theta;
+
+    /*
+    * @var $beta will hold the value of  Quantity X LastPrice
+    */
+    public $beta;
+
+    /*
+     * @var $n is used to calculate a fee
+     */
+    public $n = 20;
+
+    /*
+     * @var $m is used to calculate a fee
+     */
+    public $m = 40;
+
+
     public function set( $key, $value )
     {
         $this->$key = $value;
     }
 
-    public function create( $purchasePrice, $serial = null )
+    public function create( $serial = null )
     {
-        $this->status = 'Initialized';
+        $this->status = 'Creating';
     /*
           * Generate serial number for option
           */
@@ -46,27 +67,30 @@ class Option extends Base
              * Now create a new ORM object then
              * Populate Model_Option with user input then save in DB
              */
-             $option = Model_Option::forge(array(
-                'coin_id' => $this->coinId,
-                'serial' => $serial,
-                'quantity' => $this->quantity,
-                'price' => $purchasePrice,
-                'strike' => $this->strikePrice, /* once this value is set it should not change */
-                'category' => $this->type,
-                'status' => 'New', /*  enum("New","Sell","Sold","Execute"); */
-                'user_id' => $this->userId, /* user_id is the current owner of an option */
-                'expiration_date' => $this->expirationDate,
-            ))->save();
+            try {
+                // Run query and hope for the best.
+                Model_Option::forge(array(
+                    'coin_id' => $this->coinId,
+                    'serial' => $serial,
+                    'quantity' => $this->quantity,
+                    'price' => $this->price,
+                    'strike' => $this->strikePrice, /* once this value is set it should not change */
+                    'category' => $this->type,
+                    'status' => 'New', /*  enum("New","Sell","Sold","Execute"); */
+                    'user_id' => $this->userId, /* user_id is the current owner of an option */
+                    'expiration_date' => $this->expirationDate,
+                ))->save();
+            } catch (Orm\ValidationFailed $e) {
+                // returns the individual ValidationError objects
+                $errors = $e->get_fieldset()->validation()->error();
+            }
 
             $this->status = 'New';
-
-            die('Congratulations on creating an Option');
-
+            return $this;
         }
         else
         {
             die( 'error' . $val->error() );
-
         }
     }
     protected function sell(){}

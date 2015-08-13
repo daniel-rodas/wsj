@@ -2,37 +2,45 @@
 
 namespace Exchange\Cron;
 
-use Exchange\Model\Coin as Model_Coin;
-use Exchange\Model\Market\History as Model_History;
+use Exchange\Model\Coin;
+use Exchange\Model\Market\History;
+use Exchange\Market\Information;
 
 class Market
 {
-    public static function populateHistory()
+    public function populateHistory()
     {
-        $coins = Model_Coin::find('all');
+        try
+        {
+            $coins = Coin::find('all');
+        } catch (Orm\ValidationFailed $e)
+        {
+            // returns the individual ValidationError objects
+            $errors = $e->get_fieldset()->validation()->error();
+        }
 
+        $info = new Information();
         foreach($coins as $coin)
         {
-            // Setup cURL request to url specified in coin (bittrex.com)
-            $curl = \Request::forge($coin->api, 'curl');
-            $curl->set_params(array('market' => $coin->market));
-
-            $curl->execute();
-            $curlResponse = $curl->response();
-
-            // Return results as array
-            $info = json_decode( $curlResponse->body(), true );
+            $marketInfo = $info->get($coin);
 
             // Only record market information for coin if response is successful.
-            if( $info['success'] )
+            if( $marketInfo['success'] )
             {// Convert scientific notation to decimal notation
-                $lastPrice = rtrim( sprintf('%.20F', $info['result']['Last'] ), '0');
-                Model_History::forge(array(
-                    'market' => $coin->market,
-                    'coin_id' => $coin->id,
-                    'last_price' =>  $lastPrice,
-                    'api_url' =>  $coin->api,
-                ))->save();
+                $lastPrice = rtrim( sprintf('%.20F', $marketInfo['result']['Last'] ), '0');
+
+                try {
+                    // Run query and hope for the best.
+                    History::forge(array(
+                        'market' => $coin->market,
+                        'coin_id' => $coin->id,
+                        'last_price' =>  $lastPrice,
+                        'api_url' =>  $coin->api,
+                    ))->save();
+                        } catch (Orm\ValidationFailed $e) {
+                    // returns the individual ValidationError objects
+                    $errors = $e->get_fieldset()->validation()->error();
+                }
             }
         }
     }

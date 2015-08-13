@@ -9,6 +9,7 @@ class Option extends \Orm\Model_Soft
         // this is called upon loading the class
         \Module::load('authentication');
         \Module::load('wallet');
+        \Package::load('exchange');
     }
 
     protected static $_properties = array(
@@ -36,19 +37,23 @@ class Option extends \Orm\Model_Soft
 			'events' => array('before_save'),
 			'mysql_timestamp' => false,
 		),
-        '\Exchange\Observer_Transaction',
+        '\Exchange\Observer\Transaction',
         '\Wallet\Observer_Balance',
 	);
 
     protected static $_belongs_to = [
-        'coins',
+        'coins' => [
+            'model_to' => '\Exchange\Model\Coin',
+        ],
         'users' => [
             'model_to' => '\Authentication\Model_User',
         ]
     ];
 
     protected static $_has_many = [
-        'transactions',
+        'transactions' => [
+            'model_to' => '\Exchange\Model\Transaction',
+        ],
     ];
 
 
