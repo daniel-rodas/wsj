@@ -11,7 +11,7 @@ namespace Exchange\Market;
 use Exchange\Model\Coin;
 use Exchange\Model\Market\History;
 
-class Information extends Base
+class Information extends Context
 {
     public function get( Coin $coin )
     {

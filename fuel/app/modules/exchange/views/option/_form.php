@@ -4,41 +4,59 @@
 	<fieldset>
 
         <div class="form-group">
-            <?php echo Form::label('Expiration date', 'expiration_date', array('class'=>'control-label')); ?>
+            <?php echo Form::label('Time Frame', 'time_frame', array('class'=>'control-label')); ?>
 
-            <?php echo Form::input('expiration_date', Input::post('expiration_date', isset($option) ? $option->expiration_date : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Expiration date')); ?>
+            <?php
 
+            echo Form::select('time_frame',  '30m',
+                [
+                    '30m' => '30 Minutes',
+                    '90m' => '90 Minutes',
+                    '6h' => '6 Hours',
+                    '1d' => '1 Day',
+                ],
+                ['class' => 'col-md-4 form-control',]
+            );?>
         </div>
-		<div class="form-group">
-			<?php echo Form::label('Strike', 'strike', array('class'=>'control-label')); ?>
 
-				<?php echo Form::input('strike', Input::post('strike', isset($option) ? $option->strike : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Strike')); ?>
+        <div class="form-group">
+            <?php echo Form::label('Category', 'category', array('class'=>'control-label')); ?>
 
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Coin', 'coin_name', array('class'=>'control-label')); ?>
+            <?php
 
-				<?php echo Form::input('coin_name', Input::post('coin_name', isset($option) ? $option->coins->name : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Coin')); ?>
+            echo Form::select('category',  'Put',
+                [
+                    'Put' => 'Put',
+                    'Call' => 'Call',
+                    'Future' => 'Future',
+                    'Short' => 'Short',
+                ],
+                ['class' => 'col-md-6 form-control',]
+            );?>
+        </div>
 
-		</div>
+        <div class="form-group">
+            <?php echo Form::label('Coin', 'coin_name', array('class'=>'control-label')); ?>
+
+            <?php
+
+            echo Form::select('coin_name',  'ApexCoin',
+                [
+                    'ApexCoin' => 'Apex Coin',
+                    'CannabisCoin' => 'Cannabis Coin',
+                    'Cannacoin' => 'Canna Coin',
+                ],
+                ['class' => 'col-md-6 form-control',]
+            );?>
+        </div>
+
 		<div class="form-group">
 			<?php echo Form::label('Quantity', 'quantity', array('class'=>'control-label')); ?>
 
-				<?php echo Form::input('quantity', Input::post('quantity', isset($option) ? $option->quantity : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Quantity')); ?>
+				<?php echo Form::input('quantity', '', array('class' => 'col-md-4 form-control', 'placeholder'=>'Quantity')); ?>
 
 		</div>
-		<div class="form-group">
-			<?php echo Form::label('Purchase', 'price', array('class'=>'control-label')); ?>
 
-				<?php echo Form::input('price', Input::post('price', isset($option) ? $option->price : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Purchase')); ?>
-
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Category', 'category', array('class'=>'control-label')); ?>
-
-				<?php echo Form::input('category', Input::post('category', isset($option) ? $option->category : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Category')); ?>
-
-		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::submit('submit', 'Save', array('class' => 'btn btn-primary')); ?>		</div>

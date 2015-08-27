@@ -2,6 +2,8 @@
 
 namespace Exchange\Trade;
 
+use Exchange\IStrategy;
+
 class Future implements IStrategy
 {
     public function algorithmTrade($option)
@@ -20,7 +22,7 @@ class Future implements IStrategy
             case 'Sold':
                 return true;
 
-            case 'Execute':
+            case 'Executing':
 
                 return $option->beta;
 

@@ -6,7 +6,9 @@ class Controller_Option extends Controller_Base
 {
     public function action_index()
 	{
-        $data['options'] = Model_Option::find('all');
+
+        $data['options'] =  [( object )['id' => '233', 'serial' => 'faspfdosfo323233', 'expiration_date' => '3445553424', 'strike' => '19999999','category' => 'Cat', 'price' => '189999', 'quantity' => '34',],];
+//        $data['options'] = Model_Option::find('all');
         return \Response::forge( \View::forge('option/index', $data) );
     }
 
@@ -24,46 +26,27 @@ class Controller_Option extends Controller_Base
 
 	public function action_create()
 	{
-		if (\Input::method() == 'POST')
+
+
+        if (\Input::method() == 'POST')
 		{
-			if( ! $coin = Model_Coin::query()->where('name', \Input::post('coin_name') )->get() )
+			if( ! $coin = $this->exchange->getCoin( \Input::post('coin_name') , 'name') )
             {
                 \Session::set_flash('error', 'That coin dosen\'t exit');
             }
-            $coin = array_values($coin);
-            $coin = $coin[0];
+            /* newOption( $optionType ,  $quantity , $timeFrame , $coinId , $userId ) */
+            /*  $this->exchange->newOption( 'Put', '654' , '1d',  4, 5 ); */
 
-            $val = Model_Option::validate('create');
-			if ($val->run( array('coin_id' => $coin->id ) ))
+			if ( $this->exchange->newOption(  \Input::post('category'), \Input::post('quantity'), \Input::post('time_frame'), $coin->id, $this->user->id ) )
 			{
-                $serial = 'OP' . time() .''.  rand ( 55 , time() );
-                $option = Model_Option::forge(array(
-					'strike' => \Input::post('strike'),
-					'serial' => $serial,
-					'coin_id' => $coin->id,
-					'quantity' => \Input::post('quantity'),
-					'price' => \Input::post('price'),
-					'category' => \Input::post('category'),
-					'action' => 'New',
-					'user_id' => $this->_userId,
-					'expiration_date' => \Input::post('expiration_date'),
-				));
 
-				if ($option and $option->save())
-				{
-					\Session::set_flash('success', 'Added option #'.$option->id.'.');
+					\Session::set_flash('success', 'Added option');
 
-					\Response::redirect('option');
-				}
-
-				else
-				{
-					\Session::set_flash('error', 'Could not save option.');
-				}
-			}
+					\Response::redirect();
+            }
 			else
 			{
-				\Session::set_flash('error', $val->error());
+				\Session::set_flash('error', 'Good luck next time. ');
 			}
 		}
 

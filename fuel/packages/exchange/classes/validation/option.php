@@ -1,9 +1,11 @@
 <?php
 
+namespace Exchange\Validation;
+
 /**
  * Validation product class.
  */
-class Validation_Product
+class Option
 {
 	/**
 	 * Creates a new validation instance for product create.
@@ -12,7 +14,7 @@ class Validation_Product
 	 */
 	public static function create()
 	{
-		$validator = Validation::forge('product');
+		$validator = Validation::forge('option');
 		
 		$validator->add('name', 'Name')->add_rule('trim')->add_rule('required');
 		
@@ -26,7 +28,7 @@ class Validation_Product
 	 */
 	public static function update()
 	{
-		$validator = Validation::forge('product');
+		$validator = Validation::forge('option');
 		
 		$input = Input::param();
 		

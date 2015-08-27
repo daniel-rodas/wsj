@@ -2,8 +2,15 @@
 
 namespace Exchange\Model;
 
+use Exchange\Validation;
+
 class Coin extends \Orm\Model_Soft
 {
+    public static function _init()
+    {
+        \Package::load('exchange');
+    }
+
     protected static $_properties = array(
 		'id',
 		'name',
@@ -28,13 +35,15 @@ class Coin extends \Orm\Model_Soft
 		),
 	);
 
-    protected static $_has_many = array(
-        'options' ,
-        );
+    protected static $_has_many = [
+        'options' => [
+            'model_to' => '\Exchange\Model\Options',
+        ],
+    ];
 
 	public static function validate($factory)
 	{
-		$val = \Fuel\Core\Validation::forge($factory);
+		$val = Validation::forge($factory);
 		$val->add_field('name', 'Name', 'required');
 		$val->add_field('alt', 'Alt Text', 'required');
 		$val->add_field('file', 'File', 'required');

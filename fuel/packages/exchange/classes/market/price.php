@@ -8,6 +8,7 @@
 
 namespace Exchange\Market;
 
+use Exchange\Market\Option;
 use Exchange\Trade\Trade;
 use Exchange\Trade\IStrategy;
 use Exchange\Trade\Put;
@@ -15,10 +16,14 @@ use Exchange\Trade\Call;
 use Exchange\Trade\Future;
 use Exchange\Trade\Short;
 
-class Price extends Base
+class Price extends Context
 {
     public function strike( $coinId ,  $expirationDate  )
     {
+        if( ! is_int( (integer) $coinId) )
+        {
+            throw new \PhpErrorException('Coin ID not a valid integer.');
+        }
         /*
          * Estimate future value prediction of coin based on market price (last price) history.
          * Now do some linear algebra to get the average change in rate for the market.
@@ -56,7 +61,13 @@ class Price extends Base
         return rtrim( sprintf('%.20F', $strikePrice ), '0');
     }
 
-    public function purchase( $optionType, $option )
+    public function purchase( $optionType, Option $option )
+    {
+        $tradeObject = $this->$optionType();
+        return $tradeObject->trade( $option );
+    }
+
+    public function execute( $optionType, Option $option )
     {
         $tradeObject = $this->$optionType();
         return $tradeObject->trade( $option );

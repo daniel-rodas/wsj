@@ -2,6 +2,8 @@
 
 namespace Exchange\Trade;
 
+use Exchange\IStrategy;
+
 class Short implements IStrategy
 {
     public function algorithmTrade($option)
@@ -20,7 +22,7 @@ class Short implements IStrategy
              case 'Sold':
                 return true;
 
-            case 'Execute':
+            case 'Executing':
 
                 return $option->theta;
 

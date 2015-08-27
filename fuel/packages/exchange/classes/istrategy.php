@@ -6,10 +6,10 @@
  * Time: 11:20 PM
  */
 
-namespace Exchange\Trade;
+namespace Exchange;
 
 
 interface IStrategy
 {
-    function algorithmTrade( $action );
+    function algorithmTrade( $option );
 }

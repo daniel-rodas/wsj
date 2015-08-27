@@ -2,6 +2,8 @@
 
 namespace Exchange\Trade;
 
+use Exchange\IStrategy;
+
 class Put implements IStrategy
 {
     public function algorithmTrade($option)
@@ -21,7 +23,7 @@ class Put implements IStrategy
             case 'Sold':
                 return true;
 
-            case 'Execute':
+            case 'Executing':
                 /* 2. cost if they execute - Execute (Put is no obligation)*/
                 return $option->beta + ( $option->beta / $option->m  ); /*  cost of execute */ /* cost if they execute */;
 

@@ -8,6 +8,7 @@
 
 namespace Exchange\Trade;
 
+use Exchange\IStrategy;
 use Exchange\Market\Information;
 use Exchange\Market\Option as Market_Option;
 
@@ -43,7 +44,7 @@ Class Trade
      *      $trade->trade( Market_Option $option  );
      */
 
-    public function __construct(IStrategy $tradeObject )
+    public function __construct( IStrategy $tradeObject )
     {
         $this->tradeStradegy = $tradeObject;
         $this->information = new Information();
@@ -69,6 +70,6 @@ Class Trade
 
         $this->option->beta = $this->option->getQuantity() * $lastPrice; // 3.
 
-        return $this->tradeStradegy->algorithmTrade( $this->option ); // 4.
+        return  $this->tradeStradegy->algorithmTrade( $this->option ); // 4.
     }
 }

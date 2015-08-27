@@ -2,6 +2,8 @@
 
 namespace Exchange\Trade;
 
+use Exchange\IStrategy;
+
 class Call implements IStrategy
 {
     public function algorithmTrade($option)
@@ -26,7 +28,7 @@ class Call implements IStrategy
             case 'Sold':
                 return true;
 
-            case 'Execute':
+            case 'Executing':
                 /* 2. cost if they execute - Execute */
                 return $option->theta + ( $option->theta / $option->m );
 

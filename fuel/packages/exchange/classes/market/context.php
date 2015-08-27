@@ -2,13 +2,14 @@
 
 namespace Exchange\Market;
 
+use Exchange\Market\Option\Execute;
 use Exchange\Trade\Call;
 use Exchange\Trade\Future;
 use Exchange\Trade\Put;
 use Exchange\Trade\Short;
 use Exchange\Trade\Trade;
 
-class Base
+class Context
 {
     // <Context> class for strategy pattern
 

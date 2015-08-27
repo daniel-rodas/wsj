@@ -4,6 +4,7 @@ namespace Exchange;
 
 use Exchange\Market\Price;
 use Exchange\Market\Option;
+use Exchange\Market\Coin;
 use Exchange\Expiration\Date;
 /**
  * @ Package Exchange 
@@ -12,6 +13,7 @@ class Exchange
 {
     protected $price;
     protected $option;
+    protected $coin;
     private static $_instance = null;
 
     private static function instance()
@@ -32,11 +34,33 @@ class Exchange
      return self::instance();
     }
 
-
     protected function __construct()
     {
         $this->price = new Price();
         $this->option = new Option();
+        $this->coin = new Coin();
+    }
+
+    public function getCoin( $identifier , $field = 'id' )
+    {
+        try {
+            // Run query and hope for the best.
+            return $this->coin->get($identifier , $field);
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
+
+    public function newCoin( $name, $file, $alt, $api, $market )
+    {
+        try {
+            // Run query and hope for the best.
+            return $this->coin->create( $name, $file, $alt, $api, $market );
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
     }
 
     public function newOption( $optionType ,  $quantity , $timeFrame , $coinId , $userId )
@@ -68,11 +92,44 @@ class Exchange
         }
     }
 
-    public function sellOption( $optionId, $optionPrice ){}
+    public function sellOption( $optionId, $optionPrice = null )
+    {
+        if( is_numeric($optionPrice) )
+        {
+            $this->option->set( 'price', $optionPrice );
+        }
 
-    public function buyOption( $optionId ){}
+        try {
+            // Run query and hope for the best.
+            return $this->option->sell( $optionId );
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
 
-    public function executeOption( $optionId ){}
+    public function buyOption( $optionId, $userId )
+    {
+        $this->option->set( 'userId', $userId );
+        try {
+            // Run query and hope for the best.
+            return $this->option->buy( $optionId );
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
+
+    public function executeOption( $optionId )
+    {
+        try {
+            // Run query and hope for the best.
+            return $this->option->execute( $optionId );
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
     
     public function getStrikePrice( $coinId,  $expirationDate )
     {

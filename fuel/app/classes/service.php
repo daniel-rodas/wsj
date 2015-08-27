@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base service class.
+ * Context service class.
  */
 class Service
 {

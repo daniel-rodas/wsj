@@ -54,7 +54,17 @@ class Transaction extends \Orm\Observer
          */
 
         $info = new Information();
-        $info = $info->get($model);
+
+        // TODO DRY
+        try {
+            // Run query and hope for the best.
+            $modelCoin = Coin::query()->where('id', $model->coin_id )->get_one();
+        } catch (\PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            echo  $e->getMessage();
+        }
+
+        $info = $info->get( $modelCoin );
 
         // Only record market information for coin if response is successful.
         if( $info['success'] ) {// Convert scientific notation to decimal notation

@@ -9,14 +9,6 @@ class Controller_Base_Template extends \Controller_Hybrid
     {
         parent::before();
 
-        // Get action, module and controller name
-//        $this->actionName = \Request::active()->action;
-//        $this->moduleName = \Request::active()->module;
-//
-//        $this->controllerName = strtolower(str_replace('Controller_', '', \Request::active()->controller));
-//        $this->controllerName = str_replace($this->moduleName . '\\', '', $this->controllerName);
-
-
          // Check Auth Access
         if (\Auth::check())
         {

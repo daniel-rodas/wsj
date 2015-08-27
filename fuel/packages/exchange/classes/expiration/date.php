@@ -32,9 +32,9 @@ class Date
 
             default:
                 /*
-                * If the user does not pick a set the option to expire at the current time.
+                * If specified time frame is not correct end program.
                 */
-                return time();
+                throw new \PhpErrorException('Invalid time-frame value');
         }
     }
 }

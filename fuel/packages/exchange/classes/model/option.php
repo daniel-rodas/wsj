@@ -2,6 +2,8 @@
 
 namespace Exchange\Model;
 
+use Exchange\Validation;
+
 class Option extends \Orm\Model_Soft
 {
     public static function _init()
@@ -17,7 +19,7 @@ class Option extends \Orm\Model_Soft
 		'serial',
 		'strike',
 		'coin_id',
-		'quantity',
+		'quantity' => ['data_type' => 'int'],
 		'price',
 		'category',
 		'user_id',
@@ -37,6 +39,9 @@ class Option extends \Orm\Model_Soft
 			'events' => array('before_save'),
 			'mysql_timestamp' => false,
 		),
+        'Orm\\Observer_Validation' => array(
+            'events' => array('before_save', 'after_save', 'after_load'),
+        ),
         '\Exchange\Observer\Transaction',
         '\Wallet\Observer_Balance',
 	);
@@ -72,12 +77,13 @@ class Option extends \Orm\Model_Soft
 
     public static function validate_new($factory)
     {
-        $val = \Validation::forge($factory);
+        $val = Validation::forge($factory);
         $val->add_field('strike', 'Strike', 'required');
         $val->add_field('serial', 'Serial', 'required');
         $val->add_field('quantity', 'Quantity', 'required|valid_string[numeric]');
         $val->add_field('price', 'Price', 'required|valid_string[numeric]');
         $val->add_field('coin_id', 'Coin', 'required|valid_string[numeric]');
+        $val->add_field('user_id', 'User', 'required|valid_string[numeric]');
         $val->add_field('category', 'Category', 'required');
 
         return $val;
@@ -85,8 +91,8 @@ class Option extends \Orm\Model_Soft
 
     public static function validate_sell($factory)
     {
-        $val = \Validation::forge($factory);
-        $val->add_field('price', 'Price', 'required');
+        $val = Validation::forge($factory);
+        $val->add_field('price', 'Price', 'required|valid_string[float]');
         $val->add_field('status', 'Status', 'required');
 
         return $val;
@@ -94,7 +100,8 @@ class Option extends \Orm\Model_Soft
 
     public static function validate_buy($factory)
     {
-        $val = \Validation::forge($factory);
+        $val = Validation::forge($factory);
+        $val->add_field('user_id', 'User', 'required|valid_string[numeric]');
         $val->add_field('status', 'Status', 'required');
 
         return $val;
@@ -102,7 +109,7 @@ class Option extends \Orm\Model_Soft
 
     public static function validate_execute($factory)
     {
-        $val = \Validation::forge($factory);
+        $val = Validation::forge($factory);
         $val->add_field('status', 'Status', 'required');
 
         return $val;
