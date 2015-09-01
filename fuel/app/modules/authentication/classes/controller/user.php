@@ -14,7 +14,7 @@ class Controller_User extends Controller_Base
             \Messages::info(__('user.login.already-logged-in'));
             echo 'Controller\User\login()<br />';
             echo 'Already Logged in. redirecting user back';
-            die();
+//            die();
 //            \Response::redirect_back();
         }
 
@@ -52,7 +52,7 @@ class Controller_User extends Controller_Base
 //                        \Response::redirect('/');
 //                    }
                     echo 'Controller\User\login()<br />';
-                    echo 'Login Success. redirecting user back';
+                    echo 'Login Success. Normally, would redirecting user back, ';
 //                    \Response::redirect_back();
                 }
                 else

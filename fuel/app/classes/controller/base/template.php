@@ -19,6 +19,9 @@ class Controller_Base_Template extends \Controller_Hybrid
                  * */
                 list(, $userId) = Auth::get_user_id();
                 $this->user = Request::forge('authentication/user/find/' . $userId )->execute()->response()->body();
+                echo '<h2>';
+                echo $this->user->email;
+                echo '</h2>';
             }
         }
 

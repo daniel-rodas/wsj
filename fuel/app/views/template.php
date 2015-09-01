@@ -57,14 +57,15 @@
 
 <!--  JS Libs  -->
 <?= Asset::js([
-    '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.min.js',
     Asset::get_file('app.module.js', 'ngApp'),
-    Asset::get_file('common/header/headerController.js', 'ngApp'),
+    Asset::get_file('common/header/navigationController.js', 'ngApp'),
     Asset::get_file('common/message/messageController.js', 'ngApp'),
     Asset::get_file('common/message/messageService.js', 'ngApp'),
     Asset::get_file('components/modal/modalInstanceController.js', 'ngApp'),

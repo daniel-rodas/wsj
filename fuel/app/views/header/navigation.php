@@ -1,19 +1,21 @@
-<nav  ng-controller="HeaderController" id="navigation-user">
-<!--<nav  style="width: 100px; background-color: red;">-->
+
+<nav  style=" border: 1px solid red;" ng-controller="NavigationController as NC" id="navigation-user">
+<!--<nav >-->
 
 
     <ul class="nav navbar-right nav-pills">
 
-        <li><a  ng-click="open('section-menu')">
+        <li><a  ng-click="NC.open('section-menu')">
 
                 Sections <span  class="glyphicon glyphicon-th-list" aria-hidden="true"></span> </a></li>
         <?= $userOptions ?>
 
 
-        <li role="presentation" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> </a>
-            <ul class="dropdown-menu" role="menu">
+        <li  dropdown on-toggle="toggled(open)">
+            <a href id="simple-dropdown" dropdown-toggle>
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="simple-dropdown">
                 <li><a href="#">Language</a></li>
                 <li><a href="#">Type Size</a></li>
                 <li class="divider"></li>

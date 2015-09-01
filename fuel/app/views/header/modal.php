@@ -4,12 +4,12 @@
     <div class="modal-header">
         <div class="row">
             <h1 class="h1  col-xs-10 col-sm-10 col-md-11 col-lg-11"><a href="/">WSJ Sections</a></h1>
-            <a href="" class=" col-xs-1 col-sm-1 col-md-1 col-lg-1"  ng-click="cancel()">close  </a>
+            <a href="" class=" col-xs-1 col-sm-1 col-md-1 col-lg-1"  ng-click="NC.cancel()">close  </a>
         </div>
         <div class="row">
             <ul class="nav nav-pills nav-sections" >
 
-                <li ng-repeat="category in categories "  ><a ng-click="getNavSubCategories(category.slug)"  href=""> {{category.name}}</a></li>
+                <li ng-repeat="category in categories "  ><a ng-click="NC.getNavSubCategories(category.slug)"  href=""> {{NC.category.name}}</a></li>
 
             </ul>
         </div>
@@ -21,7 +21,7 @@
     <div class="modal-body nav-section-stories">
         <div ng-repeat="subCategory in subCategories"  class="row sub-section" >
             <article class="col-xs-3 col-sm-2 col-md-2" >
-                <a href="category/{{subCategory.slug}}" class="story">
+                <a href="category/{{NC.subCategory.slug}}" class="story">
                     <h3> {{subCategory.name}}</h3>
                 </a>
             </article>
@@ -29,7 +29,7 @@
                 <section class="row">
                     <article ng-repeat="post in subCategory.posts" class="col-xs-12 col-sm-6 col-md-4" >
 
-                        <img ng-if="getSource(post.galleries)" class="img-responsive" src="{{getSource(post.galleries)}}" alt="Powell Street"/>
+                        <img ng-if="getSource(NC.post.galleries)" class="img-responsive" src="{{NC.getSource(post.galleries)}}" alt="Powell Street"/>
 
                         <a href="/{{post.slug}}" class="story">
                             <h2>{{post.name | limitTo:letterLimitHeadline }}</h2>
