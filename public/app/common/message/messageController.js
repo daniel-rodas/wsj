@@ -1,23 +1,26 @@
 angular
-    .module('app.core')
-    .controller('MessageService', function ($scope, $rootScope, MessageService) {
-        $scope.alerts = null;
+    .module('app.common')
+    .controller('MessageController', function ( $rootScope, MessageService) {
+        this.alerts = [];
+        //this.messageService = MessageService;
+        //this.messageService.setAlert('Help Me Message Service!');
 
-        $scope.addAlert = function () {
-            $scope.alerts.push({msg: 'Another alert!'});
+        this.addAlert = function () {
+
+            this.alerts.push({msg: 'Another alert!'});
         };
 
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
+        this.closeAlert = function (index) {
+            this.alerts.splice(index, 1);
         };
 
         // TODO say what
-        $scope.$on('userChanged', function (event, message) {
-            console.log(event);
-
-            $scope.alerts = [
-                {type: 'info', msg: 'Oh snap! Something different is happening again.'},
-                {type: 'warning', msg: message}
-            ];
-        });
+        //$on('userChanged', function (event, message) {
+        //    console.log(event);
+        //
+        //    this.alerts = [
+        //        {type: 'info', msg: 'Oh snap! Something different is happening again.'},
+        //        {type: 'warning', msg: message}
+        //    ];
+        //});
     });

@@ -1,9 +1,6 @@
 <?php
 return array(
-	// '_root_'  => 'frontend/index/index',  // The default route
-	// '_404_'   => 'frontend/post/404',    // The main 404 route
 
-	// '/' => array('frontend/index/index', 'name' => 'homepage'),
 	// 'admin' => array('backend/index', 'name' => 'admin'),
 	// 'admin/index' => array('backend/index', 'name' => 'admin_index'),
 	// 'admin/post' => array('backend/post', 'name' => 'admin_post'),
@@ -16,10 +13,6 @@ return array(
     'category/(:category)' => array('blog/frontend/post/show_by_category/$1', 'name' => 'show_post_category'),
 	'author/(:author)' => array('blog/frontend/post/show_by_author/$1', 'name' => 'show_post_author'),
 
-	// 'user/login' => array('user/login', 'name' => 'login'),
-	// 'user/logout' => array('user/logout', 'name' => 'logout'),
-	// 'user/changepassword' => array('user/changepassword', 'name' => 'changepassword'),
-	// 'favicon' => 'favicon',
 //	'(:segment)' => array('blog/frontend/post/show/$1', 'name' => 'show_post'),
 
 

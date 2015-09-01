@@ -1,6 +1,6 @@
 angular
-    .module('ticker')
-.controller("LineChartController", ["$scope", function ($scope) {
+    .module('app.common')
+.controller("LineChartController", [ function () {
     //$scope.salesData = [
     //    {hour: 1,sales: 54},
     //    {hour: 2,sales: 66},
@@ -14,7 +14,7 @@ angular
     //    {hour: 10,sales: 30}
     //];
 
-    $scope.NIKEData = [
+    this.NIKEData = [
         {hour: 9, points: 19500},
         {hour: 10, points: 19650},
         {hour: 11, points: 19500},
@@ -22,4 +22,4 @@ angular
         {hour: 1, points: 19700},
         {hour: 2, points: 19800}
     ];
-}])
+}]);

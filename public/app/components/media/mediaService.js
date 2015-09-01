@@ -1,2 +1,2 @@
 angular
-    .module('message');
+    .module('app.common');

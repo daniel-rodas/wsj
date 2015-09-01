@@ -1,7 +1,9 @@
+
+<hr/>
 <script type="text/ng-template" id="login.html"  class="panel">
 
 
-    <?= \Form::open(array('action' => 'user/login', 'class' => 'form-signin', 'ng-class' => 'class')); ?>
+    <?= \Form::open(array('action' => 'authentication/user/login',  'class' => 'form-signin', 'ng-class' => 'class')); ?>
     <h2 class="form-signin-heading">Please Sign In</h2>
     <div class="form-group">
         <?= Form::label('Email Address', 'username', array('class'=>'control-label')); ?>
@@ -17,7 +19,7 @@
     </p>
     <input type="hidden" name="<?php echo \Config::get('security.csrf_token_key');?>" value="<?php echo \Security::fetch_token();?>" />
     <?= \Form::close(); ?>
-    <a ng-click="setTpl('recover.html')">Trouble signing in? Click here to reset your password.</a>
+    <a ng-click="AC.setTpl('recover.html')">Trouble signing in? Click here to reset your password.</a>
 
 </script>
 

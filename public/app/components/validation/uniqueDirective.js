@@ -1,6 +1,7 @@
 angular
-    .module('validation')
-    .directive('ngUnique', function ($http) {
+    //.module('app.validation')
+    .module('app.common')
+    .directive('UniqueDirective', function ($http) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {

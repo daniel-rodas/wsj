@@ -1,2 +1,2 @@
 angular
-    .module('ticker');
+    .module('app.common');

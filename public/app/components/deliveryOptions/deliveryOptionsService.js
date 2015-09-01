@@ -1,2 +1,2 @@
 angular
-    .module('deliveryOptions');
+    .module('app.delivery.options');

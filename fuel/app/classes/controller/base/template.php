@@ -28,14 +28,6 @@ class Controller_Base_Template extends \Controller_Hybrid
 
         // Load translation
         \Lang::load('application');
-
-
-        // If ajax or content_only, set a theme with an empty layout
-        if (\Input::is_ajax())
-        {
-            return parent::before();
-        }
-
     }
 
     public function action_index()
@@ -46,10 +38,11 @@ class Controller_Base_Template extends \Controller_Hybrid
     public function action_404()
     {
         $messages = array('Uh Oh!', 'Huh ?');
+        $data = [];
         $data['notfound_title'] = $messages[array_rand($messages)];
-        $data['title'] = '<h1>404 Times</h1>';
-        $this->template->title = __('page-not-found');
-        $this->template->content = Presenter::forge('frontpage/page')->set('content', View::forge('404', $data) );
+        $data['h1'] = '404 Times';
+        $this->template->title = 'Page Not Found.';
+        $this->template->content =  View::forge('404', $data) ;
     }
 }
 

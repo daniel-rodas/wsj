@@ -1,6 +1,6 @@
 angular
-    .module('ticker')
-.directive("linearChart", function ($window) {
+    .module('app.common')
+.directive("LineChartDirective", function ($window) {
     return {
         restrict: "EA",
         template: "<svg width='450' height='200'></svg>",

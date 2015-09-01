@@ -1,25 +1,25 @@
 angular
-    .module('app.core')
-    .controller('ModalInstanceController', function ($scope, $modalInstance, categories, subCategories, $http) {
+    .module('app.common')
+    .controller('ModalInstanceController', function ( $modalInstance, categories, subCategories, $http) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
-    $scope.letterLimitHeadline = 50;
-    $scope.letterLimit = 140;
-    $scope.subCategories = subCategories;
-    $scope.categories = categories;
-    $scope.selected = {
-        item: $scope.categories[0]
+    this.letterLimitHeadline = 50;
+    this.letterLimit = 140;
+    this.subCategories = subCategories;
+    this.categories = categories;
+    this.selected = {
+        item: this.categories[0]
     };
 
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
+    this.ok = function () {
+        $modalInstance.close(this.selected.item);
     };
 
-    $scope.cancel = function () {
+    this.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.getSource = function (galleryItem) {
+    this.getSource = function (galleryItem) {
 
         for (var key in galleryItem) {
 
@@ -32,11 +32,11 @@ angular
         }
     };
 
-    $scope.getNavSubCategories = function (slug) {
+    this.getNavSubCategories = function (slug) {
         var uri = '/blog/rest/navigation/navSubCategories.json?slugType=category&slug=' + slug;
         console.log(uri);
         $http.get(uri).success(function (subCategories) {
-            $scope.subCategories = subCategories;
+            this.subCategories = subCategories;
         });
     };
-})
+});

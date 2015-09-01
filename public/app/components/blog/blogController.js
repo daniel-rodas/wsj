@@ -1,2 +1,5 @@
 angular
-    .module('blog');
+    .module('blog')
+    .controller('BlogController', function () {
+
+    });

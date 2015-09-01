@@ -1,10 +1,10 @@
 <script type="text/ng-template" id="register.html"  class="panel">
 <!--    --><?//= \Form::open(array('action' => 'user/create', 'name' => 'formRegister', 'nonvalidate' , 'class' => 'form-signin', 'ng-class' => 'class')); ?>
-    <form name="formRegister" class="form-signin" novalidate method="post" action="http://wsj.rodasnet.com/user/">
+    <form name="formRegister" class="form-signin" novalidate method="post" action="authentication/user/register">
         <h2 class="form-signin-heading">Become a Member <span class="small">Step {{step}}</span></h2>
 
 
-        <div ng-if="step < 3"  ng-controller="userSubscriptionOptionsCtrl" class="subscription-options">
+        <div ng-if="step < 3"  ng-controller="SubscriptionOptionsController" class="subscription-options">
             <input type="hidden" name="subscription" value="{{subscription}}"/>
             <tabset type="pills"  justified="true">
                 <tab select="setSubscription('classic')" heading="Home Delivery">
@@ -182,7 +182,7 @@
         </div>
     </form>
 
-    <a ng-click="setTpl('login.html')" >Already a member? Sign In</a>
+    <a ng-click="AC.setTpl('login.html')" >Already a member? Sign In</a>
 </script>
 
 

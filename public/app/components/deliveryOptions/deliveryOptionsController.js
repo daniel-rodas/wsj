@@ -1,45 +1,45 @@
 angular
-    .module('deliveryOptions')
-    .controller('DeliveryOptionsController', function ($scope) {
-        $scope.today = function () {
-            $scope.dt = new Date();
+    .module('app.delivery.options')
+    .controller('DeliveryOptionsController', function () {
+        this.today = function () {
+            this.dt = new Date();
         };
-        $scope.today();
+        this.today();
 
-        $scope.clear = function () {
-            $scope.dt = null;
+        this.clear = function () {
+            this.dt = null;
         };
 
         // Disable weekend selection
-        $scope.disabled = function (date, mode) {
+        this.disabled = function (date, mode) {
             return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
         };
 
-        $scope.toggleMin = function () {
-            $scope.minDate = $scope.minDate ? null : new Date();
+        this.toggleMin = function () {
+            this.minDate = this.minDate ? null : new Date();
         };
-        $scope.toggleMin();
+        this.toggleMin();
 
-        $scope.open = function ($event) {
+        this.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.opened = true;
+            this.opened = true;
         };
 
-        $scope.dateOptions = {
+        this.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
 
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+        this.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        this.format = this.formats[0];
 
         var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         var afterTomorrow = new Date();
         afterTomorrow.setDate(tomorrow.getDate() + 2);
-        $scope.events =
+        this.events =
             [
                 {
                     date: tomorrow,
@@ -51,19 +51,19 @@ angular
                 }
             ];
 
-        $scope.getDayClass = function (date, mode) {
+        this.getDayClass = function (date, mode) {
             if (mode === 'day') {
                 var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+                for (var i = 0; i < this.events.length; i++) {
+                    var currentDay = new Date(this.events[i].date).setHours(0, 0, 0, 0);
 
                     if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
+                        return this.events[i].status;
                     }
                 }
             }
 
             return '';
         };
-    })
+    });

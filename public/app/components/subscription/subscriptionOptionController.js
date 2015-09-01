@@ -1,12 +1,13 @@
 angular
-    .module('subscription')
-    .controller('SubscriptionOptionsController', function ($scope, $window, $rootScope) {
+    //.module('app.subscription')
+    .module('app.common')
+    .controller('SubscriptionOptionsController', function ( $window, $rootScope) {
 
-        $scope.setSubscription = function (subscription) {
-            $scope.subscription = subscription;
+        this.setSubscription = function (subscription) {
+            this.subscription = subscription;
             $rootScope.$broadcast('UserOptionChangeEvent', subscription);
         };
-        $scope.alertMe = function () {
+        this.alertMe = function () {
             setTimeout(function () {
                 $window.alert('You\'ve selected the alert tab!');
             });

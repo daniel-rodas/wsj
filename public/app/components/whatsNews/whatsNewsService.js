@@ -1,2 +1,2 @@
 angular
-    .module('whatsNews');
+    .module('app.common');

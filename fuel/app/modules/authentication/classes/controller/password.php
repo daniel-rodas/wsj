@@ -139,7 +139,10 @@ class Controller_Password extends Controller_Base
 
         // inform the user an email is on the way (or not ;-))
             \Messages::info(__('user.login.recovery-email-send'));
-            \Response::redirect_back();
+            echo 'Controller\Password\recover()<br />';
+            echo 'User Info not on the way. redirecting user back';
+            die();
+//            \Response::redirect_back();
         }
 
     // no form posted, do we have a hash passed in the URL?
@@ -192,7 +195,10 @@ class Controller_Password extends Controller_Base
 
         // something wrong with the hash
             \Messages::error(__('user.login.recovery-hash-invalid'));
-            \Response::redirect_back();
+            echo 'Controller\User\login()<br />';
+            echo 'Something went worng. redirecting user back';
+            die();
+//            \Response::redirect_back();
         }
 
     // no form posted, and no hash present. no clue what we do here

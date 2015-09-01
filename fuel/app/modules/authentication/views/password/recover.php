@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="recover.html"  class="panel">
 
-    <?= \Form::open(array('action' => 'user/password/recover', 'class' => 'form-signin', 'ng-class' => 'class')); ?>
+    <?= \Form::open(array('action' => 'authentication/password/recover',  'class' => 'form-signin', 'ng-class' => 'class')); ?>
     <h2 class="form-signin-heading">Recover lost password</h2>
     <div class="form-group">
         <label class=" " for="email">Email Address</label>
@@ -12,5 +12,5 @@
     </p>
 
     <?= \Form::close(); ?>
-    <a ng-click="setTpl('register.html')" >Not a member of WSJ? Click here to get full access.</a>
+    <a ng-click="AC.setTpl('register.html')" >Not a member of WSJ? Click here to get full access.</a>
 </script>

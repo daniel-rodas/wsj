@@ -1,13 +1,13 @@
 angular
-    .module('whatsNews')
-.controller('WhatsNewsController', function ($scope) {
-    $scope.class = "hidden-xs hidden-sm ";
-    $scope.changeClass = function () {
-        if ($scope.class === "") {
-            $scope.class = "hidden-xs hidden-sm ";
+    .module('app.common')
+    .controller('WhatsNewsController', function () {
+        this.class = "hidden-xs hidden-sm ";
+        this.changeClass = function () {
+            if (this.class === "") {
+                this.class = "hidden-xs hidden-sm ";
+            }
+            else {
+                this.class = "";
+            }
         }
-        else {
-            $scope.class = "";
-        }
-    }
-})
+    });

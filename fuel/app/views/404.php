@@ -1,5 +1,5 @@
-<h1><?= $title; ?></h1>
+<h1>Not Found</h1>
 
 <p>
-	<?= $notfound_title; ?>
+    Please try again.
 </p>

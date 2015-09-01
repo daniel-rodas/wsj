@@ -26,9 +26,6 @@ Autoloader::add_classes(array(
     'Exchange\\Trade\Future'                => __DIR__.'/classes/trade/future.php',
     'Exchange\\Trade\Put'                => __DIR__.'/classes/trade/put.php',
     'Exchange\\Trade\Short'                => __DIR__.'/classes/trade/short.php',
-//    'Exchange'                => __DIR__.'/classes/cron/market.php',
-//	'Exchange\\Exchange_Addons_Twig'    => __DIR__.'/classes/messages/addons/twig.php',
-//	'Exchange\\Exchange_Instance'                => __DIR__.'/classes/messages/instance.php',
     'Exchange\\Trade\Trade'                => __DIR__.'/classes/trade/trade.php',
 ));
 

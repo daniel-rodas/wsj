@@ -20,7 +20,7 @@
 //
 //}
 //
-class Controller_User_Rest extends \Controller_Rest
+class Controller_Rest_User extends \Controller_Rest
 {
     public function post_is_unique()
     {

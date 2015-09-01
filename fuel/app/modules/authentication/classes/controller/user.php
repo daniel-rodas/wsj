@@ -4,8 +4,6 @@ namespace Authentication;
 
 class Controller_User extends Controller_Base
 {
-
-
     public function action_login()
     {
 
@@ -15,7 +13,10 @@ class Controller_User extends Controller_Base
             // yes, so go back to the page the user came from, or the
             // application dashboard if no previous page can be detected
             \Messages::info(__('user.login.already-logged-in'));
-            \Response::redirect_back();
+            echo 'Controller\User\login()<br />';
+            echo 'Already Logged in. redirecting user back';
+            die();
+//            \Response::redirect_back();
         }
 
         // was the login form posted?
@@ -27,7 +28,10 @@ class Controller_User extends Controller_Base
                 // CSRF attack or expired CSRF token
                 // login failed, show an error message
                 \Messages::error(__('user.login.failure'));
-                \Response::redirect_back();
+                echo 'Controller\User\login()<br />';
+                echo 'Failed Security Check. redirecting user back';
+                die();
+//                \Response::redirect_back();
             }
             else
             {
@@ -42,19 +46,25 @@ class Controller_User extends Controller_Base
                      * FIxes loop problem after redirect
                      * ( Input::referrer() === $main_login_forms or Input::referrer() === $main_registration_forms )
                      */
-                    $main_login_forms = Uri::base(false) . $this->selfReferrerLogin;
-                    $main_registration_forms = Uri::base(false) . $this->selfReferrerRegistration;
-                    if ( Input::referrer() === $main_login_forms or Input::referrer() === $main_registration_forms )
-                    {
-                        \Response::redirect('/');
-                    }
-                    \Response::redirect_back();
+//                    $main_login_forms = Uri::base(false) . $this->selfReferrerLogin;
+//                    $main_registration_forms = Uri::base(false) . $this->selfReferrerRegistration;
+//                    if ( \Input::referrer() === $main_login_forms or Input::referrer() === $main_registration_forms )
+//                    {
+//                        \Response::redirect('/');
+//                    }
+                    echo 'Controller\User\login()<br />';
+                    echo 'Login Success. redirecting user back';
+                    die();
+//            \Response::redirect_back();
                 }
                 else
                 {
                     // login failed, show an error message
                     \Messages::error(__('user.login.failure'));
-                    \Response::redirect_back();
+                    echo 'Controller\User\login()<br />';
+                    echo 'Login Failure. redirecting user back';
+                    die();
+//            \Response::redirect_back();
                 }
             }
 
@@ -77,7 +87,7 @@ class Controller_User extends Controller_Base
 
         // and go back to where you came from (or the application
         // homepage if no previous page can be determined)
-        \Response::redirect('user/service/index/login');
+        \Response::redirect( Router::get('login') );
     }
 
     public function action_admincreate()
@@ -201,7 +211,10 @@ class Controller_User extends Controller_Base
 //                        {
 //                            \Response::redirect('backend/account');
 //                        }
-                        \Response::redirect_back();
+                        echo 'Controller\User\register()<br />';
+                        echo 'Already Logged in. redirecting user back';
+                        die();
+//            \Response::redirect_back();
                     }
                     catch (\Exception $e)
                     {
@@ -218,20 +231,24 @@ class Controller_User extends Controller_Base
                         // The field Title is required and must contain a value.
                     }
 
-
-                    \Response::redirect_back();
+                    echo 'Controller\User\register()<br />';
+                    echo 'Already Logged in. redirecting user back';
+                    die();
+//            \Response::redirect_back();
                 }
             }
             else
             {
 
                 \Messages::error(  'Please specify a password.');
-                \Response::redirect_back();
+                echo 'Controller\User\register()<br />';
+                echo 'Please Specify a password. redirecting user back';
+                die();
+//            \Response::redirect_back();
             }
         }
 
         // display the login page
         return \Response::forge(\View::forge('user/register'));
     }
-
 }
