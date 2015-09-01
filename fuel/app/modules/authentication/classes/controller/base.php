@@ -7,9 +7,6 @@ class Controller_Base extends \Controller_Hybrid
     public function before()
     {
         parent::before();
-
-        // Load translation
-        \Lang::load('app');
     }
 
     public function action_link()
@@ -60,7 +57,7 @@ class Controller_Base extends \Controller_Hybrid
         }
     }
 
-    protected function link_provider($userid)
+    protected function link_provider($userId)
     {
         // do we have an auth strategy to match?
         if ($authentication = \Session::get('auth-strategy.authentication', array())) {
@@ -69,7 +66,7 @@ class Controller_Base extends \Controller_Hybrid
 
             // call Opauth to link the provider login with the local user
             $insert_id = $opauth->link_provider(array(
-                'parent_id' => $userid,
+                'parent_id' => $userId,
                 'provider' => $authentication['provider'],
                 'uid' => $authentication['uid'],
                 'access_token' => $authentication['access_token'],

@@ -21,9 +21,9 @@ class Presenter_User_Page extends Presenter
         $data['facebook_login'] = View::forge('user/facebook');
 
         // HMVC call to authentication module
-//        $data['register'] = Request::forge('authentication/user/register' )->execute();
-//        $data['login'] = Request::forge('authentication/user/login' )->execute();
-//        $data['recover'] = Request::forge('authentication/password/recover' )->execute();
+        $data['register'] = Request::forge('authentication/user/register' )->execute()->response()->body();
+        $data['login'] = Request::forge('authentication/user/login' )->execute()->response()->body();
+        $data['recover'] = Request::forge('authentication/password/recover' )->execute()->response()->body();
 
         $this->content = View::forge('user/service/index', $data);
     }

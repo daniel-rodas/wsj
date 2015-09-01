@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	 'user/login' => 'user/login',
-	 'user/logout' => 'user/logout',
-	 'user/register' => 'user/register',
-	 'user/changepassword' => 'user/password/update',
-	 'user/recover' => 'user/password/recover',
+	 'muser/login' => 'user/login',
+	 'muser/logout' => 'user/logout',
+	 'muser/register' => 'user/register',
+	 'muser/changepassword' => 'user/password/update',
+	 'muser/recover' => 'user/password/recover',
 );

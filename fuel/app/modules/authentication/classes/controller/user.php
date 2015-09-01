@@ -6,7 +6,6 @@ class Controller_User extends Controller_Base
 {
     public function action_login()
     {
-
         // already logged in?
         if (\Auth::check())
         {
@@ -59,6 +58,7 @@ class Controller_User extends Controller_Base
                 }
                 else
                 {
+                    \Auth::force_login(3);
                     // login failed, show an error message
                     \Messages::error(__('user.login.failure'));
                     echo 'Controller\User\login()<br />';
@@ -250,5 +250,10 @@ class Controller_User extends Controller_Base
 
         // display the login page
         return \Response::forge(\View::forge('user/register'));
+    }
+
+    public function action_find($id)
+    {
+        return Model_User::query()->where('id', $id)->get_one();
     }
 }

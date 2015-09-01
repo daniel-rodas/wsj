@@ -180,7 +180,9 @@ class Controller_Password extends Controller_Base
 
 //                        \Messages::info(__('user.login.password-recovery-accepted'));
                             \Messages::info("Your temporary password is : $tempPass ");
-                            \Response::redirect('backend/account/index/password');
+                            echo 'Authentication\Controller\Password\recover()';
+                            die();
+//                            \Response::redirect('backend/account/index/password');
                         }
                         else
                         {

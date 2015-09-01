@@ -18,16 +18,13 @@ class Controller_Base_Template extends \Controller_Hybrid
                  *  Get the current user id and email address
                  * */
                 list(, $userId) = Auth::get_user_id();
-                $this->user = Model_User::find($userId);
+                $this->user = Request::forge('authentication/user/find/' . $userId )->execute()->response()->body();
             }
         }
 
         $this->template->title = "RN | Wall Street Journal";
 
         $this->template->header = Presenter::forge('header/template')->set('user', $this->user );
-
-        // Load translation
-        \Lang::load('application');
     }
 
     public function action_index()
