@@ -53,8 +53,7 @@ class Controller_User extends Controller_Base
 //                    }
                     echo 'Controller\User\login()<br />';
                     echo 'Login Success. redirecting user back';
-                    die();
-//            \Response::redirect_back();
+//                    \Response::redirect_back();
                 }
                 else
                 {
@@ -62,9 +61,8 @@ class Controller_User extends Controller_Base
                     // login failed, show an error message
                     \Messages::error(__('user.login.failure'));
                     echo 'Controller\User\login()<br />';
-                    echo 'Login Failure. redirecting user back';
-                    die();
-//            \Response::redirect_back();
+                    echo 'Forced login after  Login Failure. redirecting user back';
+                    \Response::redirect_back();
                 }
             }
 
