@@ -14,7 +14,7 @@
 
 return array(
 	'driver' => array('Ormauth'),
-	'verify_multiple_logins' => false,
+//	'verify_multiple_logins' => false,
 	'salt' => 'gryfenex_csrf_token',
-	'iterations' => 10000,
+//	'iterations' => 10000,
 );

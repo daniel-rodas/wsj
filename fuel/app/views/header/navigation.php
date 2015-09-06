@@ -1,8 +1,5 @@
 
-<nav  style=" border: 1px solid red;" ng-controller="NavigationController as NC" id="navigation-user">
-<!--<nav >-->
-
-
+<nav ng-controller="NavigationController as NC" id="navigation-user">
     <ul class="nav navbar-right nav-pills">
 
         <li><a  ng-click="NC.open('section-menu')">

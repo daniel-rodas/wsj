@@ -12,8 +12,8 @@ trait Trait_Auth
     {
         // Check Auth Access
         if ( ! \Auth::check() ) {
-            \Messages::warning('You should not be here.');
-//            \Response::redirect(Router::get('login'));
+            \Messages::warning('You should not be here unless logged in.');
+            \Response::redirect(Router::get('login'));
         }
     }
 }

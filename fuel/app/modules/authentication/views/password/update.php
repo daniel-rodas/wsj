@@ -1,5 +1,5 @@
 
-<?= \Form::open(array('action' => 'user/password/update', 'class' => 'form-signin form-reset-password')); ?>
+<?= \Form::open(array('action' => 'authentication/password/update', 'class' => 'form-signin form-reset-password')); ?>
 	<h4 class="form-signin-heading">Reset your password</h4>
 	<input type="password" class="form-control" name="password" placeholder="<?= __('user.model.password'); ?>">
 	<input type="password" class="form-control" name="new_password" placeholder="<?= __('user.login.new_password'); ?>">

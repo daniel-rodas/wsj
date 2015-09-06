@@ -37,9 +37,8 @@ class Controller_Password extends Controller_Base
             }
             \Response::redirect_back('/backend/account/index/password');
         }
-
         // display the password reset page
-        return \Request::forge(  \View::forge('password/update') );
+        return \Response::forge(  \View::forge('password/update') );
     }
 
 
@@ -75,7 +74,7 @@ class Controller_Password extends Controller_Base
                     $email = \Email::forge();
                     $data = array();
                     $hash = \Crypt::encode($hash, 'R@nd0mK~Y');
-                    $data['url'] = \Uri::create('password/recover/' . $hash );
+                    $data['url'] = \Uri::create('authentication/password/recover/' . $hash );
                     $data['user'] = $user;
 
                 // use a view file to generate the email message
@@ -104,7 +103,7 @@ class Controller_Password extends Controller_Base
 
                         \Messages::success('Please check your email for instructions to reset your password');
 //                        \Messages::success(__('user.login.recovery-email-send'));
-                        \Response::redirect('user/password/confirm/' . $user->id );
+                        \Response::redirect('authentication/password/confirm/' . $user->id );
                     }
 
                 // this should never happen, a users email was validated, right?
@@ -145,12 +144,13 @@ class Controller_Password extends Controller_Base
 //            \Response::redirect_back();
         }
 
-    // no form posted, do we have a hash passed in the URL?
+        // no form posted, do we have a hash passed in the URL?
+
         elseif ($hash !== null)
         {
             $hash = \Crypt::decode($hash, 'R@nd0mK~Y');
 
-        // get the userid from the hash
+            // get the userid from the hash
             $user = substr($hash, 44);
 
         // and find the user with this id
@@ -171,41 +171,44 @@ class Controller_Password extends Controller_Base
                 // log the user in and go to the profile to change the password
                     if (\Auth::instance()->force_login($user->id))
                     {
-//                        \Messages::info('LOGGED IN');
+                        \Messages::info('LOGGED IN');
                         $tempPass = \Auth::instance()->reset_password($user->username);
 
 
                         if ( $tempPass )
                         {
 
-//                        \Messages::info(__('user.login.password-recovery-accepted'));
+                        \Messages::info(__('user.login.password-recovery-accepted'));
                             \Messages::info("Your temporary password is : $tempPass ");
+                            echo "Congratulations here is your temp pass: $tempPass .";
                             echo 'Authentication\Controller\Password\recover()';
                             die();
 //                            \Response::redirect('backend/account/index/password');
                         }
                         else
                         {
-                            return 'Something went wrong resetting password';
+                            echo 'Something went wrong resetting password';
                             // something wrong with the hash
-//                            \Messages::error(__('user.login.recovery-hash-invalid'));
+                            \Messages::error(__('user.login.recovery-hash-invalid'));
+                            echo 'Authentication\Controller\Password\recover()';
+                            die();
 //                            \Response::redirect_back();
                         }
                     }
                 }
             }
-
+            echo  'Not sure what went wrong resetting password';
+            echo 'Authentication\Controller\Password\recover()';
+            die();
         // something wrong with the hash
             \Messages::error(__('user.login.recovery-hash-invalid'));
-            echo 'Controller\User\login()<br />';
-            echo 'Something went worng. redirecting user back';
-            die();
-//            \Response::redirect_back();
+            \Response::redirect_back();
         }
 
     // no form posted, and no hash present. no clue what we do here
         else
         {
+            \Config::set('security.csrf_expiration', 3600); // set the expiration to one hour
            // display the login page
         return \Response::forge( \View::forge('password/recover') );
 
@@ -215,25 +218,25 @@ class Controller_Password extends Controller_Base
     public function action_confirm($id)
     {
         $data = array();
-        $user = \Model_User::query()->where('id', $id)->get_one();
+        $user = Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
         $this->template = \View::forge('template');
         $this->template->title = 'Balls';
-        $this->template->content = View::forge('password/confirm', $data);
+        $this->template->content = \View::forge('password/confirm', $data);
     }
 
     public function action_mock_email($id)
     {
         $data = array();
-        $user = \Model_User::query()->where('id', $id)->get_one();
+        $user = Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
         $this->template = \View::forge('template_email');
         $this->template->title = 'Balls';
         if (  isset($user->lostpassword_hash) )
         {
             // TODO move hash key to configuration file.
-            $hash = Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
-            $data['url'] = \Uri::create('password/recover/' . $hash );
+            $hash = \Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
+            $data['url'] = \Uri::create('authentication/password/recover/' . $hash );
             $this->template->content = \View::forge('password/email', $data);
         }
         else
@@ -245,14 +248,14 @@ class Controller_Password extends Controller_Base
     public function action_mock_phone($id)
     {
         $data = array();
-        $user = \Model_User::query()->where('id', $id)->get_one();
+        $user = Model_User::query()->where('id', $id)->get_one();
         $data['user'] = $user;
         $this->template = \View::forge('template_phone');
         $this->template->title = 'Balls';
         if (  isset($user->lostpassword_hash) )
         {
-            $hash = Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
-            $data['url'] = \Uri::create('password/recover/' . $hash );
+            $hash = \Crypt::encode($user->lostpassword_hash, 'R@nd0mK~Y');
+            $data['url'] = \Uri::create('authentication/password/recover/' . $hash );
             $this->template->content = \View::forge('password/phone', $data);
         }
         else

@@ -19,8 +19,8 @@ class Controller_User_Service extends \Controller_Base_Template
 
     public function action_logout()
     {
-        if ( ! Request::forge('authentication/user/logout')->execute()->response()->body() )
-        throw new \Fuel\Core\FuelException('Logout not yet hooked up.');
+        unset( $this->user );
+        Request::forge('authentication/user/logout')->execute()->response()->body();
     }
 
     protected function present($ng_view = 'register')

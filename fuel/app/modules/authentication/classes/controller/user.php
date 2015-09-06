@@ -7,30 +7,25 @@ class Controller_User extends Controller_Base
     public function action_login()
     {
         // already logged in?
-        if (\Auth::check())
-        {
-            // yes, so go back to the page the user came from, or the
-            // application dashboard if no previous page can be detected
-            \Messages::info(__('user.login.already-logged-in'));
-            echo 'Controller\User\login()<br />';
-            echo 'Already Logged in. redirecting user back';
-//            die();
+//        if (\Auth::check())
+//        {
+//            // yes, so go back to the page the user came from, or the
+//            // application dashboard if no previous page can be detected
+//            \Messages::info(__('user.login.already-logged-in'));
 //            \Response::redirect_back();
-        }
+//        }
 
         // was the login form posted?
         if (\Input::method() == 'POST')
         {
             // check for a valid CSRF token
-            if ( ! \Security::check_token())
+            // TODO fix CSRF fails !
+            if ( ! \Security::check_token() )
             {
                 // CSRF attack or expired CSRF token
                 // login failed, show an error message
                 \Messages::error(__('user.login.failure'));
-                echo 'Controller\User\login()<br />';
-                echo 'Failed Security Check. redirecting user back';
-                die();
-//                \Response::redirect_back();
+                \Response::redirect_back();
             }
             else
             {
@@ -51,23 +46,17 @@ class Controller_User extends Controller_Base
 //                    {
 //                        \Response::redirect('/');
 //                    }
-                    echo 'Controller\User\login()<br />';
-                    echo 'Login Success. Normally, would redirecting user back, ';
-//                    \Response::redirect_back();
+
+                    \Response::redirect('/');
                 }
                 else
                 {
-                    \Auth::force_login(3);
                     // login failed, show an error message
                     \Messages::error(__('user.login.failure'));
-                    echo 'Controller\User\login()<br />';
-                    echo 'Forced login after  Login Failure. redirecting user back';
-                    \Response::redirect_back();
+                    \Response::redirect('/');
                 }
             }
-
         }
-
         // display the login page
         return \Response::forge( \View::forge('user/login') );
     }
@@ -85,7 +74,8 @@ class Controller_User extends Controller_Base
 
         // and go back to where you came from (or the application
         // homepage if no previous page can be determined)
-        \Response::redirect( Router::get('login') );
+//        \Response::redirect( \Router::get('login') );
+        \Response::redirect('/');
     }
 
     public function action_admincreate()

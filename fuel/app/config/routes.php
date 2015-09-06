@@ -33,21 +33,21 @@ return array(
 
 //    Authenticated User Section
     'backend' => array('backend/index', 'name' => 'backend'),
-//    'backend/new' => array('backend/index/index', 'name' => 'backend_new'),
-//    'backend/option' => array('backend/index/option', 'name' => 'backend_option'),
-//    'backend/account' => array('backend/account', 'name' => 'backend_account'),
-//    'backend/account/basic' => array('backend/account/index/basic', 'name' => 'backend_account_basic'),
-//    'backend/account/save' => array('backend/account/index/save', 'name' => 'backend_account_save'),
-//    'backend/subscription' => array('backend/account/subscription', 'name' => 'backend_subscription'),
-//    'backend/deposit' => array('backend/index/deposit', 'name' => 'backend_deposit'),
-//    'backend/sendcoin' => array('backend/index/sendcoin/create', 'name' => 'backend_sendcoin'),
-//    'backend/feedback' => array('backend/index/feedback/create', 'name' => 'backend_feedback'),
+    'backend/new' => array('backend/index/index', 'name' => 'backend_new'),
+    'backend/option' => array('backend/index/option', 'name' => 'backend_option'),
+    'backend/account' => array('backend/account', 'name' => 'backend_account'),
+    'backend/account/basic' => array('backend/account/index/basic', 'name' => 'backend_account_basic'),
+    'backend/account/save' => array('backend/account/index/save', 'name' => 'backend_account_save'),
+    'backend/subscription' => array('backend/account/subscription', 'name' => 'backend_subscription'),
+    'backend/deposit' => array('backend/index/deposit', 'name' => 'backend_deposit'),
+    'backend/sendcoin' => array('backend/index/sendcoin/create', 'name' => 'backend_sendcoin'),
+    'backend/feedback' => array('backend/index/feedback/create', 'name' => 'backend_feedback'),
 
 //    App Logic via REST controller
-//    'app/new' => array('backend/wallstreet/new', 'name' => 'app_new'),
-//    'app/buy' => array('backend/wallstreet/buy', 'name' => 'app_buy'),
-//    'app/app' => array('backend/wallstreet/sell', 'name' => 'app_sell'),
-//    'app/execute' => array('backend/wallstreet/execute', 'name' => 'app_execute'),
+    'app/new' => array('backend/wallstreet/new', 'name' => 'app_new'),
+    'app/buy' => array('backend/wallstreet/buy', 'name' => 'app_buy'),
+    'app/app' => array('backend/wallstreet/sell', 'name' => 'app_sell'),
+    'app/execute' => array('backend/wallstreet/execute', 'name' => 'app_execute'),
 
     // Article View
 //    '(:segment)' => array('frontend/index/article/$1', 'name' => 'show_post'),

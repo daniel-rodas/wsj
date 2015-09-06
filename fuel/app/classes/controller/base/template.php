@@ -12,16 +12,13 @@ class Controller_Base_Template extends \Controller_Hybrid
          // Check Auth Access
         if (\Auth::check())
         {
-            if(!$this->user)
+            if( is_null($this->user) )
             {
                 /*
                  *  Get the current user id and email address
                  * */
                 list(, $userId) = Auth::get_user_id();
                 $this->user = Request::forge('authentication/user/find/' . $userId )->execute()->response()->body();
-                echo '<h2>';
-                echo $this->user->email;
-                echo '</h2>';
             }
         }
 

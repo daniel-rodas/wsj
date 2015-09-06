@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="recover.html"  class="panel">
 
-    <?= \Form::open(array('action' => 'authentication/password/recover',  'class' => 'form-signin', 'ng-class' => 'class')); ?>
+    <?= \Form::open(array('action' => 'http://wsj.rodasnet.com/authentication/password/recover',  'class' => 'form-signin', 'ng-class' => 'class')); ?>
     <h2 class="form-signin-heading">Recover lost password</h2>
     <div class="form-group">
         <label class=" " for="email">Email Address</label>
@@ -8,7 +8,7 @@
     </div>
 
     <p class="text-center">
-        <button type="submit" class="btn btn-muted btn-lg"  ><?= __('user.login.recover'); ?></button>
+        <button type="submit" class="btn btn-muted btn-lg"  >Recover Password</button>
     </p>
 
     <?= \Form::close(); ?>

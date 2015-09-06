@@ -4,7 +4,7 @@
 
 <div  style="padding: 1.634rem"  class="panel-body">
 
-    <?= \Request::forge('user/password/update', false)->execute()->response()->body(); ?>
+    <?= Request::forge('authentication/password/update')->execute()->response()->body(); ?>
 
 
 </div>

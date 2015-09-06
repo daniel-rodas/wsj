@@ -46,7 +46,7 @@
 </head>
 <body>
 <div id="wrapper" class="container-fluid">
-
+    <?= View::forge()->render('_includes/message'); ?>
     <?= (isset($header) ? $header : '' ); ?>
     <?= (isset($content) ? $content : '' ); ?>
     <?php echo Fuel::VERSION; ?>
@@ -54,6 +54,7 @@
 
 <!--    Add path to AngularJS app-->
 <?= Asset::add_path('app/', 'ngApp', ['js','html']); ?>
+<?//= Asset::add_path('app/components/exchange/', 'ExApp', ['js','html']); ?>
 
 <!--  JS Libs  -->
 <?= Asset::js([
@@ -73,6 +74,10 @@
     Asset::get_file('components/subscription/subscriptionService.js', 'ngApp'),
     Asset::get_file('components/deliveryOptions/deliveryOptionsController.js', 'ngApp'),
     Asset::get_file('components/whatsNews/whatsNewsController.js', 'ngApp'),
+    // Exchange App
+    Asset::get_file('components/exchange/option/categoryController.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/timeframeController.js', 'ngApp'),
+
 ]); ?>
 </body>
 </html>
