@@ -1,9 +1,5 @@
-angular
-    .module('app.exchange')
+angular.module('app.exchange')
     .controller('CategoryController', function () {
-
-
-
         this.radioModel = {
             put: false,
             call: true,

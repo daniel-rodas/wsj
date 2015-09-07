@@ -38,14 +38,18 @@
 
         <div class="row">
             <section class="col-md-6">
-                <h4>Coin</h4>
+                <h4>ApexCoin</h4>
                 <div class="row">
-                    <div class="list-group col-md-6">
-                        <p class="list-group-item  lead coin-selected-notice">
-                            Ask Price - <span>0.44663</span>
-                        </p>
-                        <p id="strike-price" class="lead list-group-item ">Strike Price -  <span>0.4543</span> </p>
-                        <p id="purchase-price" class="lead list-group-item ">Last Price - <span>0.43677</span></p>
+                    <div class="list-group col-md-3">
+
+                        <p class="list-group-item  lead "> Bid  <span class="badge">0.44663</span></p>
+                        <hr>
+                        <p class="lead list-group-item ">Ask <span class="badge">0.43677</span></p>
+                    </div>
+                    <div class="list-group col-md-3">
+                        <p class="lead list-group-item ">Last <span class="badge">0.43677</span></p>
+                        <hr>
+                        <p class="lead list-group-item ">Strike <span class="badge">0.4543</span> </p>
                     </div>
                     <div class=" col-md-6">
                         <img id="coin-selected" src="/assets/img/coin/history-graph.gif" alt="" alt="Choose a Coin" class=" img-responsive img-rounded"/>
@@ -71,21 +75,19 @@
                     </ul>
                 </nav>
                 <div class="row">
-                    <div  class="col-md-12 btn-group" id="coin-choice">
-
-                        <?php if (isset($coins)): ?>
-                            <?php foreach ($coins as $item): ?>
-                                <a type="button" class="btn btn-default"><?=
-                                    Asset::img('coin/' . $item->file,
-                                        array('data-coinid' => $item->id,'data-name' => $item->name, 'alt' => $item->alt, 'style' => 'width:3.5em',
-                                            'class' => 'img-responsive img-rounded', 'tabindex' => '-1',)); ?>
-                                </a>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-
-                            <p>No Coins.</p>
-
-                        <?php endif; ?>
+                    <div  class="col-md-12 " id="coin-choice">
+                        <section class="row">
+                            <img id="coin-selected" src="/assets/img/coin/1.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/2.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                        </section>
+                        <section class="row">
+                            <img id="coin-selected" src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/bitsharesx.jpg" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                        </section>
                     </div><!-- End. Button Group-->
                 </div>
             </section>
