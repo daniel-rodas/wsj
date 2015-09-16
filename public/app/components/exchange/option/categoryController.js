@@ -1,9 +1,12 @@
-angular.module('app.exchange')
-    .controller('CategoryController', function () {
-        this.radioModel = {
-            put: false,
-            call: true,
-            short: false,
-            future: false
-        };
+angular.module('app.exchange.option')
+    .controller('CategoryController', function ($scope, StateService) {
+        this.state = StateService;
+        //this.state.setCategory(this.radioModel);
+
+        //$scope.$watch(
+        //    function watchCategory(scope){
+        //        // The "results" of watch expression.
+        //        return(CC.this.radioModel);
+        //    }
+        //);
     });

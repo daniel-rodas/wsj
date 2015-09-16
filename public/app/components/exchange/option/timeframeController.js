@@ -1,5 +1,5 @@
 angular
-    .module('app.exchange')
+    .module('app.exchange.option')
     .controller('TimeframeController', function () {
         this.radioModel = {
             '30m': false,

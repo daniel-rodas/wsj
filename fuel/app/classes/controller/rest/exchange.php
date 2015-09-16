@@ -33,9 +33,11 @@ class Controller_Rest_Exchange extends \Controller_Rest
 
     public function get_strike_price()
     {
-        $this->_expirationDate = $this->get_expiration_date();
-
-        return $this->response = \Market\Market::strikePrice(Input::param('coin_id'), $this->_expirationDate );
+        return $this->response(
+            [
+                // Figure out expiration date for option
+                'strikePrice' => $this->exchange->getStrikePrice( Input::param('coinId'),  Input::param('expirationDate') )
+            ]);
     }
 
     protected function _strikePrice()
@@ -47,9 +49,15 @@ class Controller_Rest_Exchange extends \Controller_Rest
 
     public function get_purchase_price()
     {
-        $this->_strike = $this->_strikePrice();
-        return $this->response =   \Market\Market::purchasePrice( $category = Input::param('option'),
-            $strike = $this->_strike , $quantity = Input::param('quantity'),
-            $coin_id = Input::param('coin_id'), $action = Input::param('status') );
+//        $this->_strike = $this->_strikePrice();
+//        return $this->response =   \Market\Market::purchasePrice( $category = Input::param('option'),
+//            $strike = $this->_strike , $quantity = Input::param('quantity'),
+//            $coin_id = Input::param('coin_id'), $action = Input::param('status') );
+
+        return $this->response(
+            [
+                // Figure out expiration date for option
+                'purchacePrice' => $this->exchange->getPurchasePrice( Input::param('timeframe') )
+            ]);
     }
 }

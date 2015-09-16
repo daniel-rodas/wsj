@@ -1,6 +1,6 @@
 angular
     .module('app.exchange.option')
-    .factory('CategoryService', function () {
+    .factory('CategoryDirective', function () {
         var value;
         return {
 

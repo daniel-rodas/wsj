@@ -52,6 +52,22 @@ class Exchange
         }
     }
 
+    public function getExpirationDate( $timeFrame )
+    {
+        $date = new Date();
+        return $date->get( $timeFrame );
+    }
+
+    public function getStrikePrice( $coinId,  $expirationDate )
+    {
+        return $this->price->strike(  $coinId ,  $expirationDate );
+    }
+
+    public function getPurchasePrice( $option )
+    {
+        return $this->price->purchase( $option->getType() , $option );
+    }
+
     public function newCoin( $name, $file, $alt, $api, $market )
     {
         try {
@@ -129,21 +145,5 @@ class Exchange
             // returns the individual ValidationError objects
             return $e->getMessage();
         }
-    }
-    
-    public function getStrikePrice( $coinId,  $expirationDate )
-    {
-        return $this->price->strike(  $coinId ,  $expirationDate );
-    }
-
-    public function getExpirationDate( $timeFrame )
-    {
-        $date = new Date();
-        return $date->get( $timeFrame );
-    }
-
-    public function getPurchasePrice( $option )
-    {
-        return $this->price->purchase( $option->getType() , $option );
     }
 }

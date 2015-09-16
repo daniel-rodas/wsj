@@ -6,8 +6,12 @@
 
 <div class="container">
     <header class="row">
-        <div class="col-md-6">
+        <div class="col-md-6"  ng-controller="CreateController as COC" >
             <h2>Create New Option</h2>
+            <p>Category: {{COC.category}}, Timeframe {{COC.timeframe}}, Coin {{COC.coinName}}</p>
+            <p>Expiration Date: {{COC.expirationDate * 1000 | date:'medium'}}</p>
+            <p>Strike: {{COC.strikePrice}}</p>
+
         </div>
 
         <section class="col-md-offset-1 col-md-5">
@@ -28,16 +32,13 @@
                 </div>
             </div>
 
-
-
-
-
         </section>
     </header>
     <div class="row">
 
         <div class="row">
             <section class="col-md-6">
+
                 <h4>ApexCoin</h4>
                 <div class="row">
                     <div class="list-group col-md-3">
@@ -77,45 +78,49 @@
                 <div class="row">
                     <div  class="col-md-12 " id="coin-choice">
                         <section class="row">
-                            <img id="coin-selected" src="/assets/img/coin/1.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/2.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/1.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/2.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
                         </section>
                         <section class="row">
-                            <img id="coin-selected" src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/bitsharesx.jpg" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img id="coin-selected" src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/bitsharesx.jpg" alt="" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
                         </section>
                     </div><!-- End. Button Group-->
                 </div>
             </section>
 
             <div class="col-md-offset-1 col-md-5 btn-group-vertical"><!-- Form COntrols -->
-                <h4>Quantity</h4>
-                <div class="input-group">
-                    <div class="btn-group">
-                        <input type="range" min="5" max="200" step="5" value="100" /><br/>
+
+                <div ng-controller="QuantityController as QTC" class="input-group">
+                    <h4>Quantity <span></span></h4>
+                    <div class="input-group">
+                        <div class="btn-group">
+                            <input type="range" min="5" max="200" step="5" value="100" /><br/>
+                        </div>
                     </div>
                 </div>
-                <h4>Category</h4>
                 <div ng-controller="CategoryController as CC" class="input-group">
+                    <h4>Category <span>{{CC.radioModel}}</span></h4>
                     <div class="btn-group btn-group-lg btn-group-justified">
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'put'" unchecable>Put</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'call'" uncheckable>Call</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'short'" uncheckable>Short</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'future'" uncheckable>Future</label>
+                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'put'" >Put</label>
+                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'call'" >Call</label>
+                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'short'" >Short</label>
+                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'future'" >Future</label>
                     </div>
                 </div>
-                <h4>Time Frame</h4>
-                <div ng-controller="TimeframeController as TC"  class="input-group">
+
+                <div ng-controller="TimeframeController as TFC"  class="input-group">
+                    <h4>Time Frame <span></span></h4>
                     <div class="btn-group btn-group-lg btn-group-justified">
-                        <label class="btn btn-primary" ng-model="TF.checkModel" btn-radio="'30m'">30 minutes</label>
-                        <label class="btn btn-primary" ng-model="TF.checkModel" btn-radio="'90m'">90 minutes</label>
-                        <label class="btn btn-primary" ng-model="TF.checkModel" btn-radio="'6h'">6 hours</label>
-                        <label class="btn btn-primary" ng-model="TF.checkModel" btn-radio="'1d'">1 day</label>
-                        <label class="btn btn-primary" ng-model="TF.checkModel" btn-radio="'7d'">7 days</label>
+                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'30m'">30 minutes</label>
+                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'90m'">90 minutes</label>
+                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'6h'">6 hours</label>
+                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'1d'">1 day</label>
+                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'7d'">7 days</label>
                     </div>
                 </div>
             </div>

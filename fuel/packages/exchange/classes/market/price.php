@@ -26,11 +26,11 @@ class Price extends Context
         }
         /*
          * Estimate future value prediction of coin based on market price (last price) history.
-         * Now do some linear algebra to get the average change in rate for the market.
+         * Then, do some linear algebra to get the average change in rate for the market coin.
          */
         $timeElapsed =  $expirationDate - time();
 
-        $timeFrameBack = time() - ( 3 * $timeElapsed );
+        $timeFrameBack = time() - abs( 3 * $timeElapsed );
 
         $information = new Information();
 

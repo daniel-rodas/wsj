@@ -2,7 +2,7 @@
  * Created by Rodas on 9/6/2015.
  */
 
-angular.module('app.exchange')
+angular.module('app.exchange.service')
     .service('promiseService', function($html){
 
         return {

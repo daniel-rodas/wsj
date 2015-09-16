@@ -1,5 +1,5 @@
 angular
-    .module('app.delivery.options')
+    .module('app.subscription.options')
     .controller('DeliveryOptionsController', function () {
         this.today = function () {
             this.dt = new Date();

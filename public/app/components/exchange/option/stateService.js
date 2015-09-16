@@ -1,21 +1,41 @@
 angular
-    .module('app.exchange')
-    .factory('OptionStateService', function () {
-        var price;
-        var quantity;
-        var category;
+    .module('app.exchange.option')
+    .factory('StateService', function () {
+        //this.price;
+        //this.quantity;
+        var category ;
         var timeframe;
-        var coin;
-        var askPrice;
-        var strikePrice;
-        var lastPrice;
-        var expiration;
+        var coinName ;
+        //this.askPrice;
+        //this.strikePrice;
+        //this.lastPrice;
+        //this.expiration;
 
         return {
 
-            login: function ( username, password ) {
-                console.log(username);
-                return username;
+            getCategory: function ( ) {
+
+                return category;
+            },
+            getTimeframe: function (  ) {
+
+                return timeframe;
+            },
+            getCoinName: function (  ) {
+
+                return coinName;
+            },
+            setCategory: function ( item ) {
+
+                category = item;
+            },
+            setTimeframe: function ( item ) {
+
+                timeframe = item;
+            },
+            setCoinName: function ( item ) {
+
+                coinName = item;
             }
         };
     });
