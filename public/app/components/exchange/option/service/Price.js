@@ -3,6 +3,7 @@ angular
     .factory('PriceFactory', function PriceFactory ($http, $q) {
 
         var strikePriceUri = '/rest/exchange/strike_price.json';
+        var purchasePriceUri = '/rest/exchange/purchase_price.json';
 
         return {
             getStrikePrice : getStrikePrice,

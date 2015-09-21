@@ -76,11 +76,11 @@
     Asset::get_file('components/whatsNews/whatsNewsController.js', 'ngApp'),
     // Exchange App
     Asset::get_file('components/exchange/exchange.module.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/categoryController.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/timeframeController.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/quantityController.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/stateService.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/createController.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/controller/Category.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/controller/Timeframe.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/controller/Quantity.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/controller/Create.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/State.js', 'ngApp'),
     Asset::get_file('components/exchange/option/service/Price.js', 'ngApp'),
     Asset::get_file('components/exchange/option/service/ExpirationDate.js', 'ngApp'),
 

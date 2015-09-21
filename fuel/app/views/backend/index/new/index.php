@@ -9,7 +9,7 @@
         <div class="col-md-6"  ng-controller="CreateController as COC" >
             <h2>Create New Option</h2>
             <p>Category: {{COC.category}}, Timeframe {{COC.timeframe}}, Coin {{COC.coinName}}</p>
-            <p>Expiration Date: {{COC.expirationDate * 1000 | date:'medium'}}</p>
+
             <p>Strike: {{COC.strikePrice}}</p>
 
         </div>
@@ -115,6 +115,7 @@
 
                 <div ng-controller="TimeframeController as TFC"  class="input-group">
                     <h4>Time Frame <span></span></h4>
+                    <p>Expiration Date: {{TFC.expirationDate * 1000 | date:'medium'}}</p>
                     <div class="btn-group btn-group-lg btn-group-justified">
                         <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'30m'">30 minutes</label>
                         <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'90m'">90 minutes</label>
