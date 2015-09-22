@@ -67,7 +67,7 @@ class Observer_Balance extends \Orm\Observer
         if($model->status === 'Sell')
         {
             /*
-             * No need to set change balance if listing option for to sell
+             * No need to set trade balance if listing option for to sell
              */
             return true;
         }

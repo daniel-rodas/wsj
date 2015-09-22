@@ -221,7 +221,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if ($parent.length) {
       var $input = this.$element.find('input')
         .prop('checked', !this.$element.hasClass('active'))
-        .trigger('change')
+        .trigger('trade')
       if ($input.prop('type') === 'radio') $parent.find('.active').removeClass('active')
     }
 

@@ -2041,7 +2041,7 @@
 
           // Cloning imageInput to clear element.
           $imageInput.replaceWith($imageInput.clone()
-            .on('change', function () {
+            .on('trade', function () {
               $imageDialog.modal('hide');
               deferred.resolve(this.files);
             })
@@ -2061,7 +2061,7 @@
           event.stopPropagation();
 
           $editable.focus();
-          $imageInput.off('change');
+          $imageInput.off('trade');
           $imageUrl.off('keyup');
           $imageBtn.off('click');
         }).modal('show');
@@ -2530,7 +2530,7 @@
         oLayoutInfo.editor.removeClass('dragover');
       });
 
-      // change dropzone's message on hover.
+      // trade dropzone's message on hover.
       $dropzone.on('dragenter', function () {
         $dropzone.addClass('hover');
         $dropzoneMessage.text('Drop Image');

@@ -35,7 +35,7 @@ class Create implements IStrategy
                     'serial' => $option->getSerial(),
                     'quantity' => $option->getQuantity(),
                     'price' => $option->getPrice(),
-                    'strike' => $option->getStrike(), /* once option value is set it should not change */
+                    'strike' => $option->getStrike(), /* once option value is set it should not trade */
                     'category' => $option->getType(),
                     'status' => 'New', /*  enum("New","Sell","Sold","Execute"); */
                     'user_id' => $option->getUserId(), /* user_id is the current owner of an option */

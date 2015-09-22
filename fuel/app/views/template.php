@@ -81,7 +81,13 @@
     Asset::get_file('components/exchange/option/controller/Quantity.js', 'ngApp'),
     Asset::get_file('components/exchange/option/controller/Create.js', 'ngApp'),
     Asset::get_file('components/exchange/option/service/State.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/state/Buy.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/state/Execute.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/state/New.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/state/Sell.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/OptionCommandState.js', 'ngApp'),
     Asset::get_file('components/exchange/option/service/Price.js', 'ngApp'),
+    Asset::get_file('components/exchange/option/service/Category.js', 'ngApp'),
     Asset::get_file('components/exchange/option/service/ExpirationDate.js', 'ngApp'),
 
 ]); ?>

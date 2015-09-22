@@ -6,15 +6,6 @@ class Controller_User extends Controller_Base
 {
     public function action_login()
     {
-        // already logged in?
-//        if (\Auth::check())
-//        {
-//            // yes, so go back to the page the user came from, or the
-//            // application dashboard if no previous page can be detected
-//            \Messages::info(__('user.login.already-logged-in'));
-//            \Response::redirect_back();
-//        }
-
         // was the login form posted?
         if (\Input::method() == 'POST')
         {
@@ -35,17 +26,6 @@ class Controller_User extends Controller_Base
                 {
                     $user = \Input::param('username');
                     \Messages::info("Welcome back $user");
-
-                    /*
-                     * FIxes loop problem after redirect
-                     * ( Input::referrer() === $main_login_forms or Input::referrer() === $main_registration_forms )
-                     */
-//                    $main_login_forms = Uri::base(false) . $this->selfReferrerLogin;
-//                    $main_registration_forms = Uri::base(false) . $this->selfReferrerRegistration;
-//                    if ( \Input::referrer() === $main_login_forms or Input::referrer() === $main_registration_forms )
-//                    {
-//                        \Response::redirect('/');
-//                    }
 
                     \Response::redirect('/');
                 }

@@ -21,7 +21,7 @@ class Controller_Password extends Controller_Base
                 if ( \Input::param('new_password') === \Input::param('confirm_password') )
                 {
                     \Auth::change_password(\Input::param('password'),\Input::param('new_password'));
-                    // inform the user the password change was successful
+                    // inform the user the password trade was successful
 
                     \Messages::success( __('user.login.changed'));
                     \Response::redirect_back();
@@ -168,7 +168,7 @@ class Controller_Password extends Controller_Base
                         $user->username
                         );
 
-                // log the user in and go to the profile to change the password
+                // log the user in and go to the profile to trade the password
                     if (\Auth::instance()->force_login($user->id))
                     {
                         \Messages::info('LOGGED IN');
