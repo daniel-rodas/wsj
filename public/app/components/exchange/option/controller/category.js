@@ -1,12 +1,13 @@
 angular.module('app.exchange.option.controller')
-    .controller('CategoryController', function ($scope, StateService) {
-        this.state = StateService;
-        //this.state.setCategory(this.radioModel);
+//angular.module('app.exchange.option')
+    .controller('CategoryController', function ( OptionCommandService ) {
+        var vm = this;
 
-        //$scope.$watch(
-        //    function watchCategory(scope){
-        //        // The "results" of watch expression.
-        //        return(CC.this.radioModel);
-        //    }
-        //);
+
+        vm.command = OptionCommandService;
+
+        vm.setCat = function(){
+
+            return vm.command.category.setCategory(vm.radioModel);
+        };
     });

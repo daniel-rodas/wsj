@@ -18,6 +18,20 @@ use Exchange\Trade\Short;
 
 class Price extends Context
 {
+    public function getLastPrice($coinId)
+    {
+        if( ! is_int( (integer) $coinId) )
+        {
+            throw new \PhpErrorException('Coin ID not a valid integer.');
+        }
+
+        $information = new Information();
+        try {
+            return $information->getLastPrice($coinId);
+        } catch (\PhpErrorException $e) {
+            return $e->getMassage();
+        }
+    }
     public function strike( $coinId ,  $expirationDate  )
     {
         if( ! is_int( (integer) $coinId) )

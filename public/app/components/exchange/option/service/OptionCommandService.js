@@ -1,68 +1,42 @@
 angular
     .module('app.exchange.option.service')
-    .factory('OptionCommandService', function OptionCommandService (ExpirationDateFactory) {
+    .factory('OptionCommandService', function OptionCommandService (
+        CategoryService, ExpirationDateFactory, SymbolService ) {
 
-        var quantity;
-        var expirationDate ;
-        var category ;
-        var timeframe;
-        var coinName ;
-        var askPrice;
-        var strikePrice;
-        var lastPrice;
-        var expiration;
+        var category = CategoryService ;
+        var expiration = ExpirationDateFactory ;
+        //var price = PriceFactory ;
+        //var state = OptionStateService ;
+        var symbol = SymbolService ;
+        var expirationDate;
 
         return {
-            getExpirationDate: getExpirationDate ,
-            getCategory: getCategory ,
-            getTimeframe: getTimeframe ,
-            getCoinName: getCoinName ,
-            setExpirationDate: setExpirationDate ,
-            setCoinName:  setCoinName
+            getAllCoins : getAllCoins,
+            getExpirationDate: getExpirationDate,
+            selectSymbol : selectSymbol,
+            getLastPrice: getLastPrice
         };
 
-        function getExpirationDate (timeFrame) {
-            ExpirationDateFactory
+        function getAllCoins (callback) {
+            return symbol.getAllCoins(callback);
+        }
+
+        function selectSymbol (coin_id, callback) {
+            return symbol.selectSymbol(coin_id, callback);
+        }
+
+        function getLastPrice (coin_id, callback) {
+            return symbol.getLastPrice(coin_id, callback);
+        }
+
+        function getExpirationDate (timeframe) {
+            expiration
                 .getExpirationDate(timeframe)
                 .success(function (data) {
-                    expirationDate = data.expiration;
+                    return expirationDate = data.expiration;
                 })
                 .error(function () {
-                    alert('Error (from StateService.getExpirationDate). Cannot get expiration date at this time.');
+                    alert('Error (from OptionCommandService.getExpirationDate() ). Cannot get Coins at this time.');
                 });
-        }
-
-        function getCategory ( ) {
-
-            return category;
-        }
-
-        function getTimeframe (  ) {
-
-            return timeframe;
-        }
-
-        function getCoinName (  ) {
-
-            return coinName;
-        }
-
-        function setExpirationDate ( item ) {
-
-            expirationDate = item;
-        }
-        function setCategory ( item ) {
-
-            category = item;
-        }
-
-        function setTimeframe ( item ) {
-
-            timeframe = item;
-        }
-
-        function  setCoinName ( item ) {
-
-            coinName = item;
         }
     });

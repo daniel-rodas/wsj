@@ -1,5 +1,5 @@
 angular
-    .module('app.exchange.option.service')
+    .module('app.exchange.option.service.state')
     .factory('SellOptionStateService', function SellOptionStateService (optionState, BuyOptionStateService) {
 
         this.state = optionState;

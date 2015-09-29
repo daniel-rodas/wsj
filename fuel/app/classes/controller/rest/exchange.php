@@ -22,6 +22,32 @@ class Controller_Rest_Exchange extends \Controller_Rest
         $this->exchange = \Exchange\Exchange::forge();
     }
 
+    public function get_all_coins()
+    {
+        return $this->response(
+            [
+                // Figure out expiration date for option
+                 $this->exchange->getAllCoins()
+
+            ]);
+    }
+
+    public function get_coin()
+    {
+        return $this->response(
+            [
+                $this->exchange->getCoin( Input::param('coin_id') )
+            ]);
+    }
+
+    public function get_last_price()
+    {
+        return $this->response(
+            [
+                $this->exchange->getLastPrice( Input::param('coin_id') )
+            ]);
+    }
+
     public function get_expiration_date()
     {
         return $this->response(

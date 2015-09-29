@@ -6,11 +6,12 @@
 
 <div class="container">
     <header class="row">
-        <div class="col-md-6"  ng-controller="CreateController as COC" >
+        <div class="col-md-6" >
+<!--        <div class="col-md-6"  ng-controller="CreateController as COC" >-->
             <h2>Create New Option</h2>
-            <p>Category: {{COC.category}}, Timeframe {{COC.timeframe}}, Coin {{COC.coinName}}</p>
-
-            <p>Strike: {{COC.strikePrice}}</p>
+<!--            <p>Category: {{COC.category}}, Timeframe {{COC.timeframe}}, Coin {{COC.coinName}}</p>-->
+<!---->
+<!--            <p>Strike: {{COC.strikePrice}}</p>-->
 
         </div>
 
@@ -37,23 +38,34 @@
     <div class="row">
 
         <div class="row">
-            <section class="col-md-6">
+            <section ng-controller="SymbolController as SC" class="col-md-6">
 
-                <h4>ApexCoin</h4>
-                <div class="row">
-                    <div class="list-group col-md-3">
 
-                        <p class="list-group-item  lead "> Bid  <span class="badge">0.44663</span></p>
-                        <hr>
-                        <p class="lead list-group-item ">Ask <span class="badge">0.43677</span></p>
-                    </div>
+                <div ng-if="SC.coin" class="row">
+
+                    <section class="row">
+                        <header class="col-md-6">
+                            <h4>{{SC.coin.name}}</h4>
+                            <h3>{{SC.coin.market}}</h3>
+                        </header>
+                        <div class=" col-md-6">
+                            <img id="coin-selected" src="/assets/img/coin/{{SC.coin.file}}" alt="" alt="Choose a Coin" class=" img-responsive img-rounded"/>
+                        </div>
+                    </section>
+                    <section class="row"></section>
+<!--                    <div class="list-group col-md-3">-->
+<!---->
+<!--                        <p class="list-group-item  lead "> Bid  <span class="badge">0.44663</span></p>-->
+<!--                        <hr>-->
+<!--                        <p class="lead list-group-item ">Ask <span class="badge">0.43677</span></p>-->
+<!--                    </div>-->
                     <div class="list-group col-md-3">
-                        <p class="lead list-group-item ">Last <span class="badge">0.43677</span></p>
+                        <p class="lead list-group-item ">Last <span class="badge">{{SC.coin.lastPrice}}</span></p>
                         <hr>
-                        <p class="lead list-group-item ">Strike <span class="badge">0.4543</span> </p>
+<!--                        <p class="lead list-group-item ">Strike <span class="badge">0.4543</span> </p>-->
                     </div>
                     <div class=" col-md-6">
-                        <img id="coin-selected" src="/assets/img/coin/history-graph.gif" alt="" alt="Choose a Coin" class=" img-responsive img-rounded"/>
+                        <img id="coin-selected" src="/assets/img/coin/history-graph.jpg" alt="" alt="Choose a Coin" class=" img-responsive img-rounded"/>
                     </div>
                 </div>
                 <nav class="row">
@@ -75,27 +87,23 @@
                         </li>
                     </ul>
                 </nav>
+
                 <div class="row">
                     <div  class="col-md-12 " id="coin-choice">
                         <section class="row">
-                            <img src="/assets/img/coin/1.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/2.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
+                            <img ng-repeat="coin in SC.coins"
+                                 src="/assets/img/coin/{{coin.file}}" ng-click="SC.selectSymbol(coin.id)"
+                                  alt="{{coin.name}}" class="col-md-3 img-responsive img-thumbnail" />
                         </section>
-                        <section class="row">
-                            <img src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/4.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/bitsharesx.jpg" alt="" class="col-md-3 img-responsive img-thumbnail"/>
-                            <img src="/assets/img/coin/3.png" alt="" alt="Choose a Coin" class="col-md-3 img-responsive img-thumbnail"/>
-                        </section>
+
                     </div><!-- End. Button Group-->
                 </div>
             </section>
 
             <div class="col-md-offset-1 col-md-5 btn-group-vertical"><!-- Form COntrols -->
 
-                <div ng-controller="QuantityController as QTC" class="input-group">
+                <div  class="input-group">
+<!--                <div ng-controller="QuantityController as QTC" class="input-group">-->
                     <h4>Quantity <span></span></h4>
                     <div class="input-group">
                         <div class="btn-group">
@@ -104,24 +112,25 @@
                     </div>
                 </div>
                 <div ng-controller="CategoryController as CC" class="input-group">
+
                     <h4>Category <span>{{CC.radioModel}}</span></h4>
                     <div class="btn-group btn-group-lg btn-group-justified">
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'put'" >Put</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'call'" >Call</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'short'" >Short</label>
-                        <label class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'future'" >Future</label>
+                        <label ng-click="CC.setCat()" class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'put'" >Put</label>
+                        <label ng-click="CC.setCat()" class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'call'" >Call</label>
+                        <label ng-click="CC.setCat()" class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'short'" >Short</label>
+                        <label ng-click="CC.setCat()" class="btn btn-primary" ng-model="CC.radioModel" btn-radio="'future'" >Future</label>
                     </div>
                 </div>
 
-                <div ng-controller="TimeframeController as TFC"  class="input-group">
+                <div  ng-controller="TimeframeController as TFC"    class="input-group">
                     <h4>Time Frame <span></span></h4>
                     <p>Expiration Date: {{TFC.expirationDate * 1000 | date:'medium'}}</p>
                     <div class="btn-group btn-group-lg btn-group-justified">
-                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'30m'">30 minutes</label>
-                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'90m'">90 minutes</label>
-                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'6h'">6 hours</label>
-                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'1d'">1 day</label>
-                        <label class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'7d'">7 days</label>
+                        <label ng-click="TFC.getExpirationDate('30m')" class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'30m'">30 minutes</label>
+                        <label ng-click="TFC.getExpirationDate('90m')" class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'90m'">90 minutes</label>
+                        <label ng-click="TFC.getExpirationDate('6h')" class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'6h'">6 hours</label>
+                        <label ng-click="TFC.getExpirationDate('1d')" class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'1d'">1 day</label>
+                        <label ng-click="TFC.getExpirationDate('7d')" class="btn btn-primary" ng-model="TFC.radioModel" btn-radio="'7d'">7 days</label>
                     </div>
                 </div>
             </div>

@@ -41,11 +41,33 @@ class Exchange
         $this->coin = new Coin();
     }
 
+    public function getAllCoins()
+    {
+        try {
+            // Run query and hope for the best.
+            return $this->coin->getAll();
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
+
     public function getCoin( $identifier , $field = 'id' )
     {
         try {
             // Run query and hope for the best.
             return $this->coin->get($identifier , $field);
+        } catch ( \PhpErrorException $e) {
+            // returns the individual ValidationError objects
+            return $e->getMessage();
+        }
+    }
+
+    public function getLastPrice( $coinId )
+    {
+        try {
+            // Run query and hope for the best.
+            return $this->price->getLastPrice($coinId);
         } catch ( \PhpErrorException $e) {
             // returns the individual ValidationError objects
             return $e->getMessage();

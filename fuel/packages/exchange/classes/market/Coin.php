@@ -41,6 +41,11 @@ class Coin
             return $this->model = $this->model->query()->where( $field , $identifier )->get_one();
     }
 
+    public function getAll( )
+    {
+            return $this->model = $this->model->query()->get();
+    }
+
     public function create( $name, $file, $alt, $api, $market )
     {
         // TODO implement validation

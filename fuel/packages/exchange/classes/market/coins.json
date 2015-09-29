@@ -1,0 +1,103 @@
+[
+  {
+    "1": {
+      "id": "1",
+      "name": "ApexCoin",
+      "file": "1.png",
+      "alt": "ApexCoin",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-APEX",
+      "deleted_at": null,
+      "created_at": "1408410194",
+      "updated_at": "1408482670"
+    },
+    "4": {
+      "id": "4",
+      "name": "CannabisCoin",
+      "file": "4.png",
+      "alt": "CannabisCoin",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-CANN",
+      "deleted_at": null,
+      "created_at": "1408410987",
+      "updated_at": "1408411002"
+    },
+    "5": {
+      "id": "5",
+      "name": "Cannacoin",
+      "file": "5.png",
+      "alt": "Cannacoin",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-CCN",
+      "deleted_at": null,
+      "created_at": "1408413334",
+      "updated_at": "1408413334"
+    },
+    "10": {
+      "id": "10",
+      "name": "CoffeeCoin",
+      "file": "coffeecoin.png",
+      "alt": "CoffeeCoin",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-CFC2",
+      "deleted_at": null,
+      "created_at": "1409009491",
+      "updated_at": "1409624652"
+    },
+    "11": {
+      "id": "11",
+      "name": "BTC-AAA",
+      "file": "1.png",
+      "alt": "BTC-AAA",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-AAA",
+      "deleted_at": null,
+      "created_at": "1409211240",
+      "updated_at": "1409211240"
+    },
+    "12": {
+      "id": "12",
+      "name": "SoleCoin",
+      "file": "solecoin.png",
+      "alt": "BTC-SOLE",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-SOLE",
+      "deleted_at": null,
+      "created_at": "1410244180",
+      "updated_at": "1410244180"
+    },
+    "13": {
+      "id": "13",
+      "name": "BitSharesX",
+      "file": "bitsharesx.jpg",
+      "alt": "BTC-BTSX",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC-BTSX",
+      "deleted_at": null,
+      "created_at": "1410244376",
+      "updated_at": "1410244376"
+    },
+    "14": {
+      "id": "14",
+      "name": "Testing1",
+      "file": "testing1.png",
+      "alt": "BTC",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC",
+      "deleted_at": null,
+      "created_at": "1439010232",
+      "updated_at": "1439010425"
+    },
+    "15": {
+      "id": "15",
+      "name": "Testing1",
+      "file": "testing1.png",
+      "alt": "BTC",
+      "api": "https:\/\/bittrex.com\/api\/v1.1\/public\/getticker",
+      "market": "BTC",
+      "deleted_at": null,
+      "created_at": "1439010242",
+      "updated_at": "1439010242"
+    }
+  }
+]

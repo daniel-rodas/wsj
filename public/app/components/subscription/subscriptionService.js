@@ -1,6 +1,5 @@
 angular
-    //.module('app.subscription')
-    .module('app.common')
+    .module('app.subscription')
     .factory('SubscriptionService', function () {
         var option;
         var beginning = 1;

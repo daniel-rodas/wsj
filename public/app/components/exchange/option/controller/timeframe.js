@@ -1,9 +1,12 @@
 angular
     .module('app.exchange.option.controller')
-    .controller('TimeframeController', function TimeframeController ($scope, OptionCommandService, ExpirationDateFactory ) {
+    .controller('TimeframeController', function TimeframeController ( $scope, OptionCommandService ) {
 
         var vm = this;
-        vm.expirationDate = OptionCommandService.getExpirationDate;
+
+        vm.getExpirationDate = function(timeframe){
+            vm.expirationDate = OptionCommandService.getExpirationDate(timeframe);
+        };
 
         $scope.radioModel = {
             '30m': false,
@@ -15,7 +18,7 @@ angular
 
         $scope.timeframe = '1d';
 
-        $scope.radioCategories = vm.radioModel;
+        $scope.radioModel = vm.radioModel;
 
         $scope.$watchCollection('radioModel', function () {
             angular.forEach($scope.radioModel, function (value, key) {
@@ -24,14 +27,4 @@ angular
                 }
             });
         });
-
-        ExpirationDateFactory
-            .getExpirationDate($scope.timeframe)
-            .success(function (data) {
-
-                vm.expirationDate = data.expiration;
-            })
-            .error(function () {
-                alert('Error (from StateService.getExpirationDate). Cannot get expiration date at this time.');
-            });
     });

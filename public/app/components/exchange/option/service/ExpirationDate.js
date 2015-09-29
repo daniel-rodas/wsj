@@ -14,8 +14,12 @@ angular
 
             return $http.get(expirationDateUri)
                 .success(function(data) {
+                    console.log('ExpirationDateFactory.getExpirationDate() Success Data: ');
+                    console.log(data);
                     return data;
-                }).error(function () {
+                }).error(function (data) {
+                    console.log('ExpirationDateFactory.getExpirationDate() Error Data: ');
+                    console.log(data);
                     alert('Error @ ExpirationDateFactory. Cannot get expiration date at this time.');
                     //NotificationFactory.showError();
                 });

@@ -1,12 +1,14 @@
 angular
     .module('app.exchange.option.service')
-    .factory('CategoryService',function CategoryService () {
+    .factory('CategoryService', function CategoryService () {
         var value;
         return {
-            setCategory: setCategory ,
-            setTimeframe: setTimeframe ,
-            login: function ( value ) {
-                return value;
-            }
+            setCategory : setCategory
         };
+
+        function setCategory(val) {
+            value = val;
+            alert(value);
+            console.log(value);
+        }
     });

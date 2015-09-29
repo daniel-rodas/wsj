@@ -1,6 +1,6 @@
 angular
-    .module('app.exchange.option.service')
-    .factory('OptionStateService', function OptionStateService (NewOptionStateService) {
+    .module('app.exchange.option.service.state')
+    .factory('OptionStateService', function OptionStateService (NewOptionStateService ) {
 
         var currentState = NewOptionStateService(this);
 

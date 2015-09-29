@@ -1,6 +1,6 @@
 angular
-    //.module('app.subscription')
-    .module('app.common')
+    .module('app.subscription')
+    //.module('app.common')
     .controller('SubscriptionOptionsController', function ( $window, $rootScope) {
 
         this.setSubscription = function (subscription) {
