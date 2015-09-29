@@ -27,6 +27,7 @@ class Market
             // Only record market information for coin if response is successful.
             if( $marketInfo['success'] )
             {// Convert scientific notation to decimal notation
+
                 $lastPrice = rtrim( sprintf('%.20F', $marketInfo['result']['Last'] ), '0');
 
                 try {
@@ -37,11 +38,35 @@ class Market
                         'last_price' =>  $lastPrice,
                         'api_url' =>  $coin->api,
                     ))->save();
+
+
                         } catch (Orm\ValidationFailed $e) {
                     // returns the individual ValidationError objects
                     $errors = $e->get_fieldset()->validation()->error();
                 }
+
+                // Set coin Active
+                $this->setActive($coin);
+            }
+            else
+            {
+                $this->deactivate($coin);
             }
         }
+    }
+
+    private function setActive ($coin)
+    {
+        if( $coin->active == null )
+        {
+            $coin->active = true;
+            $coin->save();
+        }
+    }
+
+    private function deactivate ($coin)
+    {
+        $coin->active = false;
+        $coin->save();
     }
 }

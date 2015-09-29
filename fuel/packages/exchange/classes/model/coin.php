@@ -18,6 +18,7 @@ class Coin extends \Orm\Model_Soft
 		'alt',
 		'api',
         'market',
+        'active',
         'deleted_at',
 		'created_at',
 		'updated_at',
@@ -37,7 +38,7 @@ class Coin extends \Orm\Model_Soft
 
     protected static $_has_many = [
         'options' => [
-            'model_to' => '\Exchange\Model\Options',
+            'model_to' => '\Exchange\Model\Option',
         ],
     ];
 

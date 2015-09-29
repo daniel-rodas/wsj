@@ -41,9 +41,9 @@ class Coin
             return $this->model = $this->model->query()->where( $field , $identifier )->get_one();
     }
 
-    public function getAll( )
+    public function getAll( $active = true )
     {
-            return $this->model = $this->model->query()->get();
+            return $this->model = $this->model->query()->where( 'active' , $active )->get();
     }
 
     public function create( $name, $file, $alt, $api, $market )

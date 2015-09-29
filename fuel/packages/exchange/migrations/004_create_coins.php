@@ -13,6 +13,7 @@ class Create_coins
 			'alt' => array('constraint' => 255, 'type' => 'varchar'),
 			'api' => array('constraint' => 255, 'type' => 'varchar'),
 			'market' => array('constraint' => 255, 'type' => 'varchar'),
+			'active' => array( 'type' => 'boolean'),
 			'created_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
 			'updated_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
             'deleted_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
