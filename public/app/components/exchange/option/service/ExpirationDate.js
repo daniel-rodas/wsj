@@ -9,19 +9,9 @@ angular
 
         };
 
-        function getExpirationDate ( timeframe ) {
+        function getExpirationDate ( timeframe, callback ) {
             expirationDateUri = expirationDateUri + timeframe;
 
-            return $http.get(expirationDateUri)
-                .success(function(data) {
-                    console.log('ExpirationDateFactory.getExpirationDate() Success Data: ');
-                    console.log(data);
-                    return data;
-                }).error(function (data) {
-                    console.log('ExpirationDateFactory.getExpirationDate() Error Data: ');
-                    console.log(data);
-                    alert('Error @ ExpirationDateFactory. Cannot get expiration date at this time.');
-                    //NotificationFactory.showError();
-                });
+            return $http.get(expirationDateUri).then(callback);
         }
     });

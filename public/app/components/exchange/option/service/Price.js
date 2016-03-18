@@ -1,6 +1,6 @@
 angular
     .module('app.exchange.option.service')
-    .factory('PriceFactory', function PriceFactory ($http, $q) {
+    .factory('PriceFactory', function PriceFactory ($http) {
 
         var strikePriceUri = '/rest/exchange/strike_price.json';
         var purchasePriceUri = '/rest/exchange/purchase_price.json';
@@ -10,25 +10,20 @@ angular
             getPurchasePrice : getPurchasePrice
         };
 
-        function getStrikePrice ( coinId, expirationDate ) {
-
+        function getStrikePrice ( coinId, expirationDate, callback ) {
             strikePriceUri = strikePriceUri + '?coinId=' + coinId + '&expirationDate=' + expirationDate;
-            return $http.get(strikePriceUri)
-                .success(function(data) {
-                    return data;
-                }).error(function (data) {
-                    console.log(data);
-                    alert('Error @ PriceFactory. Cannot get expiration date at this time.');
-                    //NotificationFactory.showError();
-                });
+            return $http.get(strikePriceUri).then(callback);
         }
-        function getPurchasePrice ( timeframe ) {
-            return $http.get(expirationDateUri)
-                .success(function(data) {
-                    return data;
-                }).error(function () {
-                    alert('Error @ PriceFactory. Cannot get expiration date at this time.');
-                    //NotificationFactory.showError();
-                });
+        function getPurchasePrice ( optionType, quantity, strikePrice, coinId, callback ) {
+
+            return $http.get(purchasePriceUri,
+                {
+                    params : {
+                        option_type : optionType,
+                        quantity : quantity,
+                        strike_price : strikePrice,
+                        coin_id : coinId
+                    }
+                }).then(callback);
         }
     });

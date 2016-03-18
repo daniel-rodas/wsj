@@ -53,16 +53,16 @@
                         </div>
                     </section>
                     <section class="row"></section>
-<!--                    <div class="list-group col-md-3">-->
-<!---->
-<!--                        <p class="list-group-item  lead "> Bid  <span class="badge">0.44663</span></p>-->
-<!--                        <hr>-->
-<!--                        <p class="lead list-group-item ">Ask <span class="badge">0.43677</span></p>-->
-<!--                    </div>-->
+                    <div class="list-group col-md-3">
+
+                        <p class="list-group-item  lead "> Bid  <span class="badge">0.44663</span></p>
+                        <hr>
+                        <p class="lead list-group-item ">Ask <span class="badge">0.43677</span></p>
+                    </div>
                     <div class="list-group col-md-3">
                         <p class="lead list-group-item ">Last <span class="badge">{{SC.coin.lastPrice}}</span></p>
                         <hr>
-<!--                        <p class="lead list-group-item ">Strike <span class="badge">0.4543</span> </p>-->
+                        <p class="lead list-group-item ">Strike <span class="badge">{{SC.coin.strikePrice}}</span> </p>
                     </div>
                     <div class=" col-md-6">
                         <img id="coin-selected" src="/assets/img/coin/history-graph.jpg" alt="" alt="Choose a Coin" class=" img-responsive img-rounded"/>

@@ -3,7 +3,7 @@ angular
     .controller('AuthenticationController', function ( $rootScope, MessageService, SubscriptionService) {
 
        //this.templateUrl = "register.html";
-        this.setTpl = function (templateUrl) {
+        this.setTemplate = function (templateUrl) {
 
             this.templateUrl = templateUrl;
         };

@@ -1,24 +1,31 @@
 angular
     .module('app.exchange.option.service')
     .factory('OptionCommandService', function OptionCommandService (
-        CategoryService, ExpirationDateFactory, SymbolService ) {
+        CategoryService, ExpirationDateFactory, SymbolService,
+        PriceFactory
+    ) {
 
         var category = CategoryService ;
         var expiration = ExpirationDateFactory ;
-        //var price = PriceFactory ;
+        var price = PriceFactory ;
         //var state = OptionStateService ;
         var symbol = SymbolService ;
-        var expirationDate;
 
         return {
             getAllCoins : getAllCoins,
             getExpirationDate: getExpirationDate,
             selectSymbol : selectSymbol,
-            getLastPrice: getLastPrice
+            getLastPrice: getLastPrice,
+            getPurchasePrice : getPurchasePrice,
+            getStrikePrice : getStrikePrice
         };
 
         function getAllCoins (callback) {
             return symbol.getAllCoins(callback);
+        }
+
+        function getStrikePrice ( coinId, expirationDate, callback ){
+            return price.getStrikePrice ( coinId, expirationDate, callback );
         }
 
         function selectSymbol (coin_id, callback) {
@@ -29,14 +36,12 @@ angular
             return symbol.getLastPrice(coin_id, callback);
         }
 
-        function getExpirationDate (timeframe) {
-            expiration
-                .getExpirationDate(timeframe)
-                .success(function (data) {
-                    return expirationDate = data.expiration;
-                })
-                .error(function () {
-                    alert('Error (from OptionCommandService.getExpirationDate() ). Cannot get Coins at this time.');
-                });
+        function getExpirationDate (timeframe, callback) {
+            return expiration.getExpirationDate(timeframe, callback);
+        }
+
+        function getPurchasePrice ( optionType, quantity, strikePrice, coinId, callback )
+        {
+            return price.getPurchasePrice ( optionType, quantity, strikePrice, coinId, callback );
         }
     });

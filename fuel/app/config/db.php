@@ -30,7 +30,7 @@ return array(
 
     'charset'        => 'utf8',
 
-    'enable_cache'   => true,
+    'enable_cache'   => false,
 
     'profiling'      => false,
 

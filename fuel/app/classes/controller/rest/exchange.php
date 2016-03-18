@@ -53,7 +53,7 @@ class Controller_Rest_Exchange extends \Controller_Rest
         return $this->response(
             [
                 // Figure out expiration date for option
-                'expiration' => $this->exchange->getExpirationDate( Input::param('timeframe') )
+                 $this->exchange->getExpirationDate( Input::param('timeframe') )
             ]);
     }
 
@@ -62,17 +62,25 @@ class Controller_Rest_Exchange extends \Controller_Rest
         return $this->response(
             [
                 // Figure out expiration date for option
-                'strikePrice' => $this->exchange->getStrikePrice( Input::param('coinId'),  Input::param('expirationDate') )
+                 $this->exchange->getStrikePrice( Input::param('coinId'),  Input::param('expirationDate') )
             ]);
     }
 
+    /**
+     * @param $optionType
+     * @param $quantity
+     * @param $timeFrame
+     * @return mixed
+     */
     public function get_purchase_price()
     {
+        $option = $this->exchange->initializeOption( Input::param('option_type'), Input::param('quantity'),
+            Input::param('strike_price'), Input::param('coin_id') );
 
         return $this->response(
             [
                 // Figure out expiration date for option
-                'purchacePrice' => $this->exchange->getPurchasePrice( Input::param('timeframe') )
+                 $this->exchange->getPurchasePrice( $option )
             ]);
     }
 }

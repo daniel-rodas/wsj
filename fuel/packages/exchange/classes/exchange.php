@@ -16,7 +16,7 @@ class Exchange
     protected $coin;
     private static $_instance = null;
 
-    private static function instance()
+    private static function get_instance()
     {
         /*
          * Singleton to call internal method
@@ -31,7 +31,7 @@ class Exchange
 
     public static function forge()
     {
-     return self::instance();
+     return self::get_instance();
     }
 
     protected function __construct()
@@ -67,11 +67,31 @@ class Exchange
     {
         try {
             // Run query and hope for the best.
+            /** @var int $coinId */
             return $this->price->getLastPrice($coinId);
         } catch ( \PhpErrorException $e) {
             // returns the individual ValidationError objects
             return $e->getMessage();
         }
+    }
+
+    /**
+     * @param $optionType
+     * @param $quantity
+     * @param $strikePrice
+     * @param $coinId
+     * @return Option
+     */
+
+    public function initializeOption(  $optionType, $quantity, $strikePrice, $coinId  )
+    {
+        $this->option->set('status', 'Initialized');
+        $this->option->set('quantity', $quantity);
+        $this->option->set('strikePrice', $strikePrice);
+        $this->option->set('coinId', $coinId);
+        $this->option->set('type', $optionType);
+
+        return $this->option;
     }
 
     public function getExpirationDate( $timeFrame )
