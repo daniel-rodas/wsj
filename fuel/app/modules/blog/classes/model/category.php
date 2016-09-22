@@ -88,8 +88,7 @@ class Model_Category extends \Orm\Model_Soft
             array('parent_id', null)
         )
         ));
-
-
+        
         // Set categories
         foreach($categories as $category)
             $form->field('parent_id')->set_options($category->id, $category->name);

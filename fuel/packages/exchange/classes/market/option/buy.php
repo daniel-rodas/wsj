@@ -55,7 +55,7 @@ class Buy implements IStrategy
         }
         else
         {
-            die( 'error' . $val->error() );
+            return $val->error() ;
         }
     }
 }
