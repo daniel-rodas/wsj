@@ -8,29 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- * Created by Rodas on 7/4/2016.
- */
 var core_1 = require('@angular/core');
-var NavigationComponent = (function () {
-    function NavigationComponent() {
-        this.isActive = false;
-        this.pathArray = window.location.pathname.split('/');
-        console.log(this.pathArray);
+var WhatsNewsComponent = (function () {
+    function WhatsNewsComponent() {
     }
-    NavigationComponent.prototype.captureUriSegment = function (pathName) {
-        this.firstLevelUriSegment = this.pathArray[1];
-        return (pathName === this.firstLevelUriSegment ? true : false);
-    };
-    NavigationComponent = __decorate([
+    WhatsNewsComponent = __decorate([
         core_1.Component({
-            selector: 'rn-navigation',
-            templateUrl: '/angular/template/navigation',
-            styles: ["\n    .active {\n      text-decoration: underline;\n    }\n  "]
+            selector: 'rn-whats-news',
+            templateUrl: '/angular/template/whats_news'
         }), 
         __metadata('design:paramtypes', [])
-    ], NavigationComponent);
-    return NavigationComponent;
+    ], WhatsNewsComponent);
+    return WhatsNewsComponent;
 }());
-exports.NavigationComponent = NavigationComponent;
-//# sourceMappingURL=navigation.component.js.map
+exports.WhatsNewsComponent = WhatsNewsComponent;
+//# sourceMappingURL=whats.news.component.js.map

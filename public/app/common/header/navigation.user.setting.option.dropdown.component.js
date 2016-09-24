@@ -8,29 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- * Created by Rodas on 7/4/2016.
- */
 var core_1 = require('@angular/core');
-var NavigationComponent = (function () {
-    function NavigationComponent() {
-        this.isActive = false;
-        this.pathArray = window.location.pathname.split('/');
-        console.log(this.pathArray);
+var NavigationUserSettingOptionDropdown = (function () {
+    function NavigationUserSettingOptionDropdown() {
     }
-    NavigationComponent.prototype.captureUriSegment = function (pathName) {
-        this.firstLevelUriSegment = this.pathArray[1];
-        return (pathName === this.firstLevelUriSegment ? true : false);
-    };
-    NavigationComponent = __decorate([
+    NavigationUserSettingOptionDropdown = __decorate([
         core_1.Component({
-            selector: 'rn-navigation',
-            templateUrl: '/angular/template/navigation',
-            styles: ["\n    .active {\n      text-decoration: underline;\n    }\n  "]
+            selector: 'rn-navigation-user-setting-option-dropdown',
+            templateUrl: '/angular/template/navigation_user_setting_option_dropdown'
         }), 
         __metadata('design:paramtypes', [])
-    ], NavigationComponent);
-    return NavigationComponent;
+    ], NavigationUserSettingOptionDropdown);
+    return NavigationUserSettingOptionDropdown;
 }());
-exports.NavigationComponent = NavigationComponent;
-//# sourceMappingURL=navigation.component.js.map
+exports.NavigationUserSettingOptionDropdown = NavigationUserSettingOptionDropdown;
+//# sourceMappingURL=navigation.user.setting.option.dropdown.component.js.map

@@ -1,5 +1,4 @@
 <header class="header row">
-
     <div class="row">
         <a class="col-sm-3 col-md-3" href="/">
             <div id="brand" class="">WSJ</div>

@@ -13,17 +13,17 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var ng_bootstrap_1 = require('@ng-bootstrap/ng-bootstrap');
 var app_component_1 = require('./app.component');
-var navigation_component_1 = require('./navigation.component');
 var whats_news_component_1 = require('./components/whatsNews/whats.news.component');
-//,
+var navigation_modal_component_1 = require('./common/header/navigation.modal.component');
+var navigation_user_setting_option_dropdown_component_1 = require('./common/header/navigation.user.setting.option.dropdown.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [ng_bootstrap_1.NgbModule, platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [app_component_1.AppComponent, navigation_component_1.NavigationComponent, whats_news_component_1.WhatsNewsComponent],
-            bootstrap: [app_component_1.AppComponent, navigation_component_1.NavigationComponent, whats_news_component_1.WhatsNewsComponent]
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, ng_bootstrap_1.NgbModule],
+            declarations: [app_component_1.AppComponent, navigation_modal_component_1.NavigationModalComponent, whats_news_component_1.WhatsNewsComponent, navigation_user_setting_option_dropdown_component_1.NavigationUserSettingOptionDropdown],
+            bootstrap: [app_component_1.AppComponent, navigation_modal_component_1.NavigationModalComponent, whats_news_component_1.WhatsNewsComponent, navigation_user_setting_option_dropdown_component_1.NavigationUserSettingOptionDropdown]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

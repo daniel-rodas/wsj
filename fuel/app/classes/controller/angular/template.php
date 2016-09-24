@@ -29,4 +29,14 @@ class Controller_Angular_Template extends \Controller_Template
     {
         $this->template->content = View::forge('angular/application');
     }
+
+    public function action_navigation_modal()
+    {
+        $this->template->content = View::forge('angular/navigation-modal');
+    }
+
+    public function action_navigation_user_setting_option_dropdown()
+    {
+        $this->template->content = View::forge('angular/navigation-user-setting-option-dropdown');
+    }
 }

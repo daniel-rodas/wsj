@@ -14,5 +14,4 @@
         <h4>Prosecutor Probes HSBC’s Swiss Unit in Money-Laundering Case</h4>
         <p>The Geneva public prosecutor’s office has begun a search of the offices of U.K. banking giant HSBC’s Swiss unit as part of a probe into alleged money-laundering activities.</p>
     </section>
-
 </div>

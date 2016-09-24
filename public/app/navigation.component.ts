@@ -3,8 +3,6 @@
  */
 import { Component } from '@angular/core';
 
-// import {NgClass} from '@angular/common';
-
 @Component({
     selector: 'rn-navigation',
     templateUrl: '/angular/template/navigation',

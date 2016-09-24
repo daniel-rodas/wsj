@@ -1,5 +1,5 @@
 
-<li dropdown on-toggle="toggled(open)">
+<li dropdown >
     <a  href id="user-dropdown" dropdown-toggle><?php echo Str::truncate($user->email, 15);  ?> <span class="caret"></span></a>
     <ul class="dropdown-menu" aria-labelledby="user-dropdown">
         <li><a href="<?= \Router::get('backend'); ?>">Exchange</a></li>

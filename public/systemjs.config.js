@@ -26,7 +26,7 @@
             // other libraries
             'rxjs':                       'npm:rxjs',
             'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
-            '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap'
+            '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
