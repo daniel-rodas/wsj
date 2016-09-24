@@ -8,7 +8,7 @@
  */
 class Presenter_Header_Template extends Presenter
 {
-    protected $userOptions;
+    protected $userNavigationOptions;
 
     public function before()
     {
@@ -16,11 +16,11 @@ class Presenter_Header_Template extends Presenter
 
         if($this->user)
         {
-            $this->userOptions = View::forge('header/dropdown')->set('user', $this->user);
+            $this->userNavigationOptions = View::forge('header/dropdown')->set('user', $this->user);
         }
         else
         {
-            $this->userOptions = View::forge('header/login_or_register');
+            $this->userNavigationOptions = View::forge('header/login_or_register');
         }
     }
 
@@ -32,6 +32,6 @@ class Presenter_Header_Template extends Presenter
 	 */
 	public function view()
 	{
-        $this->navigation = View::forge('header/navigation')->set('userOptions', $this->userOptions);
+        $this->navigation = View::forge('header/navigation')->set('userNavigationOptions', $this->userNavigationOptions);
 	}
 }

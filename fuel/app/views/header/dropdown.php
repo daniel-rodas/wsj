@@ -1,3 +1,4 @@
+
 <li dropdown on-toggle="toggled(open)">
     <a  href id="user-dropdown" dropdown-toggle><?php echo Str::truncate($user->email, 15);  ?> <span class="caret"></span></a>
     <ul class="dropdown-menu" aria-labelledby="user-dropdown">

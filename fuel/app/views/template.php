@@ -43,60 +43,29 @@
             'styles.css'
         ] ); ?>
 
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="/node_modules/core-js/client/shim.min.js"></script>
+    <script src="/node_modules/zone.js/dist/zone.js"></script>
+    <script src="/node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="/node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="/systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
 </head>
 <body>
 <div id="wrapper" class="container-fluid">
     <?= View::forge()->render('_includes/message'); ?>
     <?= (isset($header) ? $header : '' ); ?>
+
+    <my-app>Loading...</my-app>
     <?= (isset($content) ? $content : '' ); ?>
+
     <?php echo Fuel::VERSION; ?>
 </div>    <!-- End /#wrapper .container-fluid   -->
 
-<!--    Add path to AngularJS app-->
-<?= Asset::add_path('app/', 'ngApp', ['js','html']); ?>
-
-<!--  JS Libs  -->
-<?= Asset::js([
-    'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.min.js',
-
-    // Exchange App
-    Asset::get_file('components/exchange/exchange.module.js', 'ngApp'),
-
-    Asset::get_file('components/exchange/symbol/controller/Symbol.js', 'ngApp'),
-    Asset::get_file('components/exchange/symbol/service/Symbol.js', 'ngApp'),
-
-    Asset::get_file('components/exchange/option/controller/Category.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/controller/Timeframe.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/controller/Quantity.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/controller/Create.js', 'ngApp'),
-
-    Asset::get_file('components/exchange/option/service/State.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/state/Buy.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/state/Execute.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/state/New.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/state/Sell.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/OptionCommandService.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/Price.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/Category.js', 'ngApp'),
-    Asset::get_file('components/exchange/option/service/ExpirationDate.js', 'ngApp'),
-
-    // WSJ App
-    Asset::get_file('app.module.js', 'ngApp'),
-    Asset::get_file('common/header/navigationController.js', 'ngApp'),
-    Asset::get_file('common/message/messageController.js', 'ngApp'),
-    Asset::get_file('common/message/messageService.js', 'ngApp'),
-    Asset::get_file('components/modal/modalInstanceController.js', 'ngApp'),
-    Asset::get_file('components/authentication/authenticationController.js', 'ngApp'),
-    Asset::get_file('components/subscription/subscriptionService.js', 'ngApp'),
-    Asset::get_file('components/subscription/options/deliveryOptionsController.js', 'ngApp'),
-    Asset::get_file('components/whatsNews/whatsNewsController.js', 'ngApp'),
-
-
-]); ?>
 </body>
 </html>

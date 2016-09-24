@@ -13,7 +13,7 @@ class Controller_Frontend_Post extends Controller_Blog
             'per_page'       => 3,
             'uri_segment'    => 'page',
         );
-        $pagination = \Pagination::forge('post_pagination', $config);
+        $this->data['pagination'] = $pagination = \Pagination::forge('post_pagination', $config);
         // Get posts
         $this->data['posts'] = Model_Post::query()
                                         ->offset($pagination->offset)
