@@ -26,7 +26,6 @@
 
             <?= \Auth::check() ? View::forge()->render('_includes/message') : null; ?>
 
-
             <?= (isset($content)) ? $content : '' ?>
 
             <div style="border: dashed 1px #000000" class="stripes-please row">

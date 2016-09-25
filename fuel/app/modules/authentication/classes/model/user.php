@@ -9,6 +9,7 @@ class Model_User extends \Orm\Model_Soft
         // this is called upon loading the class
         \Package::load('exchange');
         \Module::load('wallet');
+        \Module::load('blog');
     }
 
     protected static $_properties = array(
@@ -32,6 +33,13 @@ class Model_User extends \Orm\Model_Soft
     ];
 
     protected static $_has_many = array(
+        'posts' => [
+            'key_from' => 'id',
+            'model_to' => '\Blog\Model_Post',
+            'key_to' => 'user_id',		// key in the related model
+            'cascade_save' => true,		// update the related table on save
+            'cascade_delete' => false,
+        ],
 //        'transactions' => [
 //            'model_to' => '\Exchange\Model\Transaction',      // related model
 //        ],

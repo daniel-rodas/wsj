@@ -8,7 +8,7 @@
 
 <div class="row">
 <rn-whats-news><h3>What's News</h3></rn-whats-news>
-    <div class="col-sm-9 col-md-8 col-lg-7 " >
+    <div class="col-sm-9 col-md-8 col-lg-7 ">
 
         <?php if (isset($content)): ?>
                 <?php echo $content; ?>
@@ -20,7 +20,7 @@
 
 
     </div>
-    <div class="col-sm-3 col-md-2 col-lg-3 " >
+    <div class="col-sm-3 col-md-2 col-lg-3 ">
         <table class="table table-condensed">
             <tr>
                 <th></th>

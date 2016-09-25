@@ -4,6 +4,10 @@ namespace Authentication;
 
 class Model_Users_Metadata extends \Orm\Model
 {
+    public static function _init()
+    {
+        \Module::load('blog');
+    }
     // list of properties for this model
     protected static $_properties = array(
         'id', // primary key
@@ -17,6 +21,13 @@ class Model_Users_Metadata extends \Orm\Model
         'user' => array(
             'key_from' => 'parent_id',
             'model_to' => 'Authentication\Model_User',
+            'key_to' => 'id',
+            'cascade_save' => true,
+            'cascade_delete' => true,
+        ),
+        'author' => array(
+            'key_from' => 'parent_id',
+            'model_to' => '\Blog\Model_Author',
             'key_to' => 'id',
             'cascade_save' => true,
             'cascade_delete' => true,

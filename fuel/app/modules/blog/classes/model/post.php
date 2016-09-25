@@ -96,9 +96,9 @@ class Model_Post extends \Orm\Model_Soft
             'cascade_save' => false,
             'cascade_delete' => false,
         ),
-        'user' => array(
+        'author' => array(
             'key_from' => 'user_id',
-            'model_to' => '\Authentication\Model_User',
+            'model_to' => 'Blog\Model_Author',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,
@@ -135,7 +135,7 @@ class Model_Post extends \Orm\Model_Soft
         parent::set_form_fields($form, $instance);
 
         // Set authors
-        foreach(\Authentication\Model_User::find('all') as $user)
+        foreach(\Blog\Model_Author::find('all') as $user)
             $form->field('user_id')->set_options($user->id, $user->username);
 
         // Set categories

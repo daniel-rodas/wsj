@@ -6,8 +6,6 @@
  * Time: 9:25 PM
  */
 
-else
-{
 
     // Prepare comment form fieldset
     $form = \Fieldset::forge('post_comment');
@@ -53,7 +51,9 @@ else
             }
         }
     }
-    $form->repopulate();
-    $this->data['form'] = $form;
-    return \Response::forge( \View::forge('frontend/post/show')->set($this->data, null, false) );
-}
+
+
+
+$form->repopulate();
+$this->data['form'] = $form;
+

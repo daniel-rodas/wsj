@@ -9,7 +9,7 @@
 namespace Blog;
 
 
-class Controller_Post_Feature extends Controller_Frontend_Post
+class Featured extends Controller_Frontend_Post
 {
     public function action_set_featured_story($slug = false)
     {

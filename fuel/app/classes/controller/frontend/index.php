@@ -18,8 +18,17 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
         // Set news section the header
         $this->template->header->set('section', $section);
 
+        /* TODO Authenticate user, then chose which presenter to call depending if user is logged in. */
+        /* If user is not logged in then show a snippet */
+        /* possible scenario:
+        /*          $this->template->content = Presenter::forge('article/snippet')->set('slug', $slug);
+        /*
+         *
+         */
+
         // Grab presenter to be used for layout
         $this->template->content = Presenter::forge('article/page')->set('slug', $slug);
+
 
     }
 }

@@ -225,27 +225,27 @@ class Controller_Frontend_Post extends Controller_Blog
     }
 
 
-    public function action_show($slug = false, $snippet = false)
+    public function action_show($slug)
     {
-        $this->data['snippet'] = $snippet;
-        // Get post by slug
-    	$post = $this->data['post'] = Model_Post::query()->where('slug', $slug)->get_one();
+        $post = Model_Post::query()->where('slug', $slug )->get_one();
+//        $post->user = Model_Post::query()->where('slug', $slug )->related('user')->get_one();
+        $this->data['post'] = $post ;
 
         if ( ! $post)
     	{
     		\Messages::error(__('frontend.post.not-found'));
     		\Response::redirect_back(\Router::get('homepage'));
     	}
-    	else
-    	{
+        else
+        {
 
             // Prepare comment form fieldset
             $form = \Fieldset::forge('post_comment');
             $form->add_model('Blog\Model_Comment');
             $form->add('submit', '', array(
-                'type' => 'submit',
-                'value' => __('submit'),
-                'class' => 'btn btn-primary')
+                    'type' => 'submit',
+                    'value' => __('submit'),
+                    'class' => 'btn btn-primary')
             );
 
             // If submit comment
@@ -285,7 +285,7 @@ class Controller_Frontend_Post extends Controller_Blog
             }
             $form->repopulate();
             $this->data['form'] = $form;
-               return \Response::forge( \View::forge('frontend/post/show')->set($this->data, null, false) );
-    	}
+            return \Response::forge( \View::forge('frontend/post/show')->set($this->data, null, false) );
+        }
     }
 }
