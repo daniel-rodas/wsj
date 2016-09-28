@@ -2,6 +2,8 @@
 
 class Controller_Frontend_Index extends \Controller_Base_Frontend
 {
+    protected $RnBlogPackage;
+
     public function action_index()
     {
         /**
@@ -13,11 +15,12 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     public function action_article($slug)
     {
         $this->template->title = "Article | Wall Street Journal";
-// TODO Fix bug where I get empty blog post results when I get section first.
-        $section = Request::forge('blog/frontend/post/section_by_slug/' . $slug, false)->execute()->response()->body();
-//        // Set news section the header
-        $this->template->header->set('section', $section);
+        \Package::load('Rnblog');
+        $this->RnBlogPackage = \Rnblog\Rnblog::forge();
 
+        $section = $this->RnBlogPackage->sectionBySlug($slug);
+        // Set news section the header
+        $this->template->header->set('section', $section);
 
         if (!\Auth::check())
         {
