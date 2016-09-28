@@ -1,6 +1,5 @@
 <?php
 
-namespace Blog;
 
 class Model_Comment extends \Orm\Model_Soft
 {

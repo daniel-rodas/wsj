@@ -9,13 +9,13 @@ class Controller_Frontend_Post extends Controller_Blog
         // Pagination
         $config = array(
             'pagination_url' => \Uri::current(),
-            'total_items'    => Model_Post::count(),
+            'total_items'    => \Model_Post::count(),
             'per_page'       => 3,
             'uri_segment'    => 'page',
         );
         $this->data['pagination'] = $pagination = \Pagination::forge('post_pagination', $config);
         // Get posts
-        $this->data['posts'] = Model_Post::query()
+        $this->data['posts'] = \Model_Post::query()
                                         ->offset($pagination->offset)
                                         ->limit($pagination->per_page)
                                         ->order_by('created_at', 'DESC')
@@ -44,13 +44,13 @@ class Controller_Frontend_Post extends Controller_Blog
         // Pagination
         $config = array(
             'pagination_url' => \Uri::current(),
-            'total_items'    => Model_Post::count(),
+            'total_items'    => \Model_Post::count(),
             'per_page'       => 3,
             'uri_segment'    => 'page',
         );
         $pagination = \Pagination::forge('more_news_pagination', $config);
         // Get posts
-        $this->data['posts'] = Model_Post::query()
+        $this->data['posts'] = \Model_Post::query()
                                         ->offset($pagination->offset)
                                         ->limit($pagination->per_page)
                                         ->order_by('created_at', 'DESC')
@@ -210,7 +210,7 @@ class Controller_Frontend_Post extends Controller_Blog
     {
         // Get post by slug
 //    	$post = $this->data['post'] = Model_Post::query()->where('id', 157)->get_one();
-    	$post = $this->data['post'] = Model_Post::query()->where('id', 25)->get_one();
+    	$post = $this->data['post'] = \Model_Post::query()->where('id', 25)->get_one();
 
         $gallery = \Model_Gallery::query()->where('post_id', $post->id)->get_one();
         $data['url'] = $gallery->asset->uri . '' . $gallery->asset->name;

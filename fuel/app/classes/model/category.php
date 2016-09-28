@@ -1,5 +1,5 @@
 <?php
-namespace Blog;
+
 
 class Model_Category extends \Orm\Model_Soft
 {
@@ -68,7 +68,7 @@ class Model_Category extends \Orm\Model_Soft
     protected static $_has_many = array(
         'posts' => array(
             'key_from' => 'id',
-            'model_to' => 'Blog\Model_Post',
+            'model_to' => 'Model_Post',
             'key_to' => 'category_id',
             'cascade_save' => false,
             'cascade_delete' => false,  // We delete all post from the category deleted
@@ -88,7 +88,7 @@ class Model_Category extends \Orm\Model_Soft
             array('parent_id', null)
         )
         ));
-        
+
         // Set categories
         foreach($categories as $category)
             $form->field('parent_id')->set_options($category->id, $category->name);

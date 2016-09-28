@@ -1,61 +1,18 @@
 <?php
 
-namespace Blog;
 
-class Model_Post extends \Orm\Model_Soft
+class Model_Post extends \Orm\Model
 {
-    public static function _init()
-    {
-        // this is called upon loading the class
-        \Module::load('authentication');
-    }
-
-
     protected static $_properties = array(
         'id',
-        'name' => array(
-            'label' => 'post.model.name',
-            'null' => false,
-            'validation' => array('required', 'min_length' => array(3)),
-        ),
-        'slug' => array(
-            'label' => 'post.model.slug',
-            'null' => false,
-        ),
-        'content' => array(
-            'label' => 'post.model.content',
-            'null' => false,
-            'validation' => array('required'),
-            'form' => array('type' => 'textarea'),
-        ),
-        'original_url' => array(
-            'label' => 'post.model.original_url',
-            'null' => false,
-//            'validation' => array('required'),
-            'form' => array('type' => 'text'),
-        ),
-        'category_id' => array(
-            'label' => 'post.model.category_id',
-            'form' => array('type' => 'select'),
-            'null' => false,
-            'validation' => array('required', 'is_numeric'),
-        ),
-        'user_id' => array(
-            'label' => 'post.model.user_id',
-            'form' => array('type' => 'select'),
-            'null' => false,
-            'validation' => array('is_numeric'),
-        ),
-        'created_at' => array(
-            'form' => array('type' => false),
-            'default' => 0,
-            'null' => false,
-        ),
-        'updated_at' => array(
-            'form' => array('type' => false),
-            'default' => 0,
-            'null' => false,
-        ),
+        'name' ,
+        'slug',
+        'content' ,
+        'original_url' ,
+        'category_id',
+        'user_id' ,
+        'created_at',
+        'updated_at',
         'deleted_at',
     );
 
@@ -91,20 +48,20 @@ class Model_Post extends \Orm\Model_Soft
     protected static $_belongs_to = array(
         'category' => array(
             'key_from' => 'category_id',
-            'model_to' => 'Blog\Model_Category',
+            'model_to' => 'Model_Category',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,
         ),
         'author' => array(
             'key_from' => 'user_id',
-            'model_to' => 'Blog\Model_Author',
+            'model_to' => 'Model_Author',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,
         ),
     );
-    
+
     /**
      * Post HasMany Comments
      * @var array
@@ -114,18 +71,18 @@ class Model_Post extends \Orm\Model_Soft
     protected static $_has_many = array(
         'comments' => array(
             'key_from' => 'id',
-            'model_to' => 'Blog\Model_Comment',
+            'model_to' => 'Model_Comment',
             'key_to' => 'post_id',
             'cascade_save' => false,
             'cascade_delete' => true,  // We delete all comments from the post deleted
         ),
-//        'galleries' => array(
-//            'key_from' => 'id',
-//            'model_to' => '\Model_Gallery',
-//            'key_to' => 'post_id',
-//            'cascade_save' => false,
-//            'cascade_delete' => false,  // We do NOT delete all assests from the gallery deleted
-//        ),
+        'galleries' => array(
+            'key_from' => 'id',
+            'model_to' => 'Model_Gallery',
+            'key_to' => 'post_id',
+            'cascade_save' => false,
+            'cascade_delete' => false,  // We do NOT delete all assests from the gallery deleted
+        ),
     );
 
     public static function set_form_fields($form, $instance = null)

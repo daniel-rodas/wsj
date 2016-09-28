@@ -63,4 +63,3 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
             return $post;
         }
     }
-}

@@ -2,8 +2,6 @@
 
 class Controller_Frontend_Index extends \Controller_Base_Frontend
 {
-    protected $RnBlogPackage;
-
     public function action_index()
     {
         /**
@@ -15,23 +13,24 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     public function action_article($slug)
     {
         $this->template->title = "Article | Wall Street Journal";
-        \Package::load('Rnblog');
-        $this->RnBlogPackage = \Rnblog\Rnblog::forge();
 
-//        $section = $this->RnBlogPackage->DoSomething($slug);
-//        $section = $this->RnBlogPackage->sectionBySlug($slug);
+        // Find post by slug
+        $article = Model_Post::query()->select('category_id')
+            ->where('slug', $slug)->get_one();
+
+        // Find category to put in header section
+        $category = Model_Category::query()->select('name')
+            ->where('id', $article->category_id)->get_one();
+
+        $section = $category->name;
         // Set news section the header
-//        $this->template->header->set('section', $section);
+        $this->template->header->set('section', $section);
 
-        $post = $this->RnBlogPackage->showSnippet($slug);
-
-        var_dump($section);
-        var_dump($post);
-        die();
+        $post = Model_Post::query()->where('slug', $slug)->get_one();
 
         if (!\Auth::check())
         {
-            $this->template->content = Presenter::forge('article/page', 'viewSnippet')->set('slug', $slug);
+            $this->template->content = Presenter::forge('article/page', 'viewSnippet')->set('slug', $slug)->set('post', $post);
         }
         else
         {

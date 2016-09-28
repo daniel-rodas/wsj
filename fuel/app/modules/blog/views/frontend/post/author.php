@@ -4,3 +4,4 @@
 </div>
 
 <?= \Theme::instance()->view('frontend/post/_includes/list')->set(array('posts' => $posts, 'pagination' => $pagination), null, false); ?>
+

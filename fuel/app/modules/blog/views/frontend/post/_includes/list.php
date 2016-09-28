@@ -10,7 +10,7 @@
             </a>
             <small>
                 <a href="<?= \Router::get('show_post_category', array('category' => $post->category->slug)); ?>"><?= $post->category->name; ?></a>,
-                <?= __('by'); ?> <a href="<?= \Router::get('show_post_author', array('author' => $post->author->first_name)); ?>"><?= $post->author->first_name; ?></a>
+                <?= __('by'); ?> <a href="<?= \Router::get('show_post_author', array('author' => $post->author->username)); ?>"><?= $post->author->username; ?></a>
                 <em><?= date('d/m/Y', $post->created_at); ?></em>
             </small>
 		</article>

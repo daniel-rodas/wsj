@@ -44,7 +44,7 @@ class Author extends \Orm\Model_Soft
 //    protected static $_has_many = array(
 //        'posts' => [
 //            'key_from' => 'id',
-//            'model_to' => 'Rnblog\Model_Post',
+//            'model_to' => '\Rnblog\Model\Post',
 //            'key_to' => 'user_id',		// key in the related model
 //            'cascade_save' => true,		// update the related table on save
 //            'cascade_delete' => false,
