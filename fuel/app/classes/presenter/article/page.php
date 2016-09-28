@@ -8,6 +8,14 @@
  */
 class Presenter_Article_Page extends Presenter
 {
+    protected $RnBlogPackage;
+
+    public function before()
+    {
+        parent::before();
+        \Package::load('Rnblog');
+        $this->RnBlogPackage = \Rnblog\Rnblog::forge();
+    }
     /**
      * Prepare the view data, keeping this in here helps clean up
      * the controller.
@@ -22,8 +30,11 @@ class Presenter_Article_Page extends Presenter
         $data['form_login']   = Request::forge('authentication/user/login', false)->execute()->response()->body();
         $data['form_recover'] = Request::forge('authentication/password/recover', false)->execute()->response()->body();
 
+
+
         $this->authenticationComponent = View::forge('angular/authentication-component')->set('authentication_form', $data);
-        $this->content = Request::forge('blog/frontend/post/show_snippet/'. $this->slug )->execute()->response()->body();
+        $this->content = $this->RnBlogPackage->DoSomething();
+//        $this->content = Request::forge('blog/frontend/post/show_snippet/'. $this->slug )->execute()->response()->body();
         $this->loadSidebar();
     }
 

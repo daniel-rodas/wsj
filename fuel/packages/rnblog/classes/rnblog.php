@@ -39,6 +39,7 @@ class Rnblog
 	 */
 	public static function forge($instance = 'default', $config = array())
 	{
+
 		is_array($config) or $config = array('driver' => $config);
 
 		$config = \Arr::merge(static::$_defaults, \Config::get('rnblog', array()), $config);
@@ -47,7 +48,7 @@ class Rnblog
 
 		if( ! class_exists($class, true))
 		{
-			throw new \FuelException('Could not find Rnblog driver: ' . ucfirst(strtolower($config['driver']));
+			throw new \FuelException('Could not find Rnblog driver: ' . ucfirst(strtolower($config['driver'])));
 		}
 
 		$driver = new $class($config);

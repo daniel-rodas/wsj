@@ -126,15 +126,6 @@ return array(
 			'starttls'  => true,
 		),
 
-//		'smtp' => array(
-//			'host'      => 'smtp.mail.yahoo.com',
-//			'port'      => 465,
-//			'username'  => 'daniel.rodas1@yahoo.com',
-//			'password'  => 'Champtac@@45',
-//			'timeout'   => 5,
-//			'starttls'  => false,
-//		),
-//
 		/**
 		 * Newline
 		 */
