@@ -10,5 +10,5 @@
     </div>
 
     <graph></graph>
-        <?=  ( $snippet == true) ?   \Str::truncate(\Markdown::parse($post->content), \Config::get('application.truncate', 400)) :  \Markdown::parse($post->content); ?>
+        <?=   \Str::truncate( \Markdown::parse($post->content), \Config::get('application.truncate' , 150)) ; ?>
 </article>

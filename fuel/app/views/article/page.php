@@ -27,31 +27,7 @@
             <?= \Auth::check() ? View::forge()->render('_includes/message') : null; ?>
 
             <?= (isset($content)) ? $content : '' ?>
-
-            <div style="border: dashed 1px #000000" class="stripes-please row">
-
-                <div ng-controller="AuthenticationController"  class=" col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-
-                    <?= View::forge()->render('_includes/angularjs_message'); ?>
-
-                    <?php if (isset($authentication_form)): ?>
-                        <?php
-                            foreach($authentication_form as $form)
-                            {
-                                echo $form;
-                            }
-
-                            echo '<div class="user-auth-background" ng-include="templateUrl"></div>';
-                        ?>
-
-                    <?php endif; ?>
-
-
-
-                </div>
-
-            </div>
-
+            <?= (isset($authenticationComponent)) ? $authenticationComponent : '' ?>
 
         </section>
         <section id="article-sidebar" class="col-sm-3 col-lg-2">

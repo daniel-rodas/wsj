@@ -92,11 +92,12 @@ class Controller_Frontend_Post extends Controller_Blog
     }
 
 
-    public function action_section_by_slug($slug = false)
+    public function action_section_by_slug($slug)
     {
-
+        \Profiler::mark('START_OF section_by_slug query');
         $article = Model_Post::query()->select('category_id')
                                     ->where('slug', $slug)->get_one();
+        \Profiler::mark('END_OF section_by_slug query');
 
         $category = Model_Category::query()->select('name')
                                     ->where('id', $article->category_id)->get_one();
@@ -107,8 +108,10 @@ class Controller_Frontend_Post extends Controller_Blog
         }
         else
         {
-            $this->data['section'] = $category->name;
-            return \Response::forge( \View::forge('frontend/post/section')->set($this->data, null, false) );
+            // TODO Fix bug where I get empty blog post results when I get section first.
+            return $category->name;
+//            $this->data['section'] = $category->name;
+//            return \Response::forge( \View::forge('frontend/post/section')->set($this->data, null, false) );
         }
     }
 
@@ -227,8 +230,8 @@ class Controller_Frontend_Post extends Controller_Blog
 
     public function action_show($slug)
     {
-        $post = Model_Post::query()->where('slug', $slug )->get_one();
-//        $post->user = Model_Post::query()->where('slug', $slug )->related('user')->get_one();
+        $post = Model_Post::query()->related('author')->where('slug', $slug)->get_one();
+//        $post->author = Model_Author::query()->where('id', $post->user_id )->get_one();
         $this->data['post'] = $post ;
 
         if ( ! $post)
@@ -286,6 +289,24 @@ class Controller_Frontend_Post extends Controller_Blog
             $form->repopulate();
             $this->data['form'] = $form;
             return \Response::forge( \View::forge('frontend/post/show')->set($this->data, null, false) );
+        }
+    }
+    public function action_show_snippet($slug)
+    {
+        \Profiler::mark('START_OF action_show_snippet');
+        $post = Model_Post::query()->related('author')->where('slug', $slug)->get_one();
+        \Profiler::mark('START_OF action_show_snippet');
+//        $post->author = Model_Author::query()->where('id', $post->user_id )->get_one();
+        $this->data['post'] = $post ;
+
+        if ( ! $post)
+    	{
+    		\Messages::error(__('frontend.post.not-found'));
+    		\Response::redirect_back(\Router::get('homepage'));
+    	}
+        else
+        {
+            return \Response::forge( \View::forge('frontend/post/show/snippet')->set($this->data, null, false) );
         }
     }
 }

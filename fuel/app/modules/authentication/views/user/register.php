@@ -1,5 +1,5 @@
-<script type="text/ng-template" id="register.html"  class="panel">
-<!--    --><?//= \Form::open(array('action' => 'user/create', 'name' => 'formRegister', 'nonvalidate' , 'class' => 'form-signin', 'ng-class' => 'class')); ?>
+<section    class="panel">
+    <?= \Form::open(array('action' => 'user/create', 'name' => 'formRegister', 'nonvalidate' , 'class' => 'form-signin', 'ng-class' => 'class')); ?>
     <form name="formRegister" class="form-signin" novalidate method="post" action="authentication/user/register">
         <h2 class="form-signin-heading">Become a Member <span class="small">Step {{step}}</span></h2>
 
@@ -183,7 +183,7 @@
     </form>
 
     <a ng-click="AC.setTpl('login.html')" >Already a member? Sign In</a>
-</script>
+</section>
 
 
 

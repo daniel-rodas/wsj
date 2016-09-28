@@ -84,7 +84,7 @@ class Model_Post extends \Orm\Model_Soft
     
     /**
      * Post BelongsTo Category
-     * Post BelongsTo User
+     * Post BelongsTo Author
      * 
      * @var array
      */
@@ -135,7 +135,7 @@ class Model_Post extends \Orm\Model_Soft
         parent::set_form_fields($form, $instance);
 
         // Set authors
-        foreach(\Blog\Model_Author::find('all') as $user)
+        foreach(Model_Author::find('all') as $user)
             $form->field('user_id')->set_options($user->id, $user->username);
 
         // Set categories

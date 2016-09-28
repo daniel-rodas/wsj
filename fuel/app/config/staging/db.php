@@ -4,7 +4,7 @@
  */
 
 return array(
-	'default' => array(
+	'staging' => array(
 		'connection'  => array(
 			'dsn'        => 'mysql:host=localhost;dbname=fuel_staging',
 			'username'   => 'fuel_app',

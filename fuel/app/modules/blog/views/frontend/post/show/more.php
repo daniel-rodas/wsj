@@ -8,8 +8,8 @@
                 <p><?= \Str::truncate(\Markdown::parse($post->content), \Config::get('application.truncate', 200)); ?></p>
             </a>
             <small>
-<!--                <a href="--><?//= \Router::get('show_post_category', array('category' => $post->category->slug)); ?><!--">--><?//= $post->category->name; ?><!--</a>,-->
-<!--                --><?//= __('by'); ?><!-- <a href="--><?//= \Router::get('show_post_author', array('author' => $post->author->first_name)); ?><!--">--><?//= $post->author->first_name; ?><!--</a>-->
+                <a href="<?= \Router::get('show_post_category', array('category' => $post->category->slug)); ?>"><?= $post->category->name; ?></a>,
+                <?= __('by'); ?> <a href="<?= \Router::get('show_post_author', array('author' => $post->author->first_name)); ?>"><?= $post->author->first_name; ?></a>
                 <em><?= date('d/m/Y', $post->created_at); ?></em>
             </small>
 		</article>

@@ -16,7 +16,7 @@ return array(
 
         'username'       => 'wsj_db',
 
-        'password'       => 'wsj_db+++###eggeggqgq3vt 11t 1qrcq qefcaa',
+        'password'       => 'wsj_db+++###',
 
         'persistent'     => false,
 
@@ -32,7 +32,7 @@ return array(
 
     'enable_cache'   => false,
 
-    'profiling'      => false,
+    'profiling'      => true,
 
 ),
 

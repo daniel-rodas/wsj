@@ -1,6 +1,6 @@
 
 <hr/>
-<script type="text/ng-template" id="login.html"  class="panel">
+<section type="text/ng-template" id="login.html"  class="panel">
 
 
     <?= \Form::open(array('action' => 'authentication/user/login',  'class' => 'form-signin', 'ng-class' => 'class')); ?>
@@ -21,5 +21,5 @@
     <?= \Form::close(); ?>
     <a ng-click="AC.setTpl('recover.html')">Trouble signing in? Click here to reset your password.</a>
 
-</script>
+</section>
 

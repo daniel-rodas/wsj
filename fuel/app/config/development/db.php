@@ -12,6 +12,6 @@ return array(
 
                         'password'   => 'wsj_db+++###',
 		),
-//        'profiling' => 'true',
+        'profiling' => 'true',
 	),
 );
