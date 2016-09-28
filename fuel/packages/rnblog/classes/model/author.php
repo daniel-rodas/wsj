@@ -41,37 +41,37 @@ class Author extends \Orm\Model_Soft
             'mysql_timestamp' => false,
         ),
     );
-    protected static $_has_many = array(
-        'posts' => [
-            'key_from' => 'id',
-            'model_to' => 'Rnblog\Model_Post',
-            'key_to' => 'user_id',		// key in the related model
-            'cascade_save' => true,		// update the related table on save
-            'cascade_delete' => false,
-        ],
-        'users_metadata' => array(
-            'key_from' => 'id',			// key in this model
-            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
-            'key_to' => 'parent_id',		// key in the related model
-            'cascade_save' => true,		// update the related table on save
-            'cascade_delete' => true,		// delete the related data when deleting the parent
-        ),
-        'users_providers' => array(
-            'key_from' => 'id',			// key in this model
-            'model_to' => '\Authentication\Model_Users_Providers',      // related model
-            'key_to' => 'parent_id',		// key in the related model
-            'cascade_save' => true,		// update the related table on save
-            'cascade_delete' => true,		// delete the related data when deleting the parent
-        ),
-    );
+//    protected static $_has_many = array(
+//        'posts' => [
+//            'key_from' => 'id',
+//            'model_to' => 'Rnblog\Model_Post',
+//            'key_to' => 'user_id',		// key in the related model
+//            'cascade_save' => true,		// update the related table on save
+//            'cascade_delete' => false,
+//        ],
+//        'users_metadata' => array(
+//            'key_from' => 'id',			// key in this model
+//            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
+//            'key_to' => 'parent_id',		// key in the related model
+//            'cascade_save' => true,		// update the related table on save
+//            'cascade_delete' => true,		// delete the related data when deleting the parent
+//        ),
+//        'users_providers' => array(
+//            'key_from' => 'id',			// key in this model
+//            'model_to' => '\Authentication\Model_Users_Providers',      // related model
+//            'key_to' => 'parent_id',		// key in the related model
+//            'cascade_save' => true,		// update the related table on save
+//            'cascade_delete' => true,		// delete the related data when deleting the parent
+//        ),
+//    );
 
     // define the EAV container like so
-    protected static $_eav = array(
-        'users_metadata' => array(			// we use the statistics relation to store the EAV data
-            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
-            'attribute' => 'key',		// the key column in the related table contains the attribute
-            'value' => 'value',			// the value column in the related table contains the value
-        )
-    );
+//    protected static $_eav = array(
+//        'users_metadata' => array(			// we use the statistics relation to store the EAV data
+//            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
+//            'attribute' => 'key',		// the key column in the related table contains the attribute
+//            'value' => 'value',			// the value column in the related table contains the value
+//        )
+//    );
 
 }

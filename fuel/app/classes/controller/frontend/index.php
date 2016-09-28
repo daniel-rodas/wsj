@@ -18,9 +18,16 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
         \Package::load('Rnblog');
         $this->RnBlogPackage = \Rnblog\Rnblog::forge();
 
-        $section = $this->RnBlogPackage->sectionBySlug($slug);
+//        $section = $this->RnBlogPackage->DoSomething($slug);
+//        $section = $this->RnBlogPackage->sectionBySlug($slug);
         // Set news section the header
-        $this->template->header->set('section', $section);
+//        $this->template->header->set('section', $section);
+
+        $post = $this->RnBlogPackage->showSnippet($slug);
+
+        var_dump($section);
+        var_dump($post);
+        die();
 
         if (!\Auth::check())
         {

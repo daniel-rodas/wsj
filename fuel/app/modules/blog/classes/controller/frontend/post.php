@@ -291,22 +291,5 @@ class Controller_Frontend_Post extends Controller_Blog
             return \Response::forge( \View::forge('frontend/post/show')->set($this->data, null, false) );
         }
     }
-    public function action_show_snippet($slug)
-    {
-        \Profiler::mark('START_OF action_show_snippet');
-        $post = Model_Post::query()->related('author')->where('slug', $slug)->get_one();
-        \Profiler::mark('START_OF action_show_snippet');
-//        $post->author = Model_Author::query()->where('id', $post->user_id )->get_one();
-        $this->data['post'] = $post ;
 
-        if ( ! $post)
-    	{
-    		\Messages::error(__('frontend.post.not-found'));
-    		\Response::redirect_back(\Router::get('homepage'));
-    	}
-        else
-        {
-            return \Response::forge( \View::forge('frontend/post/show/snippet')->set($this->data, null, false) );
-        }
-    }
 }

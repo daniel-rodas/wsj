@@ -30,12 +30,13 @@ class Presenter_Article_Page extends Presenter
         $data['form_login']   = Request::forge('authentication/user/login', false)->execute()->response()->body();
         $data['form_recover'] = Request::forge('authentication/password/recover', false)->execute()->response()->body();
 
-
-
         $this->authenticationComponent = View::forge('angular/authentication-component')->set('authentication_form', $data);
-        $this->content = $this->RnBlogPackage->DoSomething();
-//        $this->content = Request::forge('blog/frontend/post/show_snippet/'. $this->slug )->execute()->response()->body();
-        $this->loadSidebar();
+
+        $post = $this->RnBlogPackage->showSnippet($this->slug);
+
+        $this->content = View::forge('blog/frontend/post/show/snippet')->set('post', $post) ;
+
+//        $this->loadSidebar();
     }
 
     public function view()

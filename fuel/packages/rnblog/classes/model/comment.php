@@ -61,14 +61,14 @@ class Comment extends \Orm\Model_Soft
      * Comment BelongsTo Post
      * @var array
      */
-    protected static $_belongs_to = array(
-        'post' => array(
-            'key_from' => 'post_id',
-            'model_to' => 'Rnblog\Model\Post',
-            'key_to' => 'id',
-            'cascade_save' => false,
-            'cascade_delete' => false,
-        ),
-    );
+//    protected static $_belongs_to = array(
+//        'post' => array(
+//            'key_from' => 'post_id',
+//            'model_to' => 'Rnblog\Model\Post',
+//            'key_to' => 'id',
+//            'cascade_save' => false,
+//            'cascade_delete' => false,
+//        ),
+//    );
     
 }
