@@ -1,4 +1,4 @@
-<div  id="whats-news-column" class=" col-md-2 col-lg-2  " >
+
     <h3 (click)="isVisible = !isVisible" class="h3">What's News &#8212;</h3>
     <section [style.display]="isVisible ? 'inline' : 'none'">
 
@@ -14,4 +14,3 @@
         <h4>Prosecutor Probes HSBC’s Swiss Unit in Money-Laundering Case</h4>
         <p>The Geneva public prosecutor’s office has begun a search of the offices of U.K. banking giant HSBC’s Swiss unit as part of a probe into alleged money-laundering activities.</p>
     </section>
-</div>

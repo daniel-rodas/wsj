@@ -300,10 +300,10 @@ div.row.sub-section:last-of-type{
     padding: 1rem;
 }
 
-.article-page-content .blog-post-related article a img.img-thumbnail.thumbnail  {
+/*.article-page-content .blog-post-related article a img.img-thumbnail.thumbnail  {*/
     /*width: 30%;*/
     /*float: left;*/
-}
+/*}*/
 
 .article-page-content .post {
 background-color: rgba(244,247,239,0.85);
@@ -355,8 +355,10 @@ article.post-preview {
 }
 
 img.featured-image{
-    width: 100%;
-    position: absolute;
+    margin: auto;
+
+    max-width: 100%;
+    /*position: absolute;*/
 }
 article.post.featured-story {
     padding-top: 0px;

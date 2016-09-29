@@ -5,7 +5,7 @@ class Model_Gallery extends \Orm\Model_Soft
 {
     public static function _init()
     {
-        Module::load('blog');
+        Package::load('rnblog');
     }
     protected static $_properties = array(
 		'id',
@@ -51,7 +51,7 @@ class Model_Gallery extends \Orm\Model_Soft
         ),
         'post' => array(
             'key_from' => 'post_id',
-            'model_to' => '\Model_Post',
+            'model_to' => '\Rnblog\Model\Post',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,

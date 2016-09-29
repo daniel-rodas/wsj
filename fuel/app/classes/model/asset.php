@@ -2,6 +2,11 @@
 
 class Model_Asset extends \Orm\Model_Soft
 {
+    public static function _init()
+    {
+        Package::load('rnblog');
+    }
+
 	protected static $_properties = array(
         'id',
         'name',

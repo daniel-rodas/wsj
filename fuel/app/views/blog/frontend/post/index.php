@@ -1,2 +1,2 @@
 <?=   $pagination; ?>
-<?= render('frontend/post/_includes/list', array('posts' => $posts)); ?>
+<?= render('blog/frontend/post/_includes/list', array('posts' => $posts)); ?>

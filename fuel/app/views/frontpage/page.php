@@ -7,7 +7,10 @@
 </div>
 
 <div class="row">
-<rn-whats-news><h3>What's News</h3></rn-whats-news>
+    <div  id="whats-news-column" class=" col-md-2 col-lg-2  " >
+        <rn-whats-news><h3>What's News</h3></rn-whats-news>
+    </div>
+
     <div class="col-sm-9 col-md-8 col-lg-7 ">
 
         <?php if (isset($content)): ?>

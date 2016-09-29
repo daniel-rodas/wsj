@@ -8,21 +8,31 @@
  */
 class Presenter_Frontpage_Page extends Presenter
 {
-    /**
-     * Prepare the view data, keeping this in here helps clean up
-     * the controller.
-     *
-     * @return void
-     */
-
-
     public function view()
     {
-        /* HMVC call to blog module, then put it in the main content section of the template*/
+        $article = $this->blogPackage->showFeaturedArticle();
+        $imageEncodedBase64 = $this->blogPackage->showFeaturedImageEncodedBase64($article);
+        $this->content = \View::forge('blog/frontend/post/show/featured')
+            ->set('post', $article)
+            ->set('featured_image', $imageEncodedBase64);
 
-        $this->content = \Request::forge('blog/frontend/post/show_featured_story', false)->execute()->response()->body();
-        $this->secondary_story = \Request::forge('blog/frontend/post', false)->execute()->response()->body();
-        $this->more_news = \Request::forge('blog/frontend/post/show_more_news', false)->execute()->response()->body();
+        // Pagination
+        $config = array(
+            'pagination_url' => \Uri::current(),
+            'total_items' => $this->blogPackage->showArticleCount(),
+            'per_page' => 3,
+            'uri_segment' => 'page',
+        );
+
+        $pagination = \Pagination::forge('post_pagination', $config);
+        $articlesPaginated = $this->blogPackage->showArticlesPaginated( $pagination );
+
+        $this->secondary_story = \View::forge('blog/frontend/post/index')
+            ->set_safe('pagination', $pagination)
+            ->set('posts', $articlesPaginated );
+
+        $this->more_news =  \View::forge('blog/frontend/post/show/more')
+            ->set('posts', $this->blogPackage->showMoreNews($article) );
 
     }
 }

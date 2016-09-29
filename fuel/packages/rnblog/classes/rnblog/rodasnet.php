@@ -2,7 +2,9 @@
 
 namespace Rnblog;
 
+use Model_Gallery;
 use Orm\Model;
+use Pagination;
 use Rnblog\Model\Category;
 use Rnblog\Model\Post;
 
@@ -10,18 +12,29 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
 {
     /**
      * Driver specific functions
-     * @param $offset
-     * @param $per_page
-     * @return
+     *
+     * /
+
+
+    /**
+     * @param Pagination $pagination
+     * @return array
+     * @internal param $offset
+     * @internal param $per_page
      */
 
-    public function pagination($offset, $per_page)
+    public function showArticlesPaginated(Pagination $pagination)
     {
-        return Model_Post::query()
-            ->offset($offset)
-            ->limit($per_page)
+        return Post::query()
+            ->offset($pagination->offset)
+            ->limit($pagination->per_page)
             ->order_by('created_at', 'DESC')
             ->get();
+    }
+
+    public function showArticleCount()
+    {
+        return Post::count();
     }
 
     /**
@@ -87,7 +100,7 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
             'per_page'       => 3,
             'uri_segment'    => 'page',
         );
-        $pagination = \Pagination::forge('more_news_pagination', $config);
+        $pagination = Pagination::forge('more_news_pagination', $config);
         // Get posts
         return Post::query()
             ->offset($pagination->offset)
@@ -95,4 +108,25 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
             ->order_by('created_at', 'DESC')
             ->get();
     }
+
+    public function showFeaturedArticle()
+    {
+        return Post::query()->where('id', 25)->get_one();
+    }
+
+    public function showFeaturedImageEncodedBase64( Model $article )
+    {
+        if ( $post = Post::query()->where('slug', $article->slug)->get_one() )
+        {
+            $gallery = Model_Gallery::query()->where('post_id', $post->id)->get_one();
+            $data['url'] = $gallery->asset->uri . '' . $gallery->asset->name;
+            $data['extension'] = $gallery->asset->type;
+            return \Request::forge('image/encoder/encodeBase64')
+                    ->execute($data)->response()->body();
+        }
+
+        return false;
+    }
+
+
 }
