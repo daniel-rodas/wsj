@@ -29,15 +29,17 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
         $category = $this->blogPackage->getArticleSection($article);
 
         // Set news section the header
-        $this->template->header->set('section', $article->name);
+        $this->template->header->set('section', $category->name);
 
         if (!\Auth::check())
         {
-            $this->template->content = Presenter::forge('article/page', 'viewSnippet')->set('slug', $slug)->set('post', $article);
+            $this->template->content =
+                Presenter::forge( 'article/page', 'viewSnippet' )
+                    ->set( 'slug', $slug )
+                    ->set( 'post', $article );
         }
         else
         {
-            $this->template->content = Presenter::forge('article/page')->set('slug', $slug);
             /*
             $subscription = Subscription::forge($user);
             switch ($subscription->getStatus()) {
@@ -55,7 +57,10 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
                     break;
             }
             */
-
+            $this->template->content =
+                Presenter::forge( 'article/page' )
+                    ->set( 'slug', $slug )
+                    ->set( 'post', $article );
         }
     }
 }

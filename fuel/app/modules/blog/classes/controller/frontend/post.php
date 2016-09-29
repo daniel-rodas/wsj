@@ -62,7 +62,6 @@ class Controller_Frontend_Post extends Controller_Blog
     public function action_show_related_by_slug($slug = false)
     {
         /**
-         * TODO
          * Get all posts from same category as slug
          * @param  string $slug
          */

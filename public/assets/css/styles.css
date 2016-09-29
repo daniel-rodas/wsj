@@ -79,17 +79,20 @@ body {
 
 #wrapper {
     background-color: rgb(253,254,255);
-    border-radius: 0.1em;
+    border-radius: 0;
     -webkit-box-shadow: 3px 3px 31px 17px rgba(0,0,0,0.24);
     -moz-box-shadow: 3px 3px 31px 17px rgba(0,0,0,0.24);
     box-shadow: 3px 3px 31px 17px rgba(0,0,0,0.24);
 }
 
-#wrapper .header.row{
-    background: #FBFFF0;
-    border: inset 0.15rem gold;
+.breadcrumb {
+    background-color:transparent;
 }
 
+#wrapper .header.row{
+    background: #FBFFF0;
+    border-bottom: double 0.1rem gold;
+}
 #brand {
     font-family: "adriane", times, Times New Roman, times-roman, georgia, serif;
     font-style: normal;
@@ -292,49 +295,29 @@ div.row.sub-section:last-of-type{
 
 }
 
-.article-page-content .blog-post-related {
-    padding: 1.4rem;
-}
-
-.article-page-content .blog-post-related article:hover,
-.article-page-content .blog-post-related article:focus
-{
-    background-color: rgba(154,100,10,0.3);
-
-    -webkit-box-shadow: inset 0px 0px 22px 5px rgba(0,80,0,0.39);
-    -moz-box-shadow: inset 0px 0px 22px 5px rgba(0,80,0,0.39);
-    box-shadow: inset 0px 0px 22px 5px rgba(0,80,0,0.39);
-}
 .article-page-content .blog-post-related article
 {
     padding: 1rem;
 }
+
 .article-page-content .blog-post-related article a img.img-thumbnail.thumbnail  {
     /*width: 30%;*/
     /*float: left;*/
 }
 
-.article-page-content .blog-post-related article a h2  {
-/*width: 60%;*/
-
-/*float: right;*/
-}
-
-.article-page-content .blog-post-related article small {
-
-
-}
-#article-sidebar{
-    background-color: rgba(244,247,239,0.85);
-}
-/*.article-page-content .blog-post-related,*/
 .article-page-content .post {
 background-color: rgba(244,247,239,0.85);
 }
 
-article[id*="post-"]:hover, article[id*="post-"]:active, article[id*="post-"]:focus {
+article[id*="post-"]:hover,
+article[id*="post-"]:active,
+article[id*="post-"]:focus,
+.article-page-content .blog-post-related article:hover,
+.article-page-content .blog-post-related article:focus
+{
     background-color: rgba(120,180,140,0.6);
 }
+
 article.post {
     padding: 3rem;
 }
@@ -352,6 +335,8 @@ section.secondary-stories {
     column-gap: 2em;
 }
 
+article[id*='post-'],
+.article-page-content .blog-post-related article,
 article.post-preview {
     border-bottom: 1px solid rgb(2,0,61);
     background-color: rgb(253,254,255);

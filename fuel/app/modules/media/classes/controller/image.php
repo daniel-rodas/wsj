@@ -15,7 +15,7 @@ class Controller_Image extends Controller_Base
 
     public function action_featured($id = false)
     {
-        $gallery = \Model_Gallery::query()->where('post_id', $id)->get_one();
+        $gallery = Model_Gallery::query()->where('post_id', $id)->get_one();
         if(!$gallery)
         {
             return \Response::forge( \View::forge('frontend/post/show/image') );

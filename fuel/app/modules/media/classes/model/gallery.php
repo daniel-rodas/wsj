@@ -2,11 +2,13 @@
 
 namespace Media;
 
+use Fuel\Core\Package;
+
 class Model_Gallery extends \Orm\Model_Soft
 {
     public static function _init()
     {
-        Module::load('blog');
+        Package::load('Rnblog');
     }
     protected static $_properties = array(
 		'id',
@@ -45,14 +47,14 @@ class Model_Gallery extends \Orm\Model_Soft
     protected static $_belongs_to = array(
         'asset' => array(
             'key_from' => 'asset_id',
-            'model_to' => '\Model_Asset',
+            'model_to' => 'Model_Asset',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,
         ),
         'post' => array(
             'key_from' => 'post_id',
-            'model_to' => 'Blog\Model_Post',
+            'model_to' => '\Rnblog\Model\Post',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_delete' => false,

@@ -5,7 +5,7 @@
     </div>
 <?php else: ?>
     <div class=" categories-related">
-        <h3>Related Sections</h3>
+        <h3>Other Sections</h3>
 
             <?php foreach($related_categories as $cat): ?>
 

@@ -41,6 +41,58 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
      */
     public function articleBySlug( string $slug )
     {
-        return Post::query()->where('slug', $slug)->get_one();
+        return Post::query()->where('slug', $slug)->related('author')->get_one();
+    }
+
+    public function showArticlesRelated( Model $article )
+    {
+        $category = Category::query()->where('id', $article->category_id)->get_one();
+
+        if ( ! $category)
+        {
+            return null;
+        }
+        else
+        {
+            return Post::query()->where('slug', '!=', $article->slug)
+                ->rows_limit(3)
+                ->related('category')
+                ->where('category.parent_id',  $category->parent_id)
+                ->or_where('category.id',  $category->parent_id)->get();
+        }
+    }
+
+    public function showCategoriesRelated( Model $article )
+    {
+        $category = Category::query()->where('id', $article->category_id)->get_one();
+
+        if ( ! $category)
+        {
+            return false;
+        }
+        else
+        {
+            return Category::query()
+                ->where('parent_id',  $category->parent_id)
+                ->or_where('id',  $category->parent_id)->get();
+        }
+    }
+
+    public function showMoreNews( Model $article )
+    {
+        // Pagination
+        $config = array(
+            'pagination_url' => \Uri::current(),
+            'total_items'    => Post::count(),
+            'per_page'       => 3,
+            'uri_segment'    => 'page',
+        );
+        $pagination = \Pagination::forge('more_news_pagination', $config);
+        // Get posts
+        return Post::query()
+            ->offset($pagination->offset)
+            ->limit($pagination->per_page)
+            ->order_by('created_at', 'DESC')
+            ->get();
     }
 }

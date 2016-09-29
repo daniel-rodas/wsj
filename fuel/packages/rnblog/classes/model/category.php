@@ -65,33 +65,33 @@ class Category extends \Orm\Model_Soft
      * 
      * @var array
      */
-//    protected static $_has_many = array(
-//        'posts' => array(
-//            'key_from' => 'id',
-//            'model_to' => 'Rnblog\Model\Post',
-//            'key_to' => 'category_id',
-//            'cascade_save' => false,
-//            'cascade_delete' => false,  // We delete all post from the category deleted
-//        ),
-//    );
+    protected static $_has_many = array(
+        'posts' => array(
+            'key_from' => 'id',
+            'model_to' => '\Rnblog\Model\Post',
+            'key_to' => 'category_id',
+            'cascade_save' => false,
+            'cascade_delete' => false,  // We delete all post from the category deleted
+        ),
+    );
 
-//    public static function set_form_fields($form, $instance = null)
-//    {
-//        // Call parent for create the fieldset and set default value
-//        parent::set_form_fields($form, $instance);
-//
-//        // Add null value for parent categories.
-//        $form->field('parent_id')->set_options('null','None');
-//
-//        $categories = \Model\Category::find('all', array(
-//        'where' => array(
-//            array('parent_id', null)
-//        )
-//        ));
-//
-//        // Set categories
-//        foreach($categories as $category)
-//            $form->field('parent_id')->set_options($category->id, $category->name);
-//
-//    }
+    public static function set_form_fields($form, $instance = null)
+    {
+        // Call parent for create the fieldset and set default value
+        parent::set_form_fields($form, $instance);
+
+        // Add null value for parent categories.
+        $form->field('parent_id')->set_options('null','None');
+
+        $categories = Category::find('all', array(
+        'where' => array(
+            array('parent_id', null)
+        )
+        ));
+
+        // Set categories
+        foreach($categories as $category)
+            $form->field('parent_id')->set_options($category->id, $category->name);
+
+    }
 }

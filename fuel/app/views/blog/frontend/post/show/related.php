@@ -5,7 +5,6 @@
     </div>
 <?php else: ?>
     <div class=" blog-post-related">
-    <h3>Related Stories</h3>
     <?php foreach($related_articles as $post): ?>
         <article  id="post-related-<?php echo $post->id; ?>" >
             <small>
