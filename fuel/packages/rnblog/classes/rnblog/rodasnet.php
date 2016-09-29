@@ -2,17 +2,20 @@
 
 namespace Rnblog;
 
+use Orm\Model;
+use Rnblog\Model\Category;
+use Rnblog\Model\Post;
+
 class Rnblog_Rodasnet  extends Rnblog_Driver
 {
-	/**
-	* Driver specific functions
-	*/
-	public function DoSomething()
-    {
-        return 'I, Rnblog_Rodasnet, AM ALIVE!';
-    }
+    /**
+     * Driver specific functions
+     * @param $offset
+     * @param $per_page
+     * @return
+     */
 
-    public function offset($offset, $per_page)
+    public function pagination($offset, $per_page)
     {
         return Model_Post::query()
             ->offset($offset)
@@ -21,45 +24,23 @@ class Rnblog_Rodasnet  extends Rnblog_Driver
             ->get();
     }
 
-    public function sectionBySlug($slug)
+    /**
+     * WARNING php 7 syntax!
+     * @param Model $article
+     * @return Category | null
+     */
+    public function getArticleSection( Model $article)
     {
-        $article = Model\Post::query()->select('category_id')
-            ->where('slug', $slug)->get_one();
-
-        $category = Model\Category::query()->select('name')
-            ->where('id', $article->category_id)->get_one();
-
-        unset($article);
-
-        if ( ! $category)
-        {
-            \Messages::error(__('frontend.post.not-found'));
-        }
-        else
-        {
-            return $category->name;
-        }
+        return Category::query()->select('name')->where('id', $article->category_id)->get_one();
     }
 
-    public function showSnippet($slug)
+    /**
+     * WARNING php 7 syntax!
+     * @param string $slug
+     * @return \Orm\Model
+     */
+    public function articleBySlug( string $slug )
     {
-        // TODO compare how Portfolio package handles multiple queries from same table
-//        $author = Model\Post::query()->related('author')->where('slug', $slug)->get_one();
-//        $author = Model\Post::query()->where('slug', $slug)->get_one();
-        $post = Model\Post::query()->where('slug', $slug)->get_one();
-
-//        $post->author = $author;
-
-        var_dump($post->content);
-        die();
-
-        if ( ! $post)
-        {
-            \Messages::error(__('frontend.post.not-found'));
-            \Response::redirect_back(\Router::get('homepage'));
-        }
-        else
-        {
-            return $post;
-        }
+        return Post::query()->where('slug', $slug)->get_one();
     }
+}

@@ -2,6 +2,15 @@
 
 class Controller_Frontend_Index extends \Controller_Base_Frontend
 {
+    protected $blogPackage;
+
+    public function before()
+    {
+        parent::before();
+        Package::load('Rnblog');
+        $this->blogPackage = \Rnblog\Rnblog::forge();
+    }
+
     public function action_index()
     {
         /**
@@ -14,26 +23,21 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     {
         $this->template->title = "Article | Wall Street Journal";
 
-        // Find post by slug
-        $article = Model_Post::query()->select('category_id')
-            ->where('slug', $slug)->get_one();
+        $article = $this->blogPackage->articleBySlug($slug);
 
         // Find category to put in header section
-        $category = Model_Category::query()->select('name')
-            ->where('id', $article->category_id)->get_one();
+        $category = $this->blogPackage->getArticleSection($article);
 
-        $section = $category->name;
         // Set news section the header
-        $this->template->header->set('section', $section);
-
-        $post = Model_Post::query()->where('slug', $slug)->get_one();
+        $this->template->header->set('section', $article->name);
 
         if (!\Auth::check())
         {
-            $this->template->content = Presenter::forge('article/page', 'viewSnippet')->set('slug', $slug)->set('post', $post);
+            $this->template->content = Presenter::forge('article/page', 'viewSnippet')->set('slug', $slug)->set('post', $article);
         }
         else
         {
+            $this->template->content = Presenter::forge('article/page')->set('slug', $slug);
             /*
             $subscription = Subscription::forge($user);
             switch ($subscription->getStatus()) {
@@ -51,7 +55,7 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
                     break;
             }
             */
-            $this->template->content = Presenter::forge('article/page')->set('slug', $slug);
+
         }
     }
 }
