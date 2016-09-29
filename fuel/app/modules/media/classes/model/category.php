@@ -65,15 +65,6 @@ class Model_Category extends \Orm\Model_Soft
      * 
      * @var array
      */
-    protected static $_has_many = array(
-        'posts' => array(
-            'key_from' => 'id',
-            'model_to' => 'Blog\Model_Post',
-            'key_to' => 'category_id',
-            'cascade_save' => false,
-            'cascade_delete' => false,  // We delete all post from the category deleted
-        ),
-    );
 
     public static function set_form_fields($form, $instance = null)
     {

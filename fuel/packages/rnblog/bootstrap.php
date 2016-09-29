@@ -12,6 +12,7 @@ Autoloader::add_classes(array(
 
     // Models
 	'Rnblog\\Model\Author' => __DIR__ . '/classes/model/author.php',
+	'Rnblog\\Model\Author\Metadata' => __DIR__ . '/classes/model/author/metadata.php',
 	'Rnblog\\Model\Comment' => __DIR__ . '/classes/model/comment.php',
 	'Rnblog\\Model\Post' => __DIR__ . '/classes/model/post.php',
 	'Rnblog\\Model\Category' => __DIR__ . '/classes/model/category.php',

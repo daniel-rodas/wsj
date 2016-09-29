@@ -4,10 +4,6 @@ namespace Authentication;
 
 class Model_Users_Providers extends \Orm\Model
 {
-    public static function _init()
-    {
-        \Module::load('blog');
-    }
     // list of properties for this model
     protected static $_properties = array(
         'id', // primary key
@@ -21,6 +17,7 @@ class Model_Users_Providers extends \Orm\Model
         'created_at',
 
     );
+
     protected static $_table_name = 'users_providers';
     // set up the patient relation the usual way
     protected static $_belongs_to = array(
@@ -31,12 +28,5 @@ class Model_Users_Providers extends \Orm\Model
             'cascade_save' => false,
             'cascade_delete' => false,
         ),
-        'author' => array(
-            'key_from' => 'parent_id',
-            'model_to' => '\Blog\Model_Author',
-            'key_to' => 'id',
-            'cascade_save' => false,
-            'cascade_delete' => false,
-        )
     );
 }

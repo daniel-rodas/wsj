@@ -10,10 +10,6 @@ namespace Rnblog\Model;
 
 class Author extends \Orm\Model_Soft
 {
-    public static function _init()
-    {
-        \Module::load('authentication');
-    }
     protected static $_properties = array(
         'id',
         'username',
@@ -41,6 +37,7 @@ class Author extends \Orm\Model_Soft
             'mysql_timestamp' => false,
         ),
     );
+
     protected static $_has_many = array(
         'posts' => [
             'key_from' => 'id',
@@ -51,14 +48,7 @@ class Author extends \Orm\Model_Soft
         ],
         'users_metadata' => array(
             'key_from' => 'id',			// key in this model
-            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
-            'key_to' => 'parent_id',		// key in the related model
-            'cascade_save' => true,		// update the related table on save
-            'cascade_delete' => true,		// delete the related data when deleting the parent
-        ),
-        'users_providers' => array(
-            'key_from' => 'id',			// key in this model
-            'model_to' => '\Authentication\Model_Users_Providers',      // related model
+            'model_to' => '\Rnblog\Model\Author\Metadata',      // related model
             'key_to' => 'parent_id',		// key in the related model
             'cascade_save' => true,		// update the related table on save
             'cascade_delete' => true,		// delete the related data when deleting the parent
@@ -68,7 +58,7 @@ class Author extends \Orm\Model_Soft
 //     define the EAV container like so
     protected static $_eav = array(
         'users_metadata' => array(			// we use the statistics relation to store the EAV data
-            'model_to' => '\Authentication\Model_Users_Metadata',      // related model
+            'model_to' => '\Rnblog\Model\Author\Model_Users_Metadata',      // related model
             'attribute' => 'key',		// the key column in the related table contains the attribute
             'value' => 'value',			// the value column in the related table contains the value
         )

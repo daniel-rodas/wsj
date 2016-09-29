@@ -1,8 +1,8 @@
 <?php
 
-namespace Authentication;
+namespace Rnblog\Model\Author;
 
-class Model_Users_Metadata extends \Orm\Model
+class Metadata extends \Orm\Model
 {
     // list of properties for this model
     protected static $_properties = array(
@@ -14,12 +14,12 @@ class Model_Users_Metadata extends \Orm\Model
     protected static $_table_name = 'users_metadata';
     // set up the patient relation the usual way
     protected static $_belongs_to = array(
-        'user' => array(
+        'author' => array(
             'key_from' => 'parent_id',
-            'model_to' => 'Authentication\Model_User',
+            'model_to' => '\Rnblog\Model\Author',
             'key_to' => 'id',
             'cascade_save' => true,
             'cascade_delete' => true,
-        ),
+        )
     );
 }
