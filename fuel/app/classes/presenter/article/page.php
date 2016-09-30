@@ -8,15 +8,9 @@
  */
 class Presenter_Article_Page extends Presenter
 {
-    /**
-     * Prepare the view data, keeping this in here helps clean up
-     * the controller.
-     *
-     * @return void
-     */
     public function viewSnippet()
     {
-        $this->content = View::forge('blog/frontend/post/show/snippet')->set('post', $this->post) ;
+        $this->content = View::forge('blog/frontend/post/show/snippet')->set('post', $this->post);
 
         $this->loadSidebar();
     }

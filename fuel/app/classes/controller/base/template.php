@@ -24,7 +24,9 @@ class Controller_Base_Template extends \Controller_Hybrid
 
         $this->template->title = "RN | Wall Street Journal";
 
-        $this->template->header = Presenter::forge('header/template')->set('user', $this->user );
+        $this->template->header = Presenter::forge('header/template')
+            ->set('user', $this->user )
+            ->set('brand', 'WSJ' );
     }
 
     public function action_index()

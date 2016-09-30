@@ -13,6 +13,9 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
 
     public function action_index()
     {
+        $this->template->header
+            ->set('brand', '' )
+            ->set('section', 'Wall Street Journal' );
         /**
          * Home page, featured story
          */
@@ -57,6 +60,7 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
                     break;
             }
             */
+
             $this->template->content =
                 Presenter::forge( 'article/page' )
                     ->set( 'slug', $slug )
