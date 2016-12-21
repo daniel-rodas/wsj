@@ -92,24 +92,27 @@ body {
     background-color:transparent;
 }
 
-#wrapper .header.row{
+#wrapper header {
     background: #FBFFF0;
     border-bottom: double 0.1rem gold;
+    display: flex;
+
 }
-#brand {
-    font-family: "adriane", times, Times New Roman, times-roman, georgia, serif;
-    font-style: normal;
-    font-weight: 400;
-    padding: 1.2rem;
-    text-align: center;
-    color: #444;
-    margin: 0;
-    padding: 1.2rem 1rem 1rem 1rem;
-    line-height: 44px;
-    letter-spacing: -0.1rem;
-    font-weight: bold;
+#wrapper header .wsj-section {
+    width: 50%;
+}
+#wrapper header nav {
+    width: 24%;
 }
 
+#wrapper header #brand {
+    background-image: url('/assets/img/logo/wsj-brand.png');
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+    width: 22%;
+}
 
 nav#navigation-user li.login-or-register a {
     color: rgb(2,0,61);
@@ -413,6 +416,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 @media (min-width: 768px ) {
     body{
         background-color: rgba(50,60,100,0.5);
+    }
+
+    #wrapper header #brand {
+        background-size: 3em;
+        margin-top: 1em;
     }
 
     article.post {
