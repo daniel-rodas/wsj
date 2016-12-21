@@ -61,7 +61,7 @@
     <?= View::forge()->render('_includes/message'); ?>
     <?= (isset($header) ? $header : '' ); ?>
 
-    <my-app>Loading...</my-app>
+    <my-app>.</my-app>
     <?= (isset($content) ? $content : '' ); ?>
 
     <?php echo Fuel::VERSION; ?>

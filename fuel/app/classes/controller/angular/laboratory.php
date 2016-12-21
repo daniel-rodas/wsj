@@ -1,7 +1,7 @@
 <?php
 
 
-class Controller_Angular_Template extends \Controller_Template
+class Controller_Angular_Laboratory extends \Controller_Template
 {
     public function before()
     {
