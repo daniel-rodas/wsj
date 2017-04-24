@@ -14,9 +14,9 @@ return array(
 
         'dsn'            => 'mysql:host=localhost;dbname=wsj_db',
 
-        'username'       => 'wsj_db',
+        'username'       => 'wsj_db_dev',
 
-        'password'       => 'wsj_db+++###',
+        'password'       => '8@skIl3#ka~sFj32',
 
         'persistent'     => false,
 

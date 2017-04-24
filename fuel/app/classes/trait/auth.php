@@ -8,7 +8,7 @@
 
 trait Trait_Auth
 {
-    public function check ()
+    public function check()
     {
         // Check Auth Access
         if ( ! \Auth::check() ) {

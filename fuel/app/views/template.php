@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?= $title; ?></title>
+    <title><?= $title ?></title>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +41,7 @@
             'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css',
             'animations.css',
             'styles.css'
-        ] ); ?>
+        ] ) ?>
 
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->

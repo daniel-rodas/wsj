@@ -28,14 +28,14 @@ class Presenter_Frontpage_Page extends Presenter
 
         $pagination = \Pagination::forge('post_pagination', $config);
 
-        $articlesPaginated = $this->blogPackage->showArticlesPaginated( $pagination );
+        $articlesPaginated = $this->blogPackage->showArticlesPaginated($pagination);
 
         $this->secondary_story = \View::forge('blog/frontend/post/index')
             ->set_safe('pagination', $pagination)
             ->set('posts', $articlesPaginated );
 
         $this->more_news =  \View::forge('blog/frontend/post/show/more')
-            ->set('posts', $this->blogPackage->showMoreNews($article) );
+            ->set('posts', $this->blogPackage->showMoreNews($article));
 
     }
 }
