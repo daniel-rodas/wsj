@@ -30,11 +30,11 @@ class Controller_Backend_Admin extends \Controller_Base_Backend
         // Grab presenter to be used for layout
         $presenter = Presenter::forge('admin/page')->set('header',$this->_header);
 
-        $create_article = \Request::forge('blog/backend/post/add', false)->execute()->response()->body();
-        $content = \Request::forge('blog/backend/post', false)->execute()->response()->body();
-        $category = \Request::forge('blog/backend/category', false)->execute()->response()->body();
-        $users = \Request::forge('user/auth/admincreate', false)->execute()->response()->body();
-        $authors = \Request::forge('blog/backend/author', false)->execute()->response()->body();
+        $create_article =   \Request::forge('blog/backend/post/add', false)->execute()->response()->body();
+        $content =          \Request::forge('blog/backend/post', false)->execute()->response()->body();
+        $category =         \Request::forge('blog/backend/category', false)->execute()->response()->body();
+        $users =            \Request::forge('user/auth/admincreate', false)->execute()->response()->body();
+        $authors =          \Request::forge('blog/backend/author', false)->execute()->response()->body();
         $presenter->set('create_article', $create_article);
         $presenter->set('content', $content);
         $presenter->set('users', $users);

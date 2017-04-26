@@ -32,6 +32,10 @@ desktop.ini
 /fuel/app/logs/*/*/*
 /fuel/app/cache/*/*
 /fuel/app/config/*
+/fuel/app/config/db.php
+/fuel/app/config/development/db.php
+/fuel/app/config/staging/db.php
+/fuel/app/config/production/db.php
 
 /public/node_modules/*
 fuel/app/config/db.php

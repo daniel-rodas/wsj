@@ -18,7 +18,6 @@ abstract class Presenter extends \Fuel\Core\Presenter
     public function before()
     {
         parent::before();
-        Package::load('Rnblog');
-        $this->blogPackage = \Rnblog\Rnblog::forge();
+        $this->blogPackage = \Rodasnet\Blog\Blog::forge();
     }
 }

@@ -58,7 +58,7 @@ Class Controller_Image_Encoder extends Controller_Image_Image
 //
 //            $i++;
 //        }
-        $gallery = Model_Gallery::query()->related('asset')->limit(15)->get();
+        $gallery = \Rodasnet\Blog\Model\Gallery::query()->related('asset')->limit(15)->get();
         foreach($gallery as $asset)
         {
             $input_file = DOCROOT . $asset->uri .  $asset->name;
