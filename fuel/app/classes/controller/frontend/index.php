@@ -7,8 +7,7 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     public function before()
     {
         parent::before();
-        Package::load('Rnblog');
-        $this->blogPackage = \Rnblog\Rnblog::forge();
+        $this->blogPackage = \Rodasnet\Blog\Blog::forge();
     }
 
     public function action_index()

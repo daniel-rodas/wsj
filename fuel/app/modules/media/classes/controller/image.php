@@ -15,7 +15,7 @@ class Controller_Image extends Controller_Base
 
     public function action_featured($id = false)
     {
-        $gallery = Model_Gallery::query()->where('post_id', $id)->get_one();
+        $gallery = \Rodasnet\Blog\Model\Gallery::query()->where('post_id', $id)->get_one();
         if(!$gallery)
         {
             return \Response::forge( \View::forge('frontend/post/show/image') );
@@ -31,7 +31,7 @@ class Controller_Image extends Controller_Base
     public function action_edit()
     {
         $data = array();
-        $data['images'] = Model_Image::find('all');
+        $data['images'] = \Rodasnet\Blog\Model\Image::find('all');
         $view = \View::forge('image/index');
 //        $index = new Method_Edit($model, $view, $data);
         $index = new Method_Edit($model, $view);
@@ -41,7 +41,7 @@ class Controller_Image extends Controller_Base
     public function action_index()
     {
         $data = array();
-        $data['images'] = Model_Image::find('all');
+        $data['images'] = \Rodasnet\Blog\Model\Image::find('all');
 
         return \Response::forge( \View::forge('image/index')->set($data, null, false) );
     }
