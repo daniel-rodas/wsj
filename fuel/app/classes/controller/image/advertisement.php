@@ -17,7 +17,7 @@ Class Controller_Image_Advertisement extends Controller_Image_Image
 
     public function action_banner()
     {
-        $banner = Model_Asset::query()->where('id', 22)->get_one();
+        $banner = \Rodasnet\Blog\Model\Asset::query()->where('id', 22)->get_one();
 
         $name = $banner->uri . '' . $banner->name;
         $data['image'] = $this->_base64_encode_image($name, $banner->type);
