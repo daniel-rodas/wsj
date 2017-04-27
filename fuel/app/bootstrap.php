@@ -12,6 +12,8 @@ require COREPATH.'bootstrap.php';
 // Register the autoloader
 \Autoloader::register();
 
+require '/var/www/rodasnet.com/wsj01a/fuel/vendor/autoload.php';
+
 /**
  * Your environment.  Can be set to any of the following:
  *
