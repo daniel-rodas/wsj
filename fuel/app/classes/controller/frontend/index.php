@@ -9,7 +9,6 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     public function before()
     {
         parent::before();
-        $this->blogPackage = new Rodasnet\Blog\Api\Rodasnet();
     }
 
     public function action_index()
