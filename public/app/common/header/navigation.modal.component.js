@@ -8,8 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var ng_bootstrap_1 = require('@ng-bootstrap/ng-bootstrap');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var NavigationModalComponent = (function () {
     function NavigationModalComponent(modalService) {
         this.modalService = modalService;
@@ -45,14 +46,14 @@ var NavigationModalComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    NavigationModalComponent = __decorate([
-        core_1.Component({
-            selector: 'rn-navigation-modal',
-            templateUrl: '/angular/template/navigation_modal'
-        }), 
-        __metadata('design:paramtypes', [ng_bootstrap_1.NgbModal])
-    ], NavigationModalComponent);
     return NavigationModalComponent;
 }());
+NavigationModalComponent = __decorate([
+    core_1.Component({
+        selector: 'rn-navigation-modal',
+        templateUrl: '/angular/template/navigation_modal'
+    }),
+    __metadata("design:paramtypes", [ng_bootstrap_1.NgbModal])
+], NavigationModalComponent);
 exports.NavigationModalComponent = NavigationModalComponent;
 //# sourceMappingURL=navigation.modal.component.js.map

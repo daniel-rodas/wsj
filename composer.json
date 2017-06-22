@@ -44,5 +44,6 @@
             "php oil r install"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "optimizer-autoloader": true
 }

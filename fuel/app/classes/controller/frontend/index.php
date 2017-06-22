@@ -1,6 +1,5 @@
 <?php
 
-use Rodasnet\Blog\Blog;
 
 class Controller_Frontend_Index extends \Controller_Base_Frontend
 {
@@ -9,6 +8,7 @@ class Controller_Frontend_Index extends \Controller_Base_Frontend
     public function before()
     {
         parent::before();
+        $this->blogPackage = \Rodasnet\Blog\Blog::forge();
     }
 
     public function action_index()
